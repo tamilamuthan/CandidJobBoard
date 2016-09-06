@@ -1,0 +1,1 @@
+<input type="text" value="{if $id == 'keywords'}{$value.all_words}{else}{$value.like}{/if}" class="form-control {if $id == 'keywords'}form-control__centered{/if}" name="{$id}[{if $id == 'keywords'}all_words{else}like{/if}]" id="{$id}" {if $id == 'keywords'}placeholder="[[Keywords]]"{/if} />

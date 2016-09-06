@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE translation2 [
+<!ELEMENT translation2 (languages,pages)>
+<!ELEMENT languages (lang*)>
+<!ELEMENT lang (#PCDATA)>
+<!ATTLIST lang id ID #REQUIRED>
+<!ELEMENT pages (page*)>
+<!ELEMENT page (string*)>
+<!ATTLIST page key CDATA #REQUIRED>
+<!ELEMENT string (tr*)>
+<!ATTLIST string key CDATA #REQUIRED>
+<!ELEMENT tr (#PCDATA)>
+<!ATTLIST tr lang IDREF #REQUIRED>
+]>
+
+<translation2>
+  <languages>
+    <lang id="fr"/>
+  </languages>
+  <pages>
+    <page key="Frontend">
+      <string key="&quot;How to Apply&quot; by url is empty">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="&quot;How to Apply&quot; wrong email format">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$category_name jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$category_name jobs from $site_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$companies_number Companies">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$jobs_number $category_name jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$jobs_number job(s)">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$jobs_number job(s) at $company_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$jobs_number jobs found">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$jobs_number jobs found in $location">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="$resumes_number resumes found">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="404 Page Not Found">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="&lt;b&gt;e.g.&lt;/b&gt; https://youtu.be/XXXXXXXXXXX">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="A new job alert has been created for you!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="About $company_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Account Settings">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Active">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Add $field_caption">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="All Jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Any">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Applicants">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Applied">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Apply">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Apply Discount">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Apply Now">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="View details and Apply">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Apply to $job_title at $company_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Are you sure you want to delete your profile?">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Back">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Blog">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Buy">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="By Email">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="By URL">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Cancel">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Categories">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Change Password">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Checkout">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Choose account type">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="City">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Click to select">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Close">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Comments">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Companies">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Companies on $site_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Company">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Company Description">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Company Name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Company Profile">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Confirm Password">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Country">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Cover letter">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create Employer Profile">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create Job Alert">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create Job Seeker Profile">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create New Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create alert">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Create an account">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Current Search">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Daily">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Degree or Specialty">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Delete Job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Delete Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Delete profile">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Description">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Desired Job Title">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Discount code">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Edit">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Edit Job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Edit Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Edit your resume in &quot;My Account&quot; section">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Education">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Email">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Email me jobs like this">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Employer">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Employer Registration">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Expiration Date">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Expired">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Expires">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Featured Companies">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Featured Jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="File format is not supported">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="File size shouldn&apos;t be larger than 5 MB.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Find Companies">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Find Jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Find Resumes">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Forgot Your Password?">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="From">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Full Name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Hidden">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="How to Apply">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="How would you like to pay">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="I agree to the terms of use">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="I already have a Job Seeker account.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="I already have an Employer account.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Image format is not supported">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Invalid discount code">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Description">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Postings">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Seeker">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Seeker Registration">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Title">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Job Type">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs at $company_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs at $company_name on $site_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs by Category">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs by City">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs by Country">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs by State">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs in $location">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Jobs in $location from $site_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Keep me signed in">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Keywords">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Latest Jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Less">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Let Employers Find My Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Load more">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Location">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Logo">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Logout">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Make Hidden">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Make Visible">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Monthly">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="More">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="My Account">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="My Applications">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="My Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="My Resumes">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Never Expire">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Next">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="No">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Order Information">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Password">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Password Recovery">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Passwords did not match">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Personal Summary">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Phone">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Photo">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Place Order">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please accept the Terms of Use to Register">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please choose new product">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please enter &apos;$field_caption&apos;">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please enter valid">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please enter valid YouTube link">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please enter valid email address">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please enter your email address and we&apos;ll send you a link to reset your password right away!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please include your comments.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Please provide your full name.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Position">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Post">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Post a Job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Post a Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Preview">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Preview and share your job.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Preview your resume.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Previous">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Pricing">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Proceed to posting your new job.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Proceed to posting your resume.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Proceed to searching candidates.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Purchased">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Purchased Products">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Refine Search">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Refine by $field_caption">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Register">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Registration">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Remove">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Reset my password">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Resume Search">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Resume file">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Resume file is required">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Resumes">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Save">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Search within">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Select">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Select Product">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Select your resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Send application">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Share">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Share this job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sign in">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sign in with LinkedIn">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sign me in">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sign up">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sorry, that job is no longer available. Here are some results that may be similar to the job you were looking for.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sorry, we can not find the page you were looking for">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sorry, we don&apos;t currently have any jobs for this search. Please try another search.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Sorry, we don&apos;t currently have any resumes for this search. Please try another search.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="State">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Submit">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Subtotal">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Tax">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Thank you for your purchase!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Thank you very much for your message. We will respond to you as soon as possible.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Thank you! Your application has been sent.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Thank you. We&apos;ve sent you an email containing a link to reset your password. If you haven&apos;t received it yet, please check junk or spam mail folder.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="The date format is incorrect">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="The product you&apos;ve purchased does not allow to post listings. Please purchase another product">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="There are no applications for &quot;$listing_title&quot;">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="There was an error during file upload">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="This email address is already in use.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="To">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Total">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Under construction">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="University or Institution">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Upload Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Upload your resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="View Job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="View Resume">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="View all jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="View your job stats in &quot;My Account&quot; section">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Website">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Weekly">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Work Experience">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Wrong email or password. Let&apos;s try again!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Yes">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You already applied to this job">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You applied successfully">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You can cancel this at any time.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You do not have permissions to post Jobs. Please purchase a relevant product.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You do not have permissions to post Resumes. Please purchase a relevant product.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You don&apos;t have permissions to access this page.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have $listings_number Resume(s)">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have no applications so far.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have no jobs so far">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have no resumes so far">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have received a discount of">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have successfully applied your discount!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have successfully changed your profile info!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have successfully deleted your profile!">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have successfully posted your job.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You have successfully posted your resume.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You haven&apos;t applied to any job yet.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="You&apos;ve reached the limit of number of listings allowed by your product">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your company profile has featured status now.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your email">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your email $email was successfully unsubscribed from the Email Alert">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your job will be removed permanently. Are you sure?">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your order">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your password was successfully changed">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your profile will be deleted permanently.">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="Your resume will be removed permanently. Are you sure?">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="applicants">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="e.g. http://www.yourwebsite.com">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="file not specified">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="jobs">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="jobs from $site_name">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="kilometers">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="miles">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="posted">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="resumes">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="selected">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="to">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="unlimited">
+        <tr lang="fr">  </tr>
+      </string>
+      <string key="views">
+        <tr lang="fr">  </tr>
+      </string>
+    </page>
+    <page key="Backend">
+    </page>
+  </pages>
+</translation2>

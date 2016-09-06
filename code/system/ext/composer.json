@@ -1,0 +1,7 @@
+{
+  "require": {
+    "leafo/scssphp": "0.6.3",
+    "sentry/sentry": "^0.17.0",
+    "monolog/monolog": "^1.18"
+  }
+}

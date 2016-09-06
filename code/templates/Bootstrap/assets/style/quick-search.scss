@@ -1,0 +1,111 @@
+@import "mixins";
+@import "variables";
+
+
+/* START:Quick search
+ ********************************************************************************* */
+.quick-search {
+    background-color: $container-bg;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 9;
+
+    &__inner-pages {
+        .quick-search {
+            background: none;
+        }
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    &__wrapper {
+        margin: -60px auto 0;
+        background: #fff;
+        padding: 40px;
+        box-shadow: 0 2px 30px rgba(0, 0, 0, 0.18);
+
+        @media all and (min-width: 992px) {
+            max-width: 1050px;
+        }
+
+        @media all and (max-width: 767px) {
+            padding: 50px 50px 40px;
+        }
+
+        @media all and (max-width: 620px) {
+            padding: 25px 25px 15px;
+        }
+    }
+
+    .form-group {
+        @media all and (max-width: 480px) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    .form-group__btn {
+        width: $quick-search-btn-width-lg;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        @media all and (max-width: 1200px) {
+            width: $quick-search-btn-width-md;
+        }
+
+        @media all and (max-width: 992px) {
+            padding-left: 10px;
+
+            .btn {
+                min-width: auto;
+            }
+        }
+    }
+
+    .form-group__input {
+        width: $quick-search-form-control-width-lg;
+        padding: 0 10px;
+
+        @media all and (max-width: 1200px) {
+            width: $quick-search-form-control-width-md;
+        }
+
+        &.full {
+            width: $quick-search-form-control-width-lg * 1.5;
+
+            @media all and (max-width: 1200px) {
+                width: $quick-search-form-control-width-md * 1.5;
+            }
+
+            @media all and (max-width: 767px) {
+                width: 100%;
+            }
+        }
+    }
+
+    .form-group__btn,
+    .form-group__input {
+        @media all and (max-width: 767px) {
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+
+    .form-control,
+    &__find,
+    .dropdown-radius {
+        width: 100%;
+        height: 38px;
+        text-align: center;
+    }
+
+    .form-control {
+        padding: 3px 12px 0;
+    }
+
+    &__find {
+        padding: 8px 12px;
+    }
+}

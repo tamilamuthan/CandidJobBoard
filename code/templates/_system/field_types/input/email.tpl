@@ -1,0 +1,1 @@
+<input type="text" value="{$value|escape:'html'}" class="inputString {if $complexField}complexField{/if}" name="{if $complexField}{$complexField}[{$id}][{$complexStep}][original]{else}{$id}[original]{/if}" />

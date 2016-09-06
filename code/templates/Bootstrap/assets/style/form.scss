@@ -1,0 +1,712 @@
+@import "variables";
+@import "mixins";
+
+select.form-control {
+  cursor: pointer;
+  height: 38px;
+}
+
+.form-control {
+  text-align: left;
+  height: auto;
+  padding: 8px 12px;
+  color: $form-control-color;
+  font-weight: 300;
+  display: block;
+
+  &#expiration_date[readonly] {
+    background: $form-control-bg;
+  }
+
+  &.refine-radius {
+    max-width: 75%;
+    cursor: pointer;
+    margin-left: 25px;
+    @media all and (max-width: 767px) {
+      width: auto;
+      min-width: 250px;
+    }
+  }
+
+  @include prefix(box-shadow, none, webkit moz ms);
+  @include transition(border color 0.3s ease-in-out);
+  @include placeholder {
+    text-align: center;
+    color: rgba(33, 52, 74, 0.34);
+    font-weight: 400;
+    font-family: $font-family;
+  }
+
+
+  &__textarea {
+    min-height: 140px;
+  }
+
+  &__centered {
+    background: $form-control-centered-bg;
+    font-size: $font-size-base;
+
+    @include placeholder {
+      text-align: center;
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  &[type=file]:focus,
+  &[type=checkbox]:focus,
+  &[type=radio]:focus {
+    outline: none;
+  }
+}
+
+.form-label {
+  margin-bottom: 0;
+  font-weight: 400;
+  vertical-align: middle;
+  font-size: $font-size-base;
+  text-align: left;
+  display: block;
+
+  &__error {
+    color: #ff2e2e;
+  }
+}
+
+.form {
+  max-width: $small-width;
+  width: 100%;
+  margin: 15px auto 0;
+
+  &:after,
+  &:before {
+    content: '';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  &#login-form {
+    .form-group__btns {
+      margin-bottom: 30px;
+    }
+  }
+
+  &.form__modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 6px;
+    margin: 60px auto 80px;
+    max-width: 510px;
+
+    @media all and (max-width: 767px) {
+      margin: 15px auto 35px;
+    }
+
+    .title__primary {
+      margin-bottom: 30px;
+
+      @media all and (max-width: 767px) {
+        margin-top: 5px;
+      }
+    }
+
+    .form--move-left {
+      text-align: center;
+
+      .form-label {
+        margin-bottom: 0;
+      }
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .instruction {
+    position: absolute;
+    left: 25%;
+    top: -22px;
+
+    @media all and (max-width: 767px) {
+      left: 29%;
+    }
+
+    @media all and (max-width: 480px) {
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 30px;
+    position: relative;
+    float: left;
+    width: 100%;
+
+    &__btns {
+      padding-top: 15px;
+      margin-bottom: 75px;
+
+      .btn {
+        margin: 0 10px 15px;
+      }
+    }
+
+    &__complex {
+      background: #fff;
+      padding: 30px 20px 0;
+      border-radius: 6px;
+    }
+
+    &__remove {
+      @media all and (max-width: 767px) {
+        text-align: center;
+      }
+    }
+
+    &__add {
+      position: absolute;
+      bottom: -10px;
+      @media all and (max-width: 767px) {
+        position: relative;
+        padding-bottom: 30px;
+        text-align: center;
+      }
+      .add {
+        padding-left: 50px;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 21px;
+          left: 20px;
+          top: 50%;
+          margin-top: -9px;
+          background: url('../images/add.svg') no-repeat 0 0;
+          //@include prefix(transform, rotate(45deg), webkit moz ms);
+        }
+      }
+    }
+
+    .title__secondary {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 30px;
+      margin-top: 0
+    }
+
+    &__half {
+      display: inline-block;
+      width: 48%;
+
+      &.margin {
+        margin-bottom: 30px;
+      }
+
+      &:first-child {
+        float: left;
+
+        @media all and (max-width: 767px) {
+          margin-bottom: 30px;
+        }
+      }
+
+      &:last-child {
+        float: right;
+      }
+
+      @media all and (max-width: 767px) {
+        width: 100%;
+        float: none !important;
+      }
+    }
+
+    .form-group:last-child {
+      margin-bottom: 30px;
+    }
+
+    .complex {
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(216, 216, 216, 0.7);
+
+      &-wrapper {
+        padding-bottom: 35px;
+
+        @media all and (max-width: 767px) {
+          padding-bottom: 25px;
+        }
+      }
+
+      &:only-of-type {
+        @media all and (min-width: 767px) {
+          margin-bottom: 35px !important;
+        }
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+        margin-bottom: -35px;
+        border-bottom: none;
+        margin-top: 15px;
+        @media all and (max-width: 767px) {
+          margin-top: 0;
+        }
+        .form-group {
+          &:last-child {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .form-control {
+    &[disabled] {
+      opacity: 1;
+    }
+  }
+
+  .form-label {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    margin-bottom: 5px;
+
+    &[for="keep"] {
+      width: auto;
+    }
+
+    &.form-label__access-type {
+      margin-bottom: 30px;
+    }
+
+    &.checkbox-label {
+      display: inline-block;
+    }
+  }
+
+  &--move-left,
+  .form-control {
+    &[type=checkbox] {
+      width: auto;
+    }
+
+    @media all and (max-width: 480px) {
+      width: 100%;
+    }
+  }
+
+  .form--move-left {
+    vertical-align: middle;
+
+    .form-label {
+      display: inline-block;
+    }
+
+    &.profile-logo {
+      vertical-align: top;
+      & img {
+        width: 150px;
+      }
+    }
+  }
+
+  /* Multiselect */
+  .ui-multiselect {
+    max-width: 100%;
+    min-height: 36px;
+    padding: 8px 30px 8px 15px;
+    font-weight: 300;
+    font-size: $font-size-base;
+    font-family: $font-family;
+    width: 100% !important;
+    text-transform: capitalize;
+    position: relative;
+
+    .ui-icon {
+      position: absolute;
+      border-style: solid;
+      border-width: 1px 1px 0 0;
+      height: 6px;
+      width: 6px;
+      right: 15px;
+      top: 18px;
+      margin-top: -6px;
+      @include prefix(transform, rotate(135deg), ms moz webkit);
+    }
+
+    &:focus,
+    &.ui-state-active {
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+      border-color: #66afe9;
+      outline: 0;
+    }
+  }
+}
+
+.form-message {
+  &__error {
+    color: #ff2e2e;
+  }
+
+  &__info {
+    color: rgba(33, 52, 74, 0.34);
+  }
+}
+
+.job-preview__btns {
+  margin-top: 45px;
+
+  @media all and (max-width: 767px) {
+    text-align: center;
+  }
+
+  .btn {
+    @media all and (max-width: 767px) {
+      margin: 0 15px;
+    }
+
+    &:not(:last-child) {
+      @media all and (min-width: 767px) {
+        margin: 0 15px 0 0;
+      }
+    }
+  }
+}
+
+.ui-datepicker-trigger {
+  position: absolute;
+  right: 15px;
+  top: 36px;
+  cursor: pointer;
+}
+
+.form-group {
+  textarea {
+    max-width: 100%;
+  }
+
+  .cke_editable {
+    font-size: $font-size-base;
+    font-family: $font-family;
+    color: #000;
+  }
+
+  .cke {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+    vertical-align: top !important;
+    border-color: $form-control-border-color;
+    border-radius: 6px;
+  }
+
+  .cke_combo_button {
+    margin-bottom: 0;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .cke_combo_off .cke_combo_button:hover {
+    background: #fff;
+  }
+
+  .cke_toolgroup {
+    background: none;
+    margin-bottom: 0;
+    border: none;
+
+    @include prefix(box-shadow, none, moz ms webkit);
+  }
+
+  a.cke_button {
+    opacity: 0.5;
+    cursor: pointer;
+
+    @include prefix(box-shadow, none, moz ms webkit);
+
+    &:hover {
+      @include prefix(box-shadow, none, moz ms webkit);
+    }
+
+    &_on {
+      background: none;
+      opacity: 1;
+    }
+
+    &_off,
+    &_disabled {
+      &:hover,
+      &:focus,
+      &:active {
+        @include prefix(box-shadow, none, moz ms webkit);
+
+        background: none;
+      }
+    }
+
+    &_off {
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+        border: none;
+      }
+    }
+  }
+
+  .cke_inner {
+    background: none !important;
+    padding: 0 !important;
+  }
+
+  .cke_top {
+    background: #eee;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 2px 5px 0;
+
+    @include prefix(box-shadow, none, moz ms webkit);
+
+    border-bottom: 1px solid rgba(169, 176, 183, 0.37);
+  }
+
+  .cke_bottom {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: #fff;
+    border-top: none;
+
+    .cke_resizer {
+      border-color: transparent rgba(#000, 0.5) transparent transparent;
+    }
+
+    .cke_path {
+      display: none;
+    }
+  }
+
+  .cke_button__bold_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-bold.svg') !important;
+    width: 11px;
+    height: 15px;
+  }
+
+  .cke_button__italic_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-italic.svg') !important;
+    width: 15px;
+    height: 14px;
+  }
+
+  .cke_button__underline_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-underline.svg') !important;
+    width: 10px;
+    height: 15px;
+  }
+
+  .cke_button__link_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-link.svg') !important;
+    width: 22px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  .cke_button__numberedlist_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-ordered.svg') !important;
+    width: 22px;
+    height: 15px;
+  }
+
+  .cke_button__bulletedlist_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-unordered.svg') !important;
+    width: 20px;
+    height: 13px;
+    margin-top: 1px;
+  }
+
+  .cke_button__outdent_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-outdent.svg') !important;
+    width: 15px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  .cke_button__indent_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-indent.svg') !important;
+    width: 14px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  .cke_button__justifyleft_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-left.svg') !important;
+    width: 13px;
+    height: 14px;
+  }
+
+  .cke_button__justifycenter_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-centered.svg') !important;
+    height: 14px;
+  }
+
+  .cke_button__justifyright_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-right.svg') !important;
+    width: 13px;
+    height: 14px;
+  }
+
+  .cke_button__justifyblock_icon {
+    background-image: url('../images/wysiwyg/icon-wysiwyg-justify.svg') !important;
+    height: 14px;
+  }
+
+  .cke_button_icon {
+    background-repeat: no-repeat !important;
+    background-position: 50% !important;
+    background-size: contain !important;
+  }
+
+  .cke_toolgroup {
+    margin-right: 16px;
+  }
+}
+
+.password-recovery {
+  &__description {
+    color: $profile-desc-color;
+    line-height: 24px;
+  }
+}
+
+/*Datepicker*/
+.ui-datepicker {
+  padding: 0;
+  font-family: $font-family;
+  @include prefix(box-shadow, 0 2px 18px rgba(0, 0, 0, 0.12), ms moz webkit);
+
+  .ui-datepicker-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid $form-control-border-color;
+  }
+
+  .ui-datepicker-title {
+    select {
+      background: $form-control-bg;
+      border-color: $form-control-border-color;
+      border-radius: 6px;
+      font-family: $font-family !important;
+      font-weight: 300;
+      font-size: $font-size-large;
+      padding-left: 5px;
+      min-height: 28px;
+      cursor: pointer;
+      &:first-child {
+        margin-right: 10px;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .ui-datepicker-next,
+  .ui-datepicker-prev {
+    top: 4px;
+    border: 1px solid $btn-white-border-color;
+    cursor: pointer;
+    height: 28px;
+    @include transition(all 0.3s ease-in-out);
+
+    &:hover {
+      border-color: rgba($btn-white-border-color, 0.3);
+      background: none;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 1px 1px 0 0;
+      height: 6px;
+      width: 6px;
+      top: 50%;
+      left: 50%;
+      margin-top: -4px;
+    }
+  }
+
+  .ui-datepicker-next {
+    &:before {
+      @include prefix(transform, rotate(45deg), ms webkit moz);
+      margin-left: -4px;
+    }
+  }
+
+  .ui-datepicker-prev {
+    &:before {
+      @include prefix(transform, rotate(-135deg), ms webkit moz);
+      margin-left: -2px;
+    }
+  }
+
+  .ui-datepicker-prev-hover {
+    left: 2px;
+  }
+
+  .ui-datepicker-next-hover {
+    right: 2px;
+  }
+
+  .ui-state-default {
+    border-color: transparent;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    line-height: 35px;
+    text-align: center;
+    &:hover,
+    &.ui-state-active {
+      border-color: $form-control-border-color;
+    }
+  }
+
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default {
+    background: #eee;
+  }
+}
+
+.ui-multiselect-menu {
+  font-family: $font-family;
+  .ui-widget-header {
+    display: none !important;
+  }
+
+  .ui-corner-all {
+    font-weight: normal;
+    cursor: pointer;
+
+    input {
+      outline: none;
+    }
+  }
+
+  .ui-state-hover {
+    background: none;
+    border: 1px solid transparent;
+    font-weight: 500;
+  }
+}

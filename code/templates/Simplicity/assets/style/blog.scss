@@ -1,0 +1,57 @@
+@import "mixins";
+@import "variables";
+
+.posts-list {
+    margin-bottom: 70px;
+    .listing-item__logo .media-object {
+        max-width: 125px;
+        max-height: 125px;
+    }
+}
+
+.static-pages__blog .social-share {
+    display: block;
+}
+
+.listing-item__blog .listing-item__title a {
+    display: block;
+}
+
+.blog__content--image  {
+    margin: 15px 0;
+}
+
+.blog__content--date {
+    position: relative;
+    margin: 0 25px 10px 0;
+    font-weight: 500;
+}
+.blog__content--date:before {
+    content: "";
+    display: inline-block;
+    width: 19px;
+    height: 17px;
+    position: relative;
+    top: 2px;
+    background: url("../images/icon-calendar.svg") no-repeat;
+    background-size: contain;
+    margin-right: 2px;
+}
+.blog__back {
+    color: #000;
+    border: 1px solid #ccc;
+    margin: 20px 20px 0 0;
+
+    @media all and (min-width: 767px) {
+        float: left;
+    }
+
+    &:before {
+        background: url("../images/icon-chevron-left-gray.svg") no-repeat left;
+        opacity: 1;
+    }
+
+    &:hover {
+        color: $color-content;
+    }
+}

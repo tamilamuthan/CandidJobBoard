@@ -1,0 +1,85 @@
+@import "mixins";
+@import "variables";
+
+.checkout-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.checkout {
+    padding: 0 15px 70px;
+    width: 100%;
+
+    @media all and (min-width: 992px) {
+        padding-right: 64px;
+    }
+
+    @media all and (min-width: 767px) {
+        width: calc(100% - 306px);
+    }
+
+    @media all and (max-width: 767px) {
+        margin-top: 40px;
+    }
+
+    &-sidebar__title {
+        font-size: $font-size-large;
+    }
+
+    &-message {
+        padding: 45px 30px 65px;
+        color: $details-body-color;
+        background: #fff;
+        border-radius: 6px;
+        margin: 60px auto 80px;
+        max-width: 510px;
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &-product__title {
+        max-width: 75%;
+        display: inline-block;
+    }
+
+    &-product__price {
+        max-width: 25%;
+        display: inline-block;
+    }
+
+    &-product__name {
+        border-bottom: 1px solid rgba(216, 216, 216, 0.7);
+        padding-bottom: 15px;
+    }
+
+    &-sidebar__delete-discount {
+        background: url('../images/icon-delete.svg') no-repeat 0 0;
+        background-size: 16px 17px;
+        display: inline-block;
+        width: 16px;
+        height: 17px;
+        position: relative;
+        top: 4px;
+    }
+}
+
+.payment-proceed--preloader {
+    position: relative;
+    height: 150px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        z-index: 10;
+        @include prefix(animation, loading-animation 0.9s linear infinite, moz webkit o ms);
+        background: url("../images/preloader.svg") no-repeat center;
+        top: 50%;
+        left: 50%;
+        margin-top: -28px;
+        margin-left: -16px;
+        width: 32px;
+        height: 32px;
+    }
+}

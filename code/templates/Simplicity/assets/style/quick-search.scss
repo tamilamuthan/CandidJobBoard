@@ -1,0 +1,162 @@
+@import "mixins";
+@import "variables";
+
+
+/* START:Quick search
+ ********************************************************************************* */
+body {
+    &:not(.body__inner) {
+        .quick-search {
+            &__frontpage .quick-search__wrapper {
+                margin-top: 40px;
+
+                @media all and (max-width: 420px) {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+.quick-search {
+    background-color: transparent;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 9;
+
+    &__inner-pages {
+
+        .quick-search {
+            background: none;
+
+            @media all and (max-width: 992px) {
+                width: 100%;
+            }
+        }
+
+        .quick-search__wrapper {
+            margin: 45px auto 45px;
+            padding: 40px;
+            @include prefix(box-shadow, 0 2px 14px 0 rgba(0, 0, 0, 0.08), moz ms o webkit);
+
+            @media all and (min-width: 992px) {
+                max-width: 1050px;
+            }
+
+            @media all and (max-width: 767px) {
+                padding: 50px 50px 40px;
+            }
+
+            @media all and (max-width: 620px) {
+                padding: 25px 25px 15px;
+            }
+        }
+    }
+
+    &__frontpage {
+        margin-bottom: 40px;
+
+        .quick-search__wrapper {
+            margin-top: -60px;
+        }
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    &__wrapper {
+        background-color: transparent;
+        margin: 0 auto;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .form-group {
+        @media all and (max-width: 480px) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    .form-group__btn {
+        width: $quick-search-btn-width-md;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        @media all and (max-width: 992px) {
+            padding-left: 10px;
+            width: $quick-search-btn-width-sm;
+
+            .btn {
+                min-width: initial;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .form-group__input {
+        width: $quick-search-form-control-width-md;
+        padding: 0 10px;
+
+        @media all and (max-width: 992px) {
+            width: $quick-search-form-control-width-sm;
+        }
+
+        &.full {
+            width: $quick-search-form-control-width-lg * 1.5;
+
+            @media all and (max-width: 1200px) {
+                width: $quick-search-form-control-width-md * 1.5;
+            }
+
+            @media all and (max-width: 767px) {
+                width: 100%;
+            }
+        }
+    }
+
+    .form-group__btn,
+    .form-group__input {
+        @media all and (max-width: 767px) {
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+
+    .form-control,
+    &__find,
+    .dropdown-radius {
+        width: 100%;
+        height: 38px;
+        text-align: center;
+    }
+
+    .form-control {
+        padding-left: 19px;
+        height: 40px;
+
+        @media all and (min-width: 767px) {
+            text-align: left;
+            @include placeholder {
+                text-align: left;
+            }
+        }
+    }
+
+    &__find {
+        padding: 8px 12px;
+        border-radius: $border-radius;
+        background-color: $link-color;
+        border-color: $link-color;
+        color: #fff;
+        text-transform: capitalize;
+        font-size: $font-size-large;
+
+        &:hover {
+            background-color: $link-color-hover;
+        }
+    }
+}

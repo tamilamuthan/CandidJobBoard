@@ -1,0 +1,162 @@
+@import "mixins";
+@import "variables";
+
+/* START:Footer
+ ********************************************************************************* */
+.footer {
+    color: #fff;
+
+    .container {
+        > div {
+            margin: 0 -15px;
+            text-align: center;
+            color: $footer-link-color;
+            font-size: $font-size-small;
+
+            &:not(:last-child) {
+                margin-bottom: 35px;
+            }
+
+            &:before,
+            &:after {
+                display: table;
+                content: '';
+            }
+
+            &:after {
+                clear: both;
+            }
+
+            > div {
+                padding: 0 15px;
+                width: 100%;
+                float: left;
+                text-align: left;
+
+                @media (min-width: 768px) {
+                    width: 25%;
+                }
+            }
+        }
+    }
+
+    ul {
+        padding-left: 0;
+        list-style: none;
+        font-size: $font-size-base;
+
+        li {
+            color: #fff;
+            font-size: $font-size-large;
+
+            @media all and (max-width: 767px) {
+                text-align: center;
+            }
+        }
+
+        a {
+            text-transform: none;
+        }
+
+        @media all and (max-width: 767px) {
+            margin-bottom: 30px;
+        }
+    }
+
+    .footer-nav {
+        @media all and (max-width: 767px) {
+            margin-bottom: 30px;
+        }
+    }
+
+    &-nav__title {
+        color: #fff;
+        font-size: $font-size-large;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    &-nav__item:not(.footer-nav__title) {
+        font-size: $font-size-base;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+    }
+
+    &-nav__item {
+        @media all and (max-width: 767px) {
+            text-align: center;
+        }
+    }
+
+    &-nav__link {
+        @include transition(color 0.2s ease-out);
+
+        &:hover {
+            color: $footer-link-color-hover;
+            text-decoration: none;
+        }
+
+        &-social {
+            position: relative;
+
+            &:before {
+                font-family: 'footer-social' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                width: 18px;
+                height: 14px;
+                text-align: center;
+                display: inline-block;
+                margin-right: 10px;
+
+                @include transition(background 0.2s ease-out);
+            }
+        }
+
+        &-facebook {
+            &:before {
+                content: "\e900";
+            }
+        }
+
+        &-twitter {
+            &:before {
+                content: "\e903";
+                font-size: $font-size-small;
+            }
+        }
+
+        &-plus {
+            &:before {
+                content: "\e902";
+            }
+        }
+
+        &-in {
+            &:before {
+                content: "\e901";
+                font-size: $font-size-large;
+                position: relative;
+                top: 1px;
+            }
+        }
+    }
+}
+
+
+.powered-by {
+    color: #7e7e7e;
+    margin-top: 35px;
+    font-size: $font-size-small;
+
+    a {
+        color: #7e7e7e;
+    }
+}

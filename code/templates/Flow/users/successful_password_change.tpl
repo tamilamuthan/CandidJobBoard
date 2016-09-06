@@ -1,0 +1,1 @@
+<p class="alert alert-success">[[Your password was successfully changed]]</p>

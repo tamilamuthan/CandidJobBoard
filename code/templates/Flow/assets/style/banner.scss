@@ -1,0 +1,347 @@
+.banner {
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+
+    > div {
+        display: inline-block;
+    }
+
+    &--bottom,
+    &--top {
+        text-align: center;
+        padding: 0 15px;
+        max-height: 180px;
+        height: auto;
+        min-height: 90px;
+
+        img {
+            display: inline-block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        @media all and (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &--top {
+        max-width: 100%;
+        margin: 20px auto;
+    }
+
+    &--bottom {
+        margin-bottom: 30px;
+
+        &.banner--job-details {
+            margin-top: 30px;
+
+            @media all and (min-width: 992px) {
+                position: relative;
+                top: -120px;
+            }
+        }
+    }
+
+    &--right {
+        float: right;
+        width: 120px;
+        max-height: 1200px;
+        height: 100%;
+
+        @media all and (max-width: 992px) {
+            display: none;
+        }
+
+        &.banner--company-profile {
+            @media all and (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        &.banner--search {
+            margin: 45px 0;
+        }
+
+        &.banner--companies {
+            margin-top: 18px;
+        }
+    }
+
+    &--inline {
+        max-width: 100%;
+        max-height: 500px;
+        height: 100%;
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+
+        > a,
+        img {
+            display: inline-block;
+        }
+
+        img {
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        @media all and (max-width: 767px) {
+            display: none;
+        }
+    }
+}
+
+.details-body__search {
+    @media all and (min-width: 992px) {
+        &.with-banner {
+            width: calc(100% - 135px);
+            float: left;
+            margin-right: 0;
+            margin-left: 0;
+        }
+    }
+}
+
+.listing-item__list {
+    &.with-banner {
+        @media all and (min-width: 992px) {
+            width: calc(100% - 135px);
+            float: left;
+            padding-right: 15px;
+        }
+    }
+
+    .banner--right {
+        float: right;
+    }
+}
+
+.sidebar {
+    &.with-banner {
+        padding-top: 80px;
+    }
+
+    .banner--right {
+        float: none;
+        margin: 30px auto 0;
+
+        @media all and (max-width: 767px) {
+            display: none;
+        }
+    }
+}
+
+.container--small {
+    position: relative;
+
+    &.with-banner {
+        min-height: 720px;
+        margin-bottom: 30px;
+    }
+
+    .with-banner__wrapper {
+        @media all and (min-width: 992px) {
+            width: calc(100% - 150px);
+            float: left;
+
+            .applicants {
+                width: calc(100% - 181px);
+            }
+        }
+    }
+
+    .banner--right {
+        margin-top: 25px;
+        &.banner--edit-profile {
+            top: 220px;
+        }
+
+        &.banner--products {
+            top: 85px;
+            right: 15px;
+        }
+
+        @media all and (max-width: 992px) {
+            display: none;
+        }
+    }
+}
+
+.with-banner__companies {
+    .details-body__search {
+        @media all and (min-width: 992px) {
+            width: calc(100% - 125px);
+            float: left;
+        }
+    }
+
+    .search-results__top {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .search-results__top,
+    .search-results__companies {
+        @media all and (min-width: 992px) {
+            max-width: 665px;
+        }
+    }
+
+    .results__companies,
+    .featured-company {
+        @media all and (min-width: 992px) {
+            float: none;
+        }
+    }
+
+    .search-results__companies .featured-company:nth-child(2n) {
+        @media all and (min-width: 992px) {
+            margin-right: 0;
+        }
+    }
+
+    .search-results__companies .featured-company:nth-child(3) {
+        @media all and (min-width: 992px) {
+            margin-top: 13px;
+            margin-right: 26px;
+        }
+    }
+
+    .search-results__companies .featured-company:nth-child(2n + 3) {
+        @media all and (min-width: 992px) {
+            margin-right: 26px;
+        }
+    }
+
+    .featured-company {
+        @media all and (max-width: 656px) {
+            margin-right: 0;
+        }
+    }
+
+    .banner--right {
+        margin-top: 45px;
+    }
+
+
+}
+
+.right-banner {
+    float: right;
+
+    .banner--right {
+        position: static;
+        float: none;
+
+        @media all and (min-width: 767px) {
+            display: block;
+        }
+    }
+}
+
+.details-body__search {
+    .banner {
+        @media all and (max-width: 992px) {
+            display: none;
+        }
+    }
+}
+
+.listing {
+    &__featured,
+    &__latest {
+
+        .listing__title.with-banner {
+            @media all and (min-width: 992px) {
+                width: calc(100% - 150px);
+            }
+        }
+
+        .banner--right {
+            margin-top: -55px;
+        }
+    }
+}
+
+.with-banner__products {
+    @media all and (min-width: 1120px) {
+        width: 100% !important;
+    }
+
+    .title__primary {
+        @media all and (min-width: 992px) {
+            max-width: 614px;
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+.product-items-wrapper {
+    &.with-banner {
+        @media all and (max-width: 1120px) {
+            float: none;
+            width: calc(100% - 135px);
+
+            .product-item:nth-child(3n) {
+                margin-right: 40px;
+            }
+        }
+
+        @media all and (max-width: 992px) {
+            width: 100%;
+            .product-item:nth-child(2n) {
+                margin-right: 0;
+            }
+
+            .product-item:nth-child(3n) {
+                margin-right: 40px;
+            }
+        }
+
+        @media all and (max-width: 767px) {
+            float: none;
+            width: 100%;
+
+            .product-item:nth-child(2n) {
+                margin-right: 0;
+            }
+        }
+
+        @media all and (max-width: 680px) {
+            .product-item:nth-child(2n),
+            .product-item:nth-child(3n) {
+                margin-right: auto;
+            }
+        }
+
+        @media all and (min-width: 992px) {
+            max-width: 614px;
+            float: none;
+
+            .product-item:nth-child(2n) {
+                margin-right: 0;
+            }
+
+            .product-item:nth-child(3n) {
+                margin-right: 40px;
+            }
+        }
+    }
+}
+
+.navbar {
+    &.with-banner {
+        @media all and (min-width: 767px) {
+            top: 130px;
+        }
+    }
+}

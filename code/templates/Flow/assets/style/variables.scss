@@ -1,0 +1,145 @@
+$container-bg: #fff;
+$cotnainer-bg-inner: #f8f8f8;
+$navbar-black: #373737;
+$small-width: 700px;
+
+//init
+$theme_button_color_1: #00c775 !default;
+$theme_button_color_2: #31a26d !default;
+$theme_button_color_3: #ffe15e !default;
+
+//colors
+$color-content: rgba(#272727, 0.5);
+$link-color: $theme_button_color_1 !default;
+$link-color-hovered: lighten($link-color, 5);
+$main-banner__head-text: #a7a7a7;
+$blue: #2f71ff;
+$nav-item-color-dark: #262626;
+$nav-item-color-gray: #999;
+$burger-button-color: #fff;
+$footer-link-color: #7e7e7e;
+$nav-item-filled-bg: #419dd4 !default;
+$list-item-title-color: #419dd4 !default;
+$featured-companies-jobs-count: #419dd4 !default;
+$profile-view-btn: #ff8b50;
+$refine-search-closed: #9f9b9b;
+$refine-search-opened: $link-color;
+$refine-search-hover: rgba($link-color, 0.5) !default;
+$refine-search-collapsed: $link-color;
+$refine-search-xs-border-color: rgba(44, 62, 80, 0.6);
+
+//bg
+$search-btn-bg: $theme_button_color_2 !default;
+$bg-primary: #2f71ff;
+$footer-bg: #181818;
+$input-bg: #fbfbfb;
+$middle-banner-bg: $theme_button_color_1 !default;
+$subscribe-btn-bg: #ff8b50;
+$subscribe-highlight-bg: #ecf6fb;
+$post-job-btn-bg: $theme_button_color_3 !default;
+$jobs-by-bg: $theme_button_color_2 !default;
+
+//font-size
+$font-size-base: 14px;
+$font-size-x-small: 10px;
+$font-size-small: 12px;
+$font-size-large: 16px;
+$font-size-x-large: 18px;
+$font-size-xx-large: 20px;
+$h1-primary: 32px;
+$h1-small: 20px;
+
+//font
+$font-family: "Ubuntu", sans-serif !default;
+
+//inner pages
+$content-banner-bg: #419dd4 !default;
+$btn-back-bg: rgba(255, 255, 255, 0.3);
+$btn-back-color: rgba(255, 255, 255, 0.5);
+$details-body-color: $color-content;
+$profile-name-color: #3e3e3e;
+$profile-desc-color: $color-content;
+$job-type-border: #7abae0;
+$job-type-background: $theme_button_color_3 !default;
+$job-type-color: #419dd4 !default;
+$details-header-white: rgba(255, 255, 255, 0.88);
+$apply-button-bg: $theme_button_color_2 !default;
+
+$details-footer-lg-height: 100px;
+
+$profile-width: 306px;
+$details-content-width: $profile-width + 15;
+
+//sizes
+$refine-search-chevron-closed: 7px;
+$refine-search-chevron-collapsed: 11px;
+$modal-width: 510px;
+$listing-media-width-md: 190px;
+$listing-media-width-sm: 170px;
+$featured-company-width: 324px;
+$featured-company-container-width-lg: $featured-company-width * 3;
+$featured-company-container-width-md: $featured-company-width * 2;
+$listing-item-small: 85%;
+$navbar-min-height: 77px;
+$navbar-min-height-xs: 72px;
+
+//forms
+$form-control-color: #000;
+$form-control-border-color: rgba(44, 62, 80, 0.4);
+$form-control-bg: #fbfbfb;
+$form-control-placeholder-color: rgba(33, 52, 74, 0.34);
+$form-control-border-color-hovered: #2d3e50;
+$form-mandatory-color: $theme_button_color_2 !default;
+$form-control-centered-bg: #fbfbfb;
+$form-label-width-lg: 29%;
+$form-control-width-lg: 100% - $form-label-width-lg - 1%;
+
+//btns
+$btn-min-width: 150px;
+
+//button-orange
+$btn-orange-bg: $theme_button_color_2 !default;
+$btn-orange-bg-focused: darken($btn-orange-bg, 10);
+
+//button-white
+$btn-white-border-color: #b8b8b8;
+$btn-white-color: #000;
+$btn-white-border-color-focused: #6d6d6d;
+$btn-white-bg-focused: rgba(166, 166, 166, 0.12);
+
+//button-blue
+$btn-blue-bg: #419dd4 !default;
+$btn-blue-color: #fff;
+$btn-blue-bg-focused: darken($btn-blue-bg, 10);
+
+//button-yellow
+$btn-yellow-bg: $theme_button_color_3 !default;
+$btn-yellow-color: #419dd4 !default;
+$btn-yellow-color-focused: darken($btn-yellow-bg, 10);
+
+//quick-search
+$quick-search-form-control-width-lg: 40.1%;
+$quick-search-form-control-width-md: $quick-search-form-control-width-lg - 3;
+$quick-search-btn-width-lg: 17.6%;
+$quick-search-btn-width-md: $quick-search-btn-width-lg + 7;
+
+//products
+$product-item-bg: #fff;
+$product-item-price-color: $theme_button_color_2 !default;
+$product-item-width: 286px;
+$product-wrapper-width-lg: $product-item-width * 3 + 80;
+$product-wrapper-width-md: $product-item-width * 2 + 40;
+
+//homepage
+$top-banner-image: "top-banner.png" !default;
+$secondary-banner-image: "middle-banner.jpg" !default;
+
+$nav-item-color-hover: $btn-orange-bg;
+$nav-item-border-color: $btn-orange-bg;
+$footer-link-color-hover: $btn-orange-bg;
+
+
+
+$header-link-color-default: #fff;
+$navbar-bg: transparent;
+$border-radius: 30px;

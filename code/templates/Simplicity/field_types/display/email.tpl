@@ -1,0 +1,1 @@
+<input type="email" disabled="disabled" value="{$value|escape}" class="form-control" />

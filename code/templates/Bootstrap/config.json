@@ -1,0 +1,24 @@
+{
+  "template_fallback": "_system",
+  "config": {
+    "theme_bottom_section_html": "<h3>Sign up for job alerts<\/h3>\r\n<div>Get job alerts straight to your inbox.<\/div>\r\n<div>Enter your email to get started. You will be able to unsubscribe at any moment.<\/div>",
+    "theme_button_color_1": "#419dd4",
+    "theme_button_color_2": "#ff6a50",
+    "theme_button_color_3": "#ffe15e",
+    "theme_custom_css": "",
+    "theme_custom_js": "",
+    "theme_favicon": "favicon.ico",
+    "theme_font": "\"Fira Sans\", sans-serif",
+    "theme_footer": "<div><div><ul><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/\">Home<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/contact\/\">Contact<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/about\/\">About Us <\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/terms-of-use\/\">Terms &amp; Conditions<\/a><\/li><\/ul><\/div>\r\n<div><ul><li>Employer<\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/add-listing\/?listing_type_id=Job\">Post a Job<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/resumes\/\">Search Resumes<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/login\/\">Sign in<\/a><\/li><\/ul><\/div>\r\n<div><ul><li>Job Seeker<\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/jobs\/\">Find Jobs<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/add-listing\/?listing_type_id=Resume\">Create Resume<\/a><\/li><li><a class=\"footer-nav__link\" href=\"$GLOBALS.site_url\/login\/\">Sign in<\/a><\/li><\/ul><\/div>\r\n<div><ul><li><a class=\"footer-nav__link footer-nav__link-social footer-nav__link-facebook\" href=\"\">Facebook<\/a><\/li><li><a class=\"footer-nav__link footer-nav__link-social footer-nav__link-twitter\" href=\"#\">Twitter<\/a><\/li><li><a class=\"footer-nav__link footer-nav__link-social footer-nav__link-plus\" href=\"#\">Google Plus<\/a><\/li><li><a class=\"footer-nav__link footer-nav__link-social footer-nav__link-in\" href=\"#\">LinkedIn<\/a><\/li><\/ul><\/div><\/div>\r\n<div>&copy; 2008-$current_year Powered by <a href=\"http:\/\/www.smartjobboard.com\" target=\"_blank\" title=\"Job Board Software, Script\">SmartJobBoard Job Board Software<\/a><\/div>",
+    "theme_jobs_by_category": "1",
+    "theme_jobs_by_city": "1",
+    "theme_jobs_by_country": "0",
+    "theme_jobs_by_state": "1",
+    "theme_logo": "logo.svg",
+    "theme_main_banner": "top-banner.png",
+    "theme_main_banner_text": "<h1>Search <span style=\"color:#FFFFFF\">$listings_types.Job<\/span> live jobs<\/h1>\r\n<p>Finding your new job just got easier<\/p>",
+    "theme_secondary_banner": "post-a-job.svg",
+    "theme_secondary_banner_text": "<h3>POST YOUR JOB TODAY<\/h3>\r\n<div>Job seekers will be able to find<br \/>your first-class job<\/div><a class=\"btn btn__yellow btn__bold btn-post-job\" href=\"$GLOBALS.site_url\/add-listing\/?listing_type_id=Job\">Post a Job<\/a>"
+  },
+  "name": "Classic"
+}

@@ -1,0 +1,136 @@
+$container-bg: #f7f7f7;
+$small-width: 700px;
+
+//init
+$theme_button_color_1: #419dd4 !default;
+$theme_button_color_2: #ff6a50 !default;
+$theme_button_color_3: #ffe15e !default;
+
+//colors
+$link-color: $theme_button_color_1 !default;
+$main-banner__head-text: #a7a7a7;
+$blue: #2f71ff;
+$nav-item-color-dark: #262626;
+$nav-item-color-gray: #999;
+$burger-button-color: #c2c2c2;
+$footer-link-color: #7e7e7e;
+$nav-item-filled-bg: $theme_button_color_1 !default;
+$list-item-title-color: $theme_button_color_1 !default;
+$featured-companies-jobs-count: $theme_button_color_1 !default;
+$profile-view-btn: #ff8b50;
+$refine-search-closed: #9f9b9b;
+$refine-search-opened: $link-color;
+$refine-search-hover: $theme_button_color_2 !default;
+$refine-search-collapsed: #363636;
+$refine-search-xs-border-color: rgba(44, 62, 80, 0.6);
+
+//bg
+$search-btn-bg: $theme_button_color_2 !default;
+$bg-primary: #2f71ff;
+$footer-bg: #2f2f2f;
+$input-bg: #fbfbfb;
+$middle-banner-bg: $theme_button_color_1 !default;
+$subscribe-btn-bg: #ff8b50;
+$subscribe-highlight-bg: #ecf6fb;
+$post-job-btn-bg: $theme_button_color_3 !default;
+$jobs-by-bg: $theme_button_color_1 !default;
+
+//font-size
+$font-size-base: 14px;
+$font-size-x-small: 10px;
+$font-size-small: 12px;
+$font-size-large: 16px;
+$font-size-x-large: 18px;
+$font-size-xx-large: 20px;
+$h1-primary: 32px;
+$h1-small: 20px;
+
+//font
+$font-family: "Fira Sans", sans-serif !default;
+
+//inner pages
+$content-banner-bg: $theme_button_color_1 !default;
+$btn-back-bg: rgba(255, 255, 255, 0.3);
+$btn-back-color: rgba(255, 255, 255, 0.5);
+$details-body-color: rgba(0, 0, 0, 0.4);
+$color-content: rgba(0, 0, 0, 0.5);
+$profile-name-color: #3e3e3e;
+$profile-desc-color: rgba(0, 0, 0, 0.4);
+$job-type-border: #7abae0;
+$job-type-background: $theme_button_color_3 !default;
+$job-type-color: $theme_button_color_1 !default;
+$details-header-white: rgba(255, 255, 255, 0.88);
+$apply-button-bg: $theme_button_color_2 !default;
+
+$details-footer-lg-height: 100px;
+
+$profile-width: 306px;
+$details-content-width: $profile-width + 15;
+$navbar-min-height: 77px;
+$navbar-min-height-xs: 70px;
+
+//sizes
+$refine-search-chevron-closed: 7px;
+$refine-search-chevron-collapsed: 11px;
+$modal-width: 510px;
+$listing-media-width-md: 190px;
+$listing-media-width-sm: 170px;
+$featured-company-width: 324px;
+$featured-company-container-width-lg: $featured-company-width * 3;
+$featured-company-container-width-md: $featured-company-width * 2;
+$listing-item-small: 85%;
+
+//forms
+$form-control-color: #000;
+$form-control-border-color: rgba(44, 62, 80, 0.4);
+$form-control-bg: #fbfbfb;
+$form-control-placeholder-color: rgba(33, 52, 74, 0.34);
+$form-control-border-color-hovered: #2d3e50;
+$form-mandatory-color: $theme_button_color_2 !default;
+$form-control-centered-bg: #fbfbfb;
+$form-label-width-lg: 29%;
+$form-control-width-lg: 100% - $form-label-width-lg - 1%;
+
+//btns
+$btn-min-width: 150px;
+
+//button-orange
+$btn-orange-bg: $theme_button_color_2 !default;
+$btn-orange-bg-focused: darken($btn-orange-bg, 10);
+
+//button-white
+$btn-white-border-color: #b8b8b8;
+$btn-white-color: #000;
+$btn-white-border-color-focused: #6d6d6d;
+$btn-white-bg-focused: rgba(166, 166, 166, 0.12);
+
+//button-blue
+$btn-blue-bg: $theme_button_color_1 !default;
+$btn-blue-color: #fff;
+$btn-blue-bg-focused: darken($btn-blue-bg, 10);
+
+//button-yellow
+$btn-yellow-bg: $theme_button_color_3 !default;
+$btn-yellow-color: $theme_button_color_1 !default;
+$btn-yellow-color-focused: darken($btn-yellow-bg, 10);
+
+//quick-search
+$quick-search-form-control-width-lg: 40.1%;
+$quick-search-form-control-width-md: $quick-search-form-control-width-lg - 2;
+$quick-search-btn-width-lg: 17.6%;
+$quick-search-btn-width-md: $quick-search-btn-width-lg + 4;
+
+//products
+$product-item-bg: #fff;
+$product-item-price-color: $theme_button_color_2 !default;
+$product-item-width: 286px;
+$product-wrapper-width-lg: $product-item-width * 3 + 80;
+$product-wrapper-width-md: $product-item-width * 2 + 40;
+
+//homepage
+$top-banner-image: "top-banner.png" !default;
+$secondary-banner-image: "post-a-job.svg" !default;
+
+$nav-item-color-hover: $btn-orange-bg;
+$nav-item-border-color: $btn-orange-bg;
+$footer-link-color-hover: $btn-orange-bg;

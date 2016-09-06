@@ -1,0 +1,1 @@
+<input id="{if $parentID}{$parentID}_{$id}{else}{$id}{/if}" type="text" class="inputGeo {if $complexField}complexField{/if}" value="{$value}" name="{if $complexField}{$complexField}[{$id}][{$complexStep}]{elseif $parentID}{$parentID}[{$id}]{else}{$id}{/if}" />

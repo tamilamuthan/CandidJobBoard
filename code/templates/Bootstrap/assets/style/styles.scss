@@ -1,0 +1,273 @@
+@import "variables";
+@import "mixins";
+@import "buttons";
+@import "form";
+@import "titles";
+@import "listings";
+@import "refine-search";
+@import "header";
+@import "quick-search";
+@import "listing-details";
+@import "footer";
+@import "frontpage";
+@import "blog";
+@import "checkout";
+@import "products";
+@import "my-account";
+@import "banner";
+
+@font-face {
+  font-family: 'footer-social';
+  src:    url('../fonts/footer-social.eot?fxg2qk');
+  src:    url('../fonts/footer-social.eot?fxg2qk#iefix') format('embedded-opentype'),
+  url('../fonts/footer-social.ttf?fxg2qk') format('truetype'),
+  url('../fonts/footer-social.woff?fxg2qk') format('woff'),
+  url('../fonts/footer-social.svg?fxg2qk#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  overflow-y: auto;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: $container-bg;
+  padding-right: 0 !important;
+  min-width: 300px;
+  -webkit-overflow-scrolling: touch;
+
+  @media all and (min-width: 767px) {
+    display: table;
+    width: 100%;
+  }
+}
+
+//sticky footer
+@media all and (min-width: 767px) {
+  .page-row {
+    display: table-row;
+    height: 1px;
+  }
+  .page-row-expanded {
+    height: 100%;
+  }
+}
+
+//common
+.inline-block {
+  display: inline-block !important;
+}
+
+.well {
+  border-radius: 6px;
+}
+
+.complex-block {
+  &:not(:last-child) {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(225, 225, 225, 0.6);
+  }
+
+  .listing-item__desc {
+    padding: 0;
+    height: auto;
+  }
+
+}
+
+.paragraph {
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.content-text {
+  font-size: $font-size-base + 1;
+  line-height: 26px;
+}
+
+.modal {
+  padding-right: 0 !important;
+}
+
+.modal-dialog {
+  max-width: $modal-width;
+  margin: 10px auto;
+
+  button.close {
+    width: 16px;
+    height: 16px;
+    right: 8px;
+    background: url("../images/icon-modal-close.svg") no-repeat 0 0;
+    background-size: 12px;
+    top: 16px;
+    opacity: 1;
+  }
+
+  .modal-content {
+    padding: 40px 45px;
+
+    @media all and (max-width: $modal-width) {
+      padding: 15px;
+    }
+  }
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .modal-title {
+    text-align: center;
+    color: #000;
+    font-size: $font-size-xx-large;
+    font-weight: 700;
+    line-height: 30px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 15px;
+    margin: 0 -15px;
+  }
+
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.container {
+  max-width: 1130px;
+
+  &--small {
+    margin-top: 20px;
+    .alert {
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+  }
+}
+
+.link {
+  color: $link-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $link-color;
+    text-decoration: underline;
+  }
+}
+
+
+.login-help {
+  .link {
+    margin-bottom: 10px;
+    display: inline-block;
+    text-transform: capitalize;
+  }
+}
+
+.visible-xs-480 {
+  @media all and (max-width: 480px) {
+    display: block !important;
+  }
+  display: none !important;
+}
+
+.hidden-xs-480 {
+  @media all and (max-width: 480px) {
+    display: none !important;
+  }
+}
+
+.cloud {
+  max-width: 700px;
+  margin: 0 auto 45px;
+  width: 100%;
+  padding: 19px;
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.4);
+  line-height: 24px;
+
+  @include prefix(box-shadow, 0 2px 30px rgba(0, 0, 0, 0.03), moz webkit ms);
+
+  @media all and (max-width: 767px) {
+    margin-bottom: 35px;
+    padding: 35px 15px;
+  }
+
+  .btn {
+    margin-top: 15px;
+  }
+}
+
+.static-pages {
+  max-width: 700px;
+  margin: 0 auto 70px;
+  padding: 0 15px;
+
+  &__blog {
+    margin-bottom: 70px;
+  }
+
+  a {
+    color: $link-color;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  td {
+    padding: 0 15px;
+  }
+
+  .form .form-group__btns {
+    margin-bottom: 0;
+  }
+}
+
+.flash-messages {
+  padding: 0 15px;
+}
+
+/* START:Social Plugins
+ ********************************************************************************* */
+.social-registration {
+  text-align: center;
+  margin-bottom: 30px;
+
+  &__buttons {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__linkedin {
+    background: url("../images/linkedin/Sign-In-Large---Default.png") no-repeat;
+    background-size: contain;
+    :hover {
+      background-image: url("../images/linkedin/Sign-In-Large---Hover.png");
+    }
+    :active {
+      background-image: url("../images/linkedin/Sign-In-Large---Active.png");
+    }
+    width: 215px;
+    height: 41px;
+    display: block;
+  }
+}
+
+@import "theme";

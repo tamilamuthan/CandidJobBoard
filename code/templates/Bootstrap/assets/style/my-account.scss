@@ -1,0 +1,405 @@
+@import "variables";
+@import "mixins";
+
+/* START:My Account
+ *********************************************************************************/
+
+.my-account-title {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-size: $h1-primary;
+  color: #000;
+}
+
+.my-account-list {
+  padding: 0 0 60px 0;
+  position: relative;
+
+  &:before,
+  &:after {
+    @media all and (max-width: 767px) {
+      content: '';
+      display: block;
+      height: 60px;
+      width: 60px;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  &:before {
+    @media all and (max-width: 767px) {
+      z-index: 9;
+      background: -webkit-linear-gradient(90deg, $container-bg 0%, rgba($container-bg, 0) 60%, rgba($container-bg, 0) 100%);
+      background: -moz-linear-gradient(90deg, $container-bg 0%, rgba($container-bg, 0) 60%, rgba($container-bg, 0) 100%);
+      background: -o-linear-gradient(90deg, $container-bg 0%, rgba($container-bg, 0) 60%, rgba($container-bg, 0) 100%);
+      background: -ms-linear-gradient(90deg, $container-bg 0%, rgba($container-bg, 0) 60%, rgba($container-bg, 0) 100%);
+      background: linear-gradient(90deg, $container-bg 0%, rgba($container-bg, 0) 60%, rgba($container-bg, 0) 100%);
+      left: -10px;
+
+    }
+  }
+
+  &:after {
+    @media all and (max-width: 767px) {
+      right: -10px;
+      background: -webkit-linear-gradient(90deg, rgba($container-bg, 0) 0%, $container-bg 60%, $container-bg 100%);
+      background: -moz-linear-gradient(90deg, rgba($container-bg, 0) 0%, $container-bg 60%, $container-bg 100%);
+      background: -o-linear-gradient(90deg, rgba($container-bg, 0) 0%, $container-bg 60%, $container-bg 100%);
+      background: -ms-linear-gradient(90deg, rgba($container-bg, 0) 0%, $container-bg 60%, $container-bg 100%);
+      background: linear-gradient(90deg, rgba($container-bg, 0) 0%, $container-bg 60%, $container-bg 100%);
+    }
+  }
+
+  .nav-pills {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid #000;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      float: none;
+      margin: 0 20px;
+
+      @media all and (min-width: 767px) {
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      @media all and (max-width: 767px) {
+        text-align: center;
+        border: none;
+
+        &.active {
+          border: none;
+        }
+      }
+
+      a {
+        opacity: 0.3;
+      }
+    }
+
+    li,
+    li.active {
+      border-bottom: 5px solid transparent;
+
+      a {
+        background: none;
+        font-weight: bold;
+        font-size: $font-size-x-large;
+        color: #000;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    li.active {
+      border-bottom: 5px solid #000;
+
+      a {
+        opacity: 1;
+
+        @media all and (max-width: 767px) {
+          display: inline-block;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+.my-account-listings {
+  padding-left: 0;
+  padding-right: 60px;
+  margin-bottom: 70px;
+
+  &.my-account-listings-full {
+    @media all and (min-width: 992px) {
+      width: calc(100% - 306px);
+    }
+    @media all and (min-width: 767px) {
+
+      margin: 0 auto 70px;
+      float: none;
+      padding-right: 15px;
+    }
+  }
+
+  .alert {
+    max-width: none !important;
+    width: 100%;
+    float: left;
+    margin-top: 20px !important;
+  }
+
+  @media all and (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .listing-item {
+    padding: 20px 40px;
+
+    @media all and (max-width: 767px) {
+      padding: 20px 15px;
+    }
+  }
+
+  .has-left-postings {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 0 10px 0;
+    margin: 0;
+
+    @media all and (max-width: 480px) {
+      padding-bottom: 16px;
+    }
+  }
+  .form-group__btn {
+    display: inline-block;
+    float: right;
+
+    &::after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+
+    @media all and (max-width: 480px) {
+      display: block;
+      float: left;
+      width: 100%;
+      margin-bottom: 25px;
+    }
+  }
+
+  .listings-action {
+    padding: 10px 0 0 0;
+    color: #ebebeb;
+    &--activate,
+    &--edit {
+      color: #419dd4;
+    }
+    &--delete {
+      color: #ff735b
+    }
+  }
+
+  .listing-item__info--item-date {
+    font-weight: 500;
+    color: rgba(62, 62, 62, 0.3);
+  }
+
+  .listing-item__info {
+    font-size: $font-size-base;
+    color: rgba(62, 62, 62, 0.3);
+  }
+
+  .listing-item__info--item-date {
+    float: none;
+    display: inline-block;
+
+    &:before {
+      display: none;
+    }
+
+    @media all and (max-width: 480px) {
+      text-align: left;
+      margin-bottom: 8px;
+    }
+  }
+
+  .listing-item {
+    .media-right {
+      padding-left: 0;
+      padding-right: 0;
+      min-width: 180px;
+      &.visible-xs-480 {
+        display: none;
+      }
+    }
+
+    &:first-of-type {
+      margin-top: 40px;
+    }
+  }
+}
+.my-account-products {
+  background: #fff;
+  border: none;
+  margin-bottom: 70px;
+  @include prefix(box-shadow, 0 2px 14px 0 rgba(0, 0, 0, 0.05), webkit ms moz);
+  h4 {
+    text-align: center;
+  }
+  .contract-list {
+    padding: 20px 0;
+    text-align: left;
+    font-size: 14px;
+    border-top: 1px solid #ededed;
+    &:first-of-type {
+      border-top: none;
+    }
+    &--name {
+      color: #565656;
+      font-weight: bold;
+      padding: 0 0 10px 0;
+    }
+    &--listing-count,
+    &--expires,
+    &--purchased {
+      color: #9a9a9a;
+    }
+  }
+}
+#applicationFilter {
+  .form-control {
+    color: #000;
+    cursor: pointer;
+    border: 1px solid rgba(44, 62, 80, 0.4);
+    height: 38px;
+    line-height: 18px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+}
+#applicants-list {
+  padding: 0 15px;
+  margin-bottom: 60px;
+
+  @media all and (max-width: 767px) {
+    padding: 0;
+  }
+
+  .listing-item__logo {
+    .media-object {
+      border-radius: 100px;
+    }
+  }
+
+  .listing-item__date {
+    @media all and (max-width: 480px) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .listings-application-info {
+    &--item {
+      position: relative;
+      padding-right: 10px;
+      margin: 0 10px 10px 0;
+      font-weight: 500;
+      display: inline-block;
+      float: left;
+      border-right: 1px solid #ebebeb;
+
+      &:last-child {
+        padding-right: 0;
+        margin-right: 0;
+        border-right: none;
+      }
+
+      &:after,
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+.form.edit-profile {
+  .form-group {
+    position: static !important;
+  }
+}
+.details-body__left.applicants {
+  margin: 0 auto;
+  float: none;
+  padding: 0;
+
+  @media all and (max-width: 992px) {
+    width: 100%;
+  }
+
+  form {
+    @media all and (max-width: 992px) {
+      margin: 0 -15px;
+    }
+  }
+
+  .title__primary {
+    padding: 0;
+    margin-bottom: 5px;
+  }
+}
+
+#editListingForm.form {
+  width: 100%;
+  max-width: 100%;
+}
+
+.edit-listing {
+  &--action {
+    background: #fff;
+    border: none;
+    @include prefix(box-shadow, 0 2px 14px 0 rgba(0, 0, 0, 0.05), webkit ms moz);
+
+    @media all and (max-width: 992px) and (min-width: 767px) {
+      width: 30%;
+    }
+
+    .form-group__btns {
+      margin-bottom: 0;
+    }
+
+    .btn {
+      width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 9px 0;
+      text-align: center;
+    }
+  }
+
+  &--form {
+    margin-bottom: 30px;
+    padding-left: 0;
+
+    .form-group__btns {
+      margin-bottom: 45px !important;
+    }
+  }
+}
+
+#message-modal {
+  .modal-footer {
+    border-top: none;
+  }
+}
+.btn__back.edit-listing-back {
+  background: none;
+  border: 1px solid #e7e7e7;
+  color: #000;
+  float: left;
+  text-transform: none;
+  margin-top: 20px;
+  &::before {
+    background: url('../images/icon-chevron-left-gray.svg') no-repeat left;
+    opacity: 1;
+  }
+  &:hover {
+    background: #f3f3f3;
+    color: black;
+  }
+}

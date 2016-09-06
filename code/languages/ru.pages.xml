@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE translation2 [
+<!ELEMENT translation2 (languages,pages)>
+<!ELEMENT languages (lang*)>
+<!ELEMENT lang (#PCDATA)>
+<!ATTLIST lang id ID #REQUIRED>
+<!ELEMENT pages (page*)>
+<!ELEMENT page (string*)>
+<!ATTLIST page key CDATA #REQUIRED>
+<!ELEMENT string (tr*)>
+<!ATTLIST string key CDATA #REQUIRED>
+<!ELEMENT tr (#PCDATA)>
+<!ATTLIST tr lang IDREF #REQUIRED>
+]>
+
+<translation2>
+  <languages>
+    <lang id="ru"/>
+  </languages>
+  <pages>
+    <page key="Frontend">
+      <string key="&quot;How to Apply&quot; by url is empty">
+        <tr lang="ru"> &quot;Подавать завку&quot; - укажите ссылку </tr>
+      </string>
+      <string key="&quot;How to Apply&quot; wrong email format">
+        <tr lang="ru"> &quot;Подавать заявку&quot; - неверный формат email </tr>
+      </string>
+      <string key="$category_name jobs">
+        <tr lang="ru"> Работа в области $category_name </tr>
+      </string>
+      <string key="$category_name jobs from $site_name">
+        <tr lang="ru"> Вакансии в категории $category_name от $site_name </tr>
+      </string>
+      <string key="$companies_number Companies">
+        <tr lang="ru"> $companies_number Компаний </tr>
+      </string>
+      <string key="$jobs_number $category_name jobs">
+        <tr lang="ru"> Работа в области $category_name ($jobs_number вакансий) </tr>
+      </string>
+      <string key="$jobs_number job(s)">
+        <tr lang="ru"> $jobs_number работ(-ы) </tr>
+      </string>
+      <string key="$jobs_number job(s) at $company_name">
+        <tr lang="ru"> $jobs_number вакансий(и) в $company_name </tr>
+      </string>
+      <string key="$jobs_number jobs found">
+        <tr lang="ru"> Найдено $jobs_number вакансий </tr>
+      </string>
+      <string key="$jobs_number jobs found in $location">
+        <tr lang="ru"> Работа в $location ($jobs_number вакансий) </tr>
+      </string>
+      <string key="$resumes_number resumes found">
+        <tr lang="ru"> $resumes_number резюме </tr>
+      </string>
+      <string key="404 Page Not Found">
+        <tr lang="ru"> 404 Страница не найдена </tr>
+      </string>
+      <string key="&lt;b&gt;e.g.&lt;/b&gt; https://youtu.be/XXXXXXXXXXX">
+        <tr lang="ru"> &lt;b&gt;например:&lt;/b&gt; https://youtu.be/XXXXXXXXXXX </tr>
+      </string>
+      <string key="A new job alert has been created for you!">
+        <tr lang="ru"> Вы успешно подписаны на рассылку о новых вакансиях! </tr>
+      </string>
+      <string key="About $company_name">
+        <tr lang="ru"> О компании &quot;$company_name&quot; </tr>
+      </string>
+      <string key="Account Settings">
+        <tr lang="ru"> Настройки профиля </tr>
+      </string>
+      <string key="Active">
+        <tr lang="ru"> Активный </tr>
+      </string>
+      <string key="Add $field_caption">
+        <tr lang="ru"> Добавить $field_caption </tr>
+      </string>
+      <string key="All Jobs">
+        <tr lang="ru"> Все вакансии </tr>
+      </string>
+      <string key="Any">
+        <tr lang="ru"> Любой(-ая) </tr>
+      </string>
+      <string key="Applicants">
+        <tr lang="ru"> Заявки </tr>
+      </string>
+      <string key="Applied">
+        <tr lang="ru"> Заявок </tr>
+      </string>
+      <string key="Apply">
+        <tr lang="ru"> Подать заявку </tr>
+      </string>
+      <string key="Apply Discount">
+        <tr lang="ru"> Применить </tr>
+      </string>
+      <string key="Apply Now">
+        <tr lang="ru"> Подать заявку </tr>
+      </string>
+      <string key="View details and Apply">
+        <tr lang="ru"> Посмотреть детали и подать заявку </tr>
+      </string>
+      <string key="Apply to $job_title at $company_name">
+        <tr lang="ru"> Подать заявку на вакансию $job_title в компании $company_name </tr>
+      </string>
+      <string key="Are you sure you want to delete your profile?">
+        <tr lang="ru"> Вы уверены, что хотите удалить свой профиль? </tr>
+      </string>
+      <string key="Back">
+        <tr lang="ru"> Назад </tr>
+      </string>
+      <string key="Blog">
+        <tr lang="ru"> Блог </tr>
+      </string>
+      <string key="Buy">
+        <tr lang="ru"> Купить </tr>
+      </string>
+      <string key="By Email">
+        <tr lang="ru"> По почте </tr>
+      </string>
+      <string key="By URL">
+        <tr lang="ru"> По ссылке </tr>
+      </string>
+      <string key="Cancel">
+        <tr lang="ru"> Отменить </tr>
+      </string>
+      <string key="Categories">
+        <tr lang="ru"> Категории </tr>
+      </string>
+      <string key="Change Password">
+        <tr lang="ru"> Изменить Пароль </tr>
+      </string>
+      <string key="Checkout">
+        <tr lang="ru"> Оформление заказа </tr>
+      </string>
+      <string key="Choose account type">
+        <tr lang="ru"> Выберите тип учетной записи </tr>
+      </string>
+      <string key="City">
+        <tr lang="ru"> Город </tr>
+      </string>
+      <string key="Click to select">
+        <tr lang="ru"> Выбрать </tr>
+      </string>
+      <string key="Close">
+        <tr lang="ru"> Закрыть </tr>
+      </string>
+      <string key="Comments">
+        <tr lang="ru"> Комментарии </tr>
+      </string>
+      <string key="Companies">
+        <tr lang="ru"> Компании </tr>
+      </string>
+      <string key="Companies on $site_name">
+        <tr lang="ru"> Компании на $site_name </tr>
+      </string>
+      <string key="Company">
+        <tr lang="ru"> Компания </tr>
+      </string>
+      <string key="Company Description">
+        <tr lang="ru"> Описание Компании </tr>
+      </string>
+      <string key="Company Name">
+        <tr lang="ru"> Название Компании </tr>
+      </string>
+      <string key="Company Profile">
+        <tr lang="ru"> Профиль Компании </tr>
+      </string>
+      <string key="Confirm Password">
+        <tr lang="ru"> Подтвердить Пароль </tr>
+      </string>
+      <string key="Country">
+        <tr lang="ru"> Страна </tr>
+      </string>
+      <string key="Cover letter">
+        <tr lang="ru"> Сопроводительное письмо </tr>
+      </string>
+      <string key="Create Employer Profile">
+        <tr lang="ru"> Создать профиль работодателя </tr>
+      </string>
+      <string key="Create Job Alert">
+        <tr lang="ru"> Подписка на новые вакансии </tr>
+      </string>
+      <string key="Create Job Seeker Profile">
+        <tr lang="ru"> Создать профиль соискателя </tr>
+      </string>
+      <string key="Create New Resume">
+        <tr lang="ru"> Создать новое резюме </tr>
+      </string>
+      <string key="Create alert">
+        <tr lang="ru"> Подписаться </tr>
+      </string>
+      <string key="Create an account">
+        <tr lang="ru"> Регистрация </tr>
+      </string>
+      <string key="Current Search">
+        <tr lang="ru"> Текущий поиск </tr>
+      </string>
+      <string key="Daily">
+        <tr lang="ru"> Ежедневно </tr>
+      </string>
+      <string key="Degree or Specialty">
+        <tr lang="ru"> Степень или специальность </tr>
+      </string>
+      <string key="Delete Job">
+        <tr lang="ru"> Удалить </tr>
+      </string>
+      <string key="Delete Resume">
+        <tr lang="ru"> Удалить </tr>
+      </string>
+      <string key="Delete profile">
+        <tr lang="ru"> Удалить </tr>
+      </string>
+      <string key="Description">
+        <tr lang="ru"> Описание </tr>
+      </string>
+      <string key="Desired Job Title">
+        <tr lang="ru"> Желаемая должность </tr>
+      </string>
+      <string key="Discount code">
+        <tr lang="ru"> Код скидки </tr>
+      </string>
+      <string key="Edit">
+        <tr lang="ru"> Редактировать </tr>
+      </string>
+      <string key="Edit Job">
+        <tr lang="ru"> Редактировать вакансию </tr>
+      </string>
+      <string key="Edit Resume">
+        <tr lang="ru"> Редактировать резюме </tr>
+      </string>
+      <string key="Edit your resume in &quot;My Account&quot; section">
+        <tr lang="ru"> Редактировать моё резюме в разделе &quot;Мой кабинет&quot; </tr>
+      </string>
+      <string key="Education">
+        <tr lang="ru"> Образование </tr>
+      </string>
+      <string key="Email">
+        <tr lang="ru"> Email </tr>
+      </string>
+      <string key="Email me jobs like this">
+        <tr lang="ru"> Подписаться на новые вакансии </tr>
+      </string>
+      <string key="Employer">
+        <tr lang="ru"> Работодатель </tr>
+      </string>
+      <string key="Employer Registration">
+        <tr lang="ru"> Регистрация работодателя </tr>
+      </string>
+      <string key="Expiration Date">
+        <tr lang="ru"> Срок действия </tr>
+      </string>
+      <string key="Expired">
+        <tr lang="ru"> Итекщий срок действия </tr>
+      </string>
+      <string key="Expires">
+        <tr lang="ru"> Истекает </tr>
+      </string>
+      <string key="Featured Companies">
+        <tr lang="ru"> Избранные компании </tr>
+      </string>
+      <string key="Featured Jobs">
+        <tr lang="ru"> Горячие вакансии </tr>
+      </string>
+      <string key="File format is not supported">
+        <tr lang="ru"> Формат файла не поддерживается </tr>
+      </string>
+      <string key="File size shouldn&apos;t be larger than 5 MB.">
+        <tr lang="ru"> Размер файла должен быть не более 5 MB. </tr>
+      </string>
+      <string key="Find Companies">
+        <tr lang="ru"> Найти компании </tr>
+      </string>
+      <string key="Find Jobs">
+        <tr lang="ru"> Поиск работы </tr>
+      </string>
+      <string key="Find Resumes">
+        <tr lang="ru"> Найти резюме </tr>
+      </string>
+      <string key="Forgot Your Password?">
+        <tr lang="ru"> Забыли пароль? </tr>
+      </string>
+      <string key="From">
+        <tr lang="ru"> От </tr>
+      </string>
+      <string key="Full Name">
+        <tr lang="ru"> Полное имя </tr>
+      </string>
+      <string key="Hidden">
+        <tr lang="ru"> Скрытый </tr>
+      </string>
+      <string key="How to Apply">
+        <tr lang="ru"> Подавать заявку </tr>
+      </string>
+      <string key="How would you like to pay">
+        <tr lang="ru"> Способ оплаты </tr>
+      </string>
+      <string key="I agree to the terms of use">
+        <tr lang="ru"> Я согласен(-на) с условиями пользовательского соглашения </tr>
+      </string>
+      <string key="I already have a Job Seeker account.">
+        <tr lang="ru"> У меня уже есть учётная запись соискателя. </tr>
+      </string>
+      <string key="I already have an Employer account.">
+        <tr lang="ru"> У меня уже есть учётная запись работодателя. </tr>
+      </string>
+      <string key="Image format is not supported">
+        <tr lang="ru"> Формат изображения не поддерживается </tr>
+      </string>
+      <string key="Invalid discount code">
+        <tr lang="ru"> Неверный код скидки </tr>
+      </string>
+      <string key="Job Description">
+        <tr lang="ru"> Описание вакансии </tr>
+      </string>
+      <string key="Job Postings">
+        <tr lang="ru"> Вакансии </tr>
+      </string>
+      <string key="Job Seeker">
+        <tr lang="ru"> Соискатель </tr>
+      </string>
+      <string key="Job Seeker Registration">
+        <tr lang="ru"> Регистрация соискателя </tr>
+      </string>
+      <string key="Job Title">
+        <tr lang="ru"> Название вакансии </tr>
+      </string>
+      <string key="Job Type">
+        <tr lang="ru"> Тип вакансии </tr>
+      </string>
+      <string key="Jobs">
+        <tr lang="ru"> Вакансии </tr>
+      </string>
+      <string key="Jobs at $company_name">
+        <tr lang="ru"> Вакансии в $company_name </tr>
+      </string>
+      <string key="Jobs at $company_name on $site_name">
+        <tr lang="ru"> Вакансии в $company_name на $site_name </tr>
+      </string>
+      <string key="Jobs by Category">
+        <tr lang="ru"> Категории </tr>
+      </string>
+      <string key="Jobs by City">
+        <tr lang="ru"> Города </tr>
+      </string>
+      <string key="Jobs by Country">
+        <tr lang="ru"> Страны </tr>
+      </string>
+      <string key="Jobs by State">
+        <tr lang="ru"> Регионы </tr>
+      </string>
+      <string key="Jobs in $location">
+        <tr lang="ru"> Работа в $location </tr>
+      </string>
+      <string key="Jobs in $location from $site_name">
+        <tr lang="ru"> Работа в $location от $site_name </tr>
+      </string>
+      <string key="Keep me signed in">
+        <tr lang="ru"> Запомнить меня </tr>
+      </string>
+      <string key="Keywords">
+        <tr lang="ru"> Ключевые слова </tr>
+      </string>
+      <string key="Latest Jobs">
+        <tr lang="ru"> Последние работы </tr>
+      </string>
+      <string key="Less">
+        <tr lang="ru"> меньше </tr>
+      </string>
+      <string key="Let Employers Find My Resume">
+        <tr lang="ru"> Компании могут находить моё резюме </tr>
+      </string>
+      <string key="Load more">
+        <tr lang="ru"> Загрузить ещё </tr>
+      </string>
+      <string key="Location">
+        <tr lang="ru"> Город/регион </tr>
+      </string>
+      <string key="Logo">
+        <tr lang="ru"> Логотип </tr>
+      </string>
+      <string key="Logout">
+        <tr lang="ru"> Выйти </tr>
+      </string>
+      <string key="Make Hidden">
+        <tr lang="ru"> Скрыть </tr>
+      </string>
+      <string key="Make Visible">
+        <tr lang="ru"> Активировать </tr>
+      </string>
+      <string key="Monthly">
+        <tr lang="ru"> Ежемесячно </tr>
+      </string>
+      <string key="More">
+        <tr lang="ru"> Ещё </tr>
+      </string>
+      <string key="My Account">
+        <tr lang="ru"> Мой кабинет </tr>
+      </string>
+      <string key="My Applications">
+        <tr lang="ru"> Мои заявки </tr>
+      </string>
+      <string key="My Resume">
+        <tr lang="ru"> Моё резюме </tr>
+      </string>
+      <string key="My Resumes">
+        <tr lang="ru"> Мои резюме </tr>
+      </string>
+      <string key="Never Expire">
+        <tr lang="ru"> Бесконечный срок действия </tr>
+      </string>
+      <string key="Next">
+        <tr lang="ru"> Следующая </tr>
+      </string>
+      <string key="No">
+        <tr lang="ru"> Нет </tr>
+      </string>
+      <string key="Order Information">
+        <tr lang="ru"> Информация о заказе </tr>
+      </string>
+      <string key="Password">
+        <tr lang="ru"> Пароль </tr>
+      </string>
+      <string key="Password Recovery">
+        <tr lang="ru"> Восстановить пароль </tr>
+      </string>
+      <string key="Passwords did not match">
+        <tr lang="ru"> Пароль не подходит </tr>
+      </string>
+      <string key="Personal Summary">
+        <tr lang="ru"> Резюме </tr>
+      </string>
+      <string key="Phone">
+        <tr lang="ru"> Телефон </tr>
+      </string>
+      <string key="Photo">
+        <tr lang="ru"> Фото </tr>
+      </string>
+      <string key="Place Order">
+        <tr lang="ru"> Разместить заказ </tr>
+      </string>
+      <string key="Please accept the Terms of Use to Register">
+        <tr lang="ru"> Пожалуйста, примите условия пользовательского соглашения </tr>
+      </string>
+      <string key="Please choose new product">
+        <tr lang="ru"> Пожалуйста, выберите новый продукт </tr>
+      </string>
+      <string key="Please enter &apos;$field_caption&apos;">
+        <tr lang="ru"> Пожалуйста  введите &apos;$field_caption&apos; </tr>
+      </string>
+      <string key="Please enter valid">
+        <tr lang="ru"> Пожалуйста, введите валидный </tr>
+      </string>
+      <string key="Please enter valid YouTube link">
+        <tr lang="ru"> Пожалуйста, введите правильную ссылку на YouTube </tr>
+      </string>
+      <string key="Please enter valid email address">
+        <tr lang="ru"> Пожалуйста, введите действующий адрес эл. почты </tr>
+      </string>
+      <string key="Please enter your email address and we&apos;ll send you a link to reset your password right away!">
+        <tr lang="ru"> Пожалуйста, введите адрес своей/вашей электронной почты, и мы сразу же вышлем Вам ссылку для восстановления пароля! </tr>
+      </string>
+      <string key="Please include your comments.">
+        <tr lang="ru"> Пожалуйста, оставьте ваши комментарии. </tr>
+      </string>
+      <string key="Please provide your full name.">
+        <tr lang="ru"> Пожалуйста, укажите полное имя. </tr>
+      </string>
+      <string key="Position">
+        <tr lang="ru"> Должность </tr>
+      </string>
+      <string key="Post">
+        <tr lang="ru"> Опубликовать </tr>
+      </string>
+      <string key="Post a Job">
+        <tr lang="ru"> Создать вакансию </tr>
+      </string>
+      <string key="Post a Resume">
+        <tr lang="ru"> Создать резюме </tr>
+      </string>
+      <string key="Preview">
+        <tr lang="ru"> Предпросмотр </tr>
+      </string>
+      <string key="Preview and share your job.">
+        <tr lang="ru"> Посмотреть и поделиться своей вакансией. </tr>
+      </string>
+      <string key="Preview your resume.">
+        <tr lang="ru"> Посмотреть резюме. </tr>
+      </string>
+      <string key="Previous">
+        <tr lang="ru"> Предыдущая </tr>
+      </string>
+      <string key="Pricing">
+        <tr lang="ru"> Цены </tr>
+      </string>
+      <string key="Proceed to posting your new job.">
+        <tr lang="ru"> Перейти к публикации вашей новой вакансии. </tr>
+      </string>
+      <string key="Proceed to posting your resume.">
+        <tr lang="ru"> Перейти к размещению вашего нового резюме. </tr>
+      </string>
+      <string key="Proceed to searching candidates.">
+        <tr lang="ru"> Перейти к поиску кандидатов. </tr>
+      </string>
+      <string key="Purchased">
+        <tr lang="ru"> Куплено </tr>
+      </string>
+      <string key="Purchased Products">
+        <tr lang="ru"> Куплено продуктов </tr>
+      </string>
+      <string key="Refine Search">
+        <tr lang="ru"> Фильтровать </tr>
+      </string>
+      <string key="Refine by $field_caption">
+        <tr lang="ru"> $field_caption </tr>
+      </string>
+      <string key="Register">
+        <tr lang="ru"> Регистрация </tr>
+      </string>
+      <string key="Registration">
+        <tr lang="ru"> Регистрация </tr>
+      </string>
+      <string key="Remove">
+        <tr lang="ru"> Удалить </tr>
+      </string>
+      <string key="Reset my password">
+        <tr lang="ru"> Поменять пароль </tr>
+      </string>
+      <string key="Resume Search">
+        <tr lang="ru"> Резюме </tr>
+      </string>
+      <string key="Resume file">
+        <tr lang="ru"> Файл резюме </tr>
+      </string>
+      <string key="Resume file is required">
+        <tr lang="ru"> Загрузите файл резюме </tr>
+      </string>
+      <string key="Resumes">
+        <tr lang="ru"> Резюме </tr>
+      </string>
+      <string key="Save">
+        <tr lang="ru"> Сохранить </tr>
+      </string>
+      <string key="Search within">
+        <tr lang="ru"> Радиус поиска </tr>
+      </string>
+      <string key="Select">
+        <tr lang="ru"> Выбрать </tr>
+      </string>
+      <string key="Select Product">
+        <tr lang="ru"> Выбрать продукт </tr>
+      </string>
+      <string key="Select your resume">
+        <tr lang="ru"> Выберите резюме </tr>
+      </string>
+      <string key="Send application">
+        <tr lang="ru"> Подать заявку </tr>
+      </string>
+      <string key="Share">
+        <tr lang="ru"> Поделиться </tr>
+      </string>
+      <string key="Share this job">
+        <tr lang="ru"> Поделиться </tr>
+      </string>
+      <string key="Sign in">
+        <tr lang="ru"> Войти </tr>
+      </string>
+      <string key="Sign in with LinkedIn">
+        <tr lang="ru"> Войти через LinkedIn </tr>
+      </string>
+      <string key="Sign me in">
+        <tr lang="ru"> Войти </tr>
+      </string>
+      <string key="Sign up">
+        <tr lang="ru"> Регистрация </tr>
+      </string>
+      <string key="Sorry, that job is no longer available. Here are some results that may be similar to the job you were looking for.">
+        <tr lang="ru"> К сожалению, эта вакансия больше недоступна. Вот некоторые вакансии, которые могут вас заинтересовать. </tr>
+      </string>
+      <string key="Sorry, we can not find the page you were looking for">
+        <tr lang="ru"> К сожалению, мы не можем найти страницу, которую вы искали </tr>
+      </string>
+      <string key="Sorry, we don&apos;t currently have any jobs for this search. Please try another search.">
+        <tr lang="ru"> К сожалению, в настоящее время нет никаких вакансий по вашему запросу. Пожалуйста, попробуйте другие критерии поиска. </tr>
+      </string>
+      <string key="Sorry, we don&apos;t currently have any resumes for this search. Please try another search.">
+        <tr lang="ru"> К сожалению, в настоящее время нет никаких резюме по вашему запросу. Пожалуйста, попробуйте другие критерии поиска. </tr>
+      </string>
+      <string key="State">
+        <tr lang="ru"> Штат </tr>
+      </string>
+      <string key="Submit">
+        <tr lang="ru"> Отправить </tr>
+      </string>
+      <string key="Subtotal">
+        <tr lang="ru"> Подытог </tr>
+      </string>
+      <string key="Tax">
+        <tr lang="ru"> Налог </tr>
+      </string>
+      <string key="Thank you for your purchase!">
+        <tr lang="ru"> Спасибо за покупку! </tr>
+      </string>
+      <string key="Thank you very much for your message. We will respond to you as soon as possible.">
+        <tr lang="ru"> Большое спасибо за ваше сообщение. Мы ответим вам в ближайшее время. </tr>
+      </string>
+      <string key="Thank you! Your application has been sent.">
+        <tr lang="ru"> Спасибо! Ваша заявка отправлена. </tr>
+      </string>
+      <string key="Thank you. We&apos;ve sent you an email containing a link to reset your password. If you haven&apos;t received it yet, please check junk or spam mail folder.">
+        <tr lang="ru"> Спасибо. Мы отправили вам письмо, содержащее ссылку для восстановления пароля. Если вы ещё не получили его, пожалуйста, проверьте папку &quot;Спам&quot;. </tr>
+      </string>
+      <string key="The date format is incorrect">
+        <tr lang="ru"> Неправильный формат даты </tr>
+      </string>
+      <string key="The product you&apos;ve purchased does not allow to post listings. Please purchase another product">
+        <tr lang="ru"> Продукт, который вы купили, не позволяет вам размещать объявления. Пожалуйста, приобрите другой продукт </tr>
+      </string>
+      <string key="There are no applications for &quot;$listing_title&quot;">
+        <tr lang="ru"> Нет заявок на вакансию &quot;$listing_title&quot; </tr>
+      </string>
+      <string key="There was an error during file upload">
+        <tr lang="ru"> Возникла ошибка во время загрузки файла </tr>
+      </string>
+      <string key="This email address is already in use.">
+        <tr lang="ru"> Эта эл.почта уже используется. </tr>
+      </string>
+      <string key="To">
+        <tr lang="ru"> До </tr>
+      </string>
+      <string key="Total">
+        <tr lang="ru"> Итого </tr>
+      </string>
+      <string key="Under construction">
+        <tr lang="ru"> На реконструкции </tr>
+      </string>
+      <string key="University or Institution">
+        <tr lang="ru"> Университет или институт </tr>
+      </string>
+      <string key="Upload Resume">
+        <tr lang="ru"> Загрузить резюме </tr>
+      </string>
+      <string key="Upload your resume">
+        <tr lang="ru"> Загрузить ваше резюме </tr>
+      </string>
+      <string key="View Job">
+        <tr lang="ru"> Просмотр </tr>
+      </string>
+      <string key="View Resume">
+        <tr lang="ru"> Просмотр </tr>
+      </string>
+      <string key="View all jobs">
+        <tr lang="ru"> Посмотреть все вакансии </tr>
+      </string>
+      <string key="View your job stats in &quot;My Account&quot; section">
+        <tr lang="ru"> Посмотреть статистику по вакансиям в раделе &quot;Мой кабинет&quot; </tr>
+      </string>
+      <string key="Website">
+        <tr lang="ru"> Веб-сайт </tr>
+      </string>
+      <string key="Weekly">
+        <tr lang="ru"> Еженедельно </tr>
+      </string>
+      <string key="Work Experience">
+        <tr lang="ru"> Опыт работы </tr>
+      </string>
+      <string key="Wrong email or password. Let&apos;s try again!">
+        <tr lang="ru"> Неверный email или пароль. Попробуйте ещё раз! </tr>
+      </string>
+      <string key="Yes">
+        <tr lang="ru"> Да </tr>
+      </string>
+      <string key="You already applied to this job">
+        <tr lang="ru"> Вы уже подали заявку на эту работу </tr>
+      </string>
+      <string key="You applied successfully">
+        <tr lang="ru"> Вы успешно подали заявку </tr>
+      </string>
+      <string key="You can cancel this at any time.">
+        <tr lang="ru"> Вы можете отменить это в любое время. </tr>
+      </string>
+      <string key="You do not have permissions to post Jobs. Please purchase a relevant product.">
+        <tr lang="ru"> Вы не можете публиковать Вакансии. Вам необходимо приобрести соответствующий продукт. </tr>
+      </string>
+      <string key="You do not have permissions to post Resumes. Please purchase a relevant product.">
+        <tr lang="ru"> У вас нет разрешения на публикацию Резюме. Вам необходимо приобрести соответствующий продукт. </tr>
+      </string>
+      <string key="You don&apos;t have permissions to access this page.">
+        <tr lang="ru"> У вас нет разрешений на доступ к этой странице. </tr>
+      </string>
+      <string key="You have $listings_number Resume(s)">
+        <tr lang="ru"> У вас $listings_number резюме </tr>
+      </string>
+      <string key="You have no applications so far.">
+        <tr lang="ru"> У вас пока нет заявок. </tr>
+      </string>
+      <string key="You have no jobs so far">
+        <tr lang="ru"> У вас пока нет вакансий </tr>
+      </string>
+      <string key="You have no resumes so far">
+        <tr lang="ru"> У вас пока нет резюме </tr>
+      </string>
+      <string key="You have received a discount of">
+        <tr lang="ru"> Вы получили скидку в размере </tr>
+      </string>
+      <string key="You have successfully applied your discount!">
+        <tr lang="ru"> Скидка успешно применена! </tr>
+      </string>
+      <string key="You have successfully changed your profile info!">
+        <tr lang="ru"> Ваш профиль успешно успешно изменён! </tr>
+      </string>
+      <string key="You have successfully deleted your profile!">
+        <tr lang="ru"> Ваш профиль успешно удалён! </tr>
+      </string>
+      <string key="You have successfully posted your job.">
+        <tr lang="ru"> Вы успешно опубликовали свою вакансию. </tr>
+      </string>
+      <string key="You have successfully posted your resume.">
+        <tr lang="ru"> Вы успешно разместили своё резюме. </tr>
+      </string>
+      <string key="You haven&apos;t applied to any job yet.">
+        <tr lang="ru"> У вас ещё нет заявок ни на одну работу. </tr>
+      </string>
+      <string key="You&apos;ve reached the limit of number of listings allowed by your product">
+        <tr lang="ru"> Вы достигли лимита по количеству объявлений </tr>
+      </string>
+      <string key="Your company profile has featured status now.">
+        <tr lang="ru"> Ваша компания теперь имеет &quot;избранный&quot; статус. </tr>
+      </string>
+      <string key="Your email">
+        <tr lang="ru"> Ваш email </tr>
+      </string>
+      <string key="Your email $email was successfully unsubscribed from the Email Alert">
+        <tr lang="ru"> Ваш email $email был успешно отписан от рассылки новых вакансий </tr>
+      </string>
+      <string key="Your job will be removed permanently. Are you sure?">
+        <tr lang="ru"> Ваша вакансия будет удалена. Вы уверены? </tr>
+      </string>
+      <string key="Your name">
+        <tr lang="ru"> Ваше имя </tr>
+      </string>
+      <string key="Your order">
+        <tr lang="ru"> Ваш заказ </tr>
+      </string>
+      <string key="Your password was successfully changed">
+        <tr lang="ru"> Ваш пароль был успешно изменен </tr>
+      </string>
+      <string key="Your profile will be deleted permanently.">
+        <tr lang="ru"> Ваш профиль будет удалён. </tr>
+      </string>
+      <string key="Your resume will be removed permanently. Are you sure?">
+        <tr lang="ru"> Ваше резюме будет удалено. Вы уверены? </tr>
+      </string>
+      <string key="applicants">
+        <tr lang="ru"> заявки </tr>
+      </string>
+      <string key="e.g. http://www.yourwebsite.com">
+        <tr lang="ru"> например http://www.yourwebsite.com </tr>
+      </string>
+      <string key="file not specified">
+        <tr lang="ru"> файл не указан </tr>
+      </string>
+      <string key="jobs">
+        <tr lang="ru"> вакансий </tr>
+      </string>
+      <string key="jobs from $site_name">
+        <tr lang="ru"> вакансии от $site_name </tr>
+      </string>
+      <string key="kilometers">
+        <tr lang="ru"> километров </tr>
+      </string>
+      <string key="miles">
+        <tr lang="ru"> миль </tr>
+      </string>
+      <string key="posted">
+        <tr lang="ru"> опубликовано </tr>
+      </string>
+      <string key="resumes">
+        <tr lang="ru"> резюме </tr>
+      </string>
+      <string key="selected">
+        <tr lang="ru"> выбрано </tr>
+      </string>
+      <string key="to">
+        <tr lang="ru"> до </tr>
+      </string>
+      <string key="unlimited">
+        <tr lang="ru"> без ограничений </tr>
+      </string>
+      <string key="views">
+        <tr lang="ru"> просм. </tr>
+      </string>
+    </page>
+    <page key="Backend">
+    </page>
+  </pages>
+</translation2>
