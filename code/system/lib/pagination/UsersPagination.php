@@ -4,7 +4,9 @@ class SJB_UsersPagination extends SJB_Pagination
 {
 	public function __construct($userGroupInfo, $template)
 	{
-		if ($userGroupInfo['id'] == 'JobSeeker' || $userGroupInfo['id'] == 'Employer') {
+        $companyTypes = array('Employer','Investor','Entrepreneur');
+
+		if ($userGroupInfo['id'] == 'JobSeeker' || in_array($userGroupInfo['id'], $companyTypes)) {
 			$this->item = mb_strtolower($userGroupInfo['name'], 'utf8') . 's';
 		} else {
 			$this->item = '\'' . mb_strtolower($userGroupInfo['name'], 'utf8') . '\' users';
@@ -24,10 +26,10 @@ class SJB_UsersPagination extends SJB_Pagination
 		}
 
 		$fields = array(
-			'CompanyName'       => array('name' => 'Company Name', 'isVisible' => $userGroupInfo['id'] == 'Employer'),
+			'CompanyName'       => array('name' => 'Company Name', 'isVisible' => in_array($userGroupInfo['id'], $companyTypes)),
 			'name'              => array('name' => 'Name', 'isVisible' => $userGroupInfo['id'] == 'JobSeeker', 'isSort' => false),
 			'username'          => array('name' => 'Email'),
-			'Location'          => array('name' => 'Location', 'isVisible' => $userGroupInfo['id'] == 'Employer', 'isSort' => false),
+			'Location'          => array('name' => 'Location', 'isVisible' => in_array($userGroupInfo['id'], $companyTypes), 'isSort' => false),
 			'registration_date' => array('name' => 'Registration Date'),
 			'active'            => array('name' => 'Status', 'isSort' => false),
 		);

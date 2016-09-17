@@ -199,6 +199,8 @@ class SJB_Admin_Menu_AdminMenu extends SJB_Function
                 ],
             ];
 
+        SJB_Event::dispatch("onAfterAdminMenuCreated");
+
         if (SJB_System::getSystemSettings("isSaas")) {
             foreach ($GLOBALS['LEFT_ADMIN_MENU'] as $menuKey => $menuItems) {
                 foreach ($menuItems as $key => $menuItem) {

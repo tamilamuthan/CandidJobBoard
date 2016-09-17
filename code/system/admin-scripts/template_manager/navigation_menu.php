@@ -36,6 +36,8 @@ class SJB_Admin_TemplateManager_NavigationMenu extends SJB_Function
 			'/jobs/' => 'Search Jobs',
 			'/companies/' => 'Company Search',
 			'/resumes/' => 'Resume Search',
+            '/opportunities/' => 'Opportunities Search',
+            '/ideas/' => 'Ideas Search',
 			'/employer-products/' => 'Employer Products',
 			'/jobseeker-products/' => 'Job Seeker Products',
 			'/blog/' => 'Blog',

@@ -24,6 +24,10 @@
 					<li class="navbar__item navbar__item__filled">
                         {if $GLOBALS.current_user.group.id == "Employer"}
                             <a class="navbar__link btn__blue" href="{$GLOBALS.site_url}/my-listings/job/">[[My Account]]</a>
+                        {elseif $GLOBALS.current_user.group.id == "Investor"}
+                            <a class="navbar__link btn__blue" href="{$GLOBALS.site_url}/my-listings/investor/">[[My Account]]</a>
+                        {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
+                            <a class="navbar__link btn__blue" href="{$GLOBALS.site_url}/my-listings/entrepreneur/">[[My Account]]</a>
                         {else}
                             <a class="navbar__link btn__blue" href="{$GLOBALS.site_url}/my-listings/resume/">[[My Account]]</a>
                         {/if}

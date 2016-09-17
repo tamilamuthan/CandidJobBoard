@@ -35,7 +35,16 @@ class SJB_Classifieds_MyListings extends SJB_Function
 		$currentUser = SJB_UserManager::getCurrentUser();
 
 		if (!$this->listingTypeID) {
-			SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . '/my-listings/' . ($currentUser->getUserGroupSID() == SJB_UserGroup::EMPLOYER ? 'job' : 'resume') . '/' );
+            $page = 'resume';
+            $eSid = SJB_UserGroupManager::getUserGroupSIDByID('Entrepreneur');
+            $iSid = SJB_UserGroupManager::getUserGroupSIDByID('Investor');
+            switch ($currentUser->getUserGroupSID()) {
+                case $eSid: $page = 'idea'; break;
+                case $iSid: $page = 'opportunity'; break;
+                case SJB_UserGroup::EMPLOYER: $page = 'job'; break;
+                case SJB_UserGroup::JOBSEEKER: $page = 'resume'; break;
+            }
+			SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . '/my-listings/' . $page . '/');
 		}
 
 		$this->listingTypeSID = SJB_ListingTypeManager::getListingTypeSIDByID($this->listingTypeID);

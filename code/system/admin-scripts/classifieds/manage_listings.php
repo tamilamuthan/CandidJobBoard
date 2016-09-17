@@ -96,10 +96,13 @@ class SJB_Admin_Classifieds_ManageListings extends SJB_Function
 		// criteria for search and for the form are different. see PostingDate
 		$criteria = SJB_SearchFormBuilder::extractCriteriaFromRequestData($request, $listing);
 		$search_form_builder->registerTags($template_processor);
-		$template = 'manage_listings.tpl';
-		if ($listingTypeInfo['id'] == 'Job') {
-			$template = 'manage_jobs.tpl';
-		}
+
+        switch($listingTypeInfo['id']) {
+            case 'Job': $template = 'manage_jobs.tpl'; break;
+            case 'Opportunity': $template = 'manage_opportunities.tpl'; break;
+            case 'Idea': $template = 'manage_ideas.tpl'; break;
+            default: $template = 'manage_listings.tpl';
+        }
 		$template_processor->display($template);
 
 		/************* S E A R C H   F O R M   R E S U L T S *************/
@@ -126,8 +129,10 @@ class SJB_Admin_Classifieds_ManageListings extends SJB_Function
 			$searcher->setLimit((($paginator->currentPage - 1) * $paginator->itemsPerPage). ', '.$paginator->itemsPerPage);
 			$foundListingsSIDs = $searcher->getObjectsSIDsByCriteria($criteria, $aliases, $sorting, $innerJoin); //get found listing sids per page
 			if (empty($foundListingsSIDs) && $paginator->currentPage != 1) {
-				if ($listingTypeInfo['id'] == 'Job' || $listingTypeInfo['id'] == 'Resume') {
-					SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/manage-' . strtolower($listingTypeInfo['id']) . 's/?page=1&restore=1');
+				if ($listingTypeInfo['id'] == 'Job' || $listingTypeInfo['id'] == 'Resume' || $listingTypeInfo['id'] == 'Idea' ) {
+                    SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/manage-' . strtolower($listingTypeInfo['id']) . 's/?page=1&restore=1');
+                } else if ($listingTypeInfo['id'] == 'Opportunity') {
+                    SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/manage-opportunities/?page=1&restore=1');
 				} else {
 					SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/manage-' . strtolower($listingTypeInfo['id']) . '-listings/?page=1&restore=1');
 				}

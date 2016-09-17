@@ -23,18 +23,18 @@
 								<td><a href="{$GLOBALS.site_url}/edit-listing/?listing_id={$listing.id}">{$listing.Title|escape:'html'}</a></td>
 								<td>
 									<a href="{$GLOBALS.site_url}/edit-user/?user_sid={$listing.user.sid}">
-										{if $listing.type.id == 'Job'}
+										{if in_array($listing.type.id, array('Job','Idea','Opportunity'))}
 											{$listing.user.CompanyName|escape}
 										{else}
 											{$listing.user.FullName|escape}
 										{/if}
 									</a>
 								</td>
-								{if $listing.type.id == 'Job'}
+                                {if in_array($listing.type.id, array('Job','Opportunity'))}
 									<td>[[{$listing.product.name}]]</td>
 								{/if}
 								<td>{$listing.activation_date|date:null:true}</td>
-								{if $listing.type.id == 'Job'}
+                                {if in_array($listing.type.id, array('Job','Opportunity'))}
 									<td><a href="{$GLOBALS.site_url}/system/applications/view/?user_sid={$listing.user.id}&amp;appJobId={$listing.id}">{$listing.applications}</a></td>
 								{/if}
 								<td>

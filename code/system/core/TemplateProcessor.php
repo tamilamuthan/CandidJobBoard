@@ -182,7 +182,11 @@ class SJB_TemplateProcessor extends Smarty
 		}
 		if ($listing && is_array($listing)) {
 			if ($listing['type']['id'] == 'Job') {
-				$url = '/job/' . $listing['id'] . '/' . self::pretty_url($listing['Title']) . '/';
+                $url = '/job/' . $listing['id'] . '/' . self::pretty_url($listing['Title']) . '/';
+            } else if ($listing['type']['id'] == 'Opportunity') {
+                $url = '/opportunity/' . $listing['id'] . '/' . self::pretty_url($listing['Title']) . '/';
+            } else if ($listing['type']['id'] == 'Idea') {
+                $url = '/idea/' . $listing['id'] . '/' . self::pretty_url($listing['Title']) . '/';
 			} else {
 				$url = '/resume/' . $listing['id'] . '/' . self::pretty_url($listing['Title']) . '/';
 			}

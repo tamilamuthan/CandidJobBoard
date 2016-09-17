@@ -50,6 +50,8 @@
 					</tr>
 				{elseif $form_field.type == 'location'}
 					{input property=$form_field.id}
+                {elseif in_array($listingType.id, array('Opportunity','Idea')) && in_array($form_field.id, array('JobCategory','EmploymentType'))}
+                    <input type="hidden" id="{$form_field.id}" name="action" value="0"/>
 				{else}
 					<tr>
 						<td class="caption-td">[[{$form_field.caption}]]</td>

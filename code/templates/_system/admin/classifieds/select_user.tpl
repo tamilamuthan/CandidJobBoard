@@ -37,6 +37,10 @@ $(function() {
 	<legend>
 		{if $listingType.id == 'Job'}
 			[[Select Employer]]
+        {elseif $listingType.id == 'Opportunity'}
+            [[Select Investor]]
+        {elseif $listingType.id == 'Idea'}
+            [[Select Entrepreneur]]
 		{else}
 			[[Select Job Seeker]]
 		{/if}

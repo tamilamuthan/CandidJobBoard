@@ -5,7 +5,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 	public function isAccessible()
 	{
 		$listingTypeId = SJB_Request::getVar('listing_type_id', null);
-		$listingType = !in_array($listingTypeId, array('resume', 'job')) ? "{$listingTypeId}_listings" : $listingTypeId . 's';
+		$listingType = !in_array($listingTypeId, array('resume', 'job','idea','opportunity')) ? "{$listingTypeId}_listings" : $listingTypeId . 's';
 		$this->setPermissionLabel('manage_' . strtolower($listingType));
 		return parent::isAccessible();
 	}
@@ -148,8 +148,10 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 						if ($editUser)
 							SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . "/edit-user/?user_sid=".$userSID);
 						else {
-							if ($listingTypeID == 'resume' || $listingTypeID == 'job') {
-								$link = "manage-" . strtolower($listingTypeID) . "s";
+							if ($listingTypeID == 'resume' || $listingTypeID == 'job' || $listingTypeID == 'idea') {
+                                $link = "manage-" . strtolower($listingTypeID) . "s";
+                            } else if ($listingTypeID == 'opportunity') {
+                                    $link = "manage-opportunities";
 							} else {
 								$link = "manage-" . strtolower($listingTypeID) . "-listings";
 							}

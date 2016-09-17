@@ -2,7 +2,7 @@
 {if $edit_user}
 	{breadcrumbs}
 		<a href="{$GLOBALS.site_url}/manage-users/{$userGroupInfo.id|lower}">
-			[[Manage {if $userGroupInfo.id == 'Employer' || $userGroupInfo.id == 'JobSeeker'}{$userGroupInfo.name}s{else}'{$userGroupInfo.name}' Users{/if}]]
+			[[Manage {if in_array($userGroupInfo.id, array('Employer','JobSeeker','Investor','Entrepreneur'))}{$userGroupInfo.name}s{else}'{$userGroupInfo.name}' Users{/if}]]
 		</a>
 		&#187; <a href="{$GLOBALS.site_url}/edit-user/?user_sid={$userSID}">[[Edit User]]</a> 
 		&#187; <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id={$listingType.id}&username={$username}&edit_user=1">
@@ -37,7 +37,12 @@
 		<input type="hidden" name="edit_user" value="{$edit_user}" />
 		{set_token_field}
 		<table>
-			{foreach from=$form_fields item=form_field}
+            {if in_array($listingType.id, array('Opportunity','Idea'))}
+                <input type="hidden" name="EmploymentType" id="EmploymentType" value="76" />
+                <input type="hidden" name="JobCategory[]" id="JobCategory" value="359" />
+            {/if}
+
+            {foreach from=$form_fields item=form_field}
 				{if $form_field.id == 'youtube'}
 					<tr>
 						<td class="caption-td">[[{$form_field.caption}]]</td>

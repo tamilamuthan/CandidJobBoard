@@ -7,6 +7,17 @@
             </li>
             <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
             <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
+        {elseif $GLOBALS.current_user.group.id == "Investor"}
+            {title}[[Opportunities]]{/title}
+            <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[Opportunities]]</a>
+            </li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
+        {elseif $GLOBALS.current_user.group.id == "Entreprenuer"}
+            {title}[[My Ideas]]{/title}
+            <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[My Ideas]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[My Applications]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Account Settings]]</a></li>
         {else}
             {title}[[My Resumes]]{/title}
             <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[My Resumes]]</a></li>
@@ -20,6 +31,10 @@
         <div class="form-group__btn">
             {if $GLOBALS.current_user.group.id == "Employer"}
                 <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Job" class="btn btn__orange btn__bold">[[Post a Job]]</a>
+            {elseif $GLOBALS.current_user.group.id == "Investor"}
+                <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Opportunity" class="btn btn__orange btn__bold">[[Post an Opportunity]]</a>
+            {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
+                <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Idea" class="btn btn__orange btn__bold">[[Post an Idea]]</a>
             {else}
                 <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Resume" class="btn btn__orange btn__bold">[[Create New Resume]]</a>
             {/if}

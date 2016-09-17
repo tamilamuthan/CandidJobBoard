@@ -110,8 +110,8 @@ class SJB_ListingTypeManager
 	 */
 	public static function createTemplateStructure($listingTypeInfo)
 	{
-		if (in_array($listingTypeInfo['id'], array('Resume', 'Job'))) {
-			$result['link']   = strtolower($listingTypeInfo['id']) . 's';
+		if (in_array($listingTypeInfo['id'], array('Resume', 'Job', 'Idea', 'Opportunity'))) {
+			$result['link']   = ($listingTypeInfo['id']=='Opportunity') ? 'opportunities' : strtolower($listingTypeInfo['id']) . 's';
 			$result['id']	  = $listingTypeInfo['id'];
 			$result['name']   = $listingTypeInfo['name'];
 		} else {

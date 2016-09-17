@@ -109,7 +109,7 @@
 					{foreach from=$found_users item=user name=users_block}
 						<tr class="{cycle values = 'evenrow,oddrow'}">
 							<td><input type="checkbox" name="users[{$user.sid}]" value="1" id="checkbox_{$smarty.foreach.users_block.iteration}" /></td>
-							{if $userGroupInfo.id == 'Employer'}
+							{if in_array($userGroupInfo.id, array('Employer','Investor','Entrepreneur'))}
 								<td><a href="{$GLOBALS.site_url}/edit-user/?user_sid={$user.sid}" title="Edit">{$user.CompanyName|escape:'html'}</a></td>
 								<td><a href="{$GLOBALS.site_url}/edit-user/?user_sid={$user.sid}" title="Edit"><b>{$user.username}</b></a></td>
 								<td>

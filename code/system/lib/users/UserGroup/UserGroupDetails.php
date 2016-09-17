@@ -13,9 +13,11 @@ class SJB_UserGroupDetails extends SJB_ObjectDetails
 	public function __construct($object_info)
 	{
 		$this->notificationGroups = new SJB_NotificationGroups();
+
 		if (isset($object_info['id'])) {
 			$this->notificationGroups->setNotificationListingType($object_info['id']);
 		}
+
 		parent::SJB_ObjectDetails($object_info);
 	}
 
@@ -38,6 +40,16 @@ class SJB_UserGroupDetails extends SJB_ObjectDetails
 				'is_required' => true,
 				'is_system' => true,
 			),
+            array(
+                'id' => 'id',
+                'caption' => 'Group Id',
+                'type' => 'string',
+                'length' => '50',
+                'table_name' => 'user_groups',
+                'is_required' => true,
+                'is_system' => true,
+            ),
+
 		);
 	}
 
