@@ -27,7 +27,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 			$userInfo = SJB_UserManager::getUserInfoBySID($userSID);
 			$userGroupInfo = SJB_UserGroupManager::getUserGroupInfoBySID($userInfo['user_group_sid']);
 			if (!$productSID) {
-				$products = SJB_ProductsManager::getProductsInfoByUserGroupSID($userGroupInfo['sid']); 
+				$products = SJB_ProductsManager::getProductsInfoByUserGroupSID($userGroupInfo['sid']);
 				foreach ($products as $key =>$product) {
 					if (empty($product['listing_type_sid']) || $product['listing_type_sid'] != $listingTypeSID)
 						unset($products[$key]);
@@ -51,7 +51,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 					$tmp_listing_sid = $tmp_listing_id_from_request;
 				elseif (!$tmp_listing_id_from_request)
 					$tmp_listing_sid = time();
-					
+
 				$productInfo = SJB_ProductsManager::getProductInfoBySID($productSID);
 				$extraInfo = is_null($productInfo['serialized_extra_info']) ? null : unserialize($productInfo['serialized_extra_info']);
 				if (!empty($extraInfo)) {
@@ -78,6 +78,28 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 				$listing->deleteProperty('status');
 				$access_type = $listing->getProperty('access_type');
 
+                // Add screening questions
+                $screening_questionnaires = SJB_ScreeningQuestionnaires::getList($userSID);
+                //if (SJB_Acl::getInstance()->isAllowed('use_screening_questionnaires') && $screening_questionnaires) {
+                if ($screening_questionnaires) {
+					$issetQuestionnairyField = $listing->getProperty('screening_questionnaire');
+					if ($issetQuestionnairyField) {
+						$value = SJB_Request::getVar("screening_questionnaire");
+						$listing_info = $_REQUEST;
+						$value = $value ? $value : isset($listing_info['screening_questionnaire']) ? $listing_info['screening_questionnaire'] : '';
+						$listing->addProperty(
+							array('id' => 'screening_questionnaire',
+								'type' => 'list',
+								'caption' => 'Screening Questionnaire',
+								'value' => $value,
+								'list_values' => SJB_ScreeningQuestionnaires::getListSIDsAndCaptions($userSID),
+								'is_system' => true));
+					}
+				}
+				//else {
+				//	$listing->deleteProperty('screening_questionnaire');
+                //}
+
 				$add_listing_form = new SJB_Form($listing);
 				$add_listing_form->registerTags($tp);
 
@@ -93,7 +115,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 						$formToken           = SJB_Request::getVar('form_token');
 						$sessionFilesStorage = SJB_Session::getValue('tmp_uploads_storage');
 						$uploadedFields      = SJB_Array::getPath($sessionFilesStorage, $formToken);
-	
+
 						if (!empty($uploadedFields)) {
 							foreach ($uploadedFields as $fieldId => $fieldValue) {
 								// get field of listing
@@ -101,7 +123,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 								if (strpos($fieldId, ':') !== false) {
 									$isComplex = true;
 								}
-	
+
 								$tmpUploadedFileId = $fieldValue['file_id'];
 								// rename it to real listing field value
 								$newFileId = $fieldId . "_" . $listing->getSID();
@@ -110,12 +132,12 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 									SJB_DB::query("DELETE FROM `uploaded_files` WHERE `id` = ?s", $newFileId);
 								}
 								SJB_DB::query("UPDATE `uploaded_files` SET `id` = ?s WHERE `id` =?s", $newFileId, $tmpUploadedFileId);
-	
+
 								if ($isComplex) {
 									list($parentField, $subField, $complexStep) = explode(':', $fieldId);
 									$parentProp  = $listing->getProperty($parentField);
 									$parentValue = $parentProp->getValue();
-	
+
 									// look for complex property with current $fieldID and set it to new value of property
 									if (!empty($parentValue)) {
 										foreach ($parentValue as $id => $value) {
@@ -128,21 +150,21 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 								} else {
 									$listing->setPropertyValue($fieldId, $newFileId);
 								}
-	
+
 								// unset value from session temporary storage
 								$sessionFilesStorage = SJB_Array::unsetValueByPath($sessionFilesStorage, "{$formToken}/{$fieldId}");
 							}
-	
+
 							//and remove token key from temporary storage
 							$sessionFilesStorage = SJB_Array::unsetValueByPath($sessionFilesStorage, "{$formToken}");
 							SJB_Session::setValue('tmp_uploads_storage', $sessionFilesStorage);
-	
+
 							SJB_ListingManager::saveListing($listing);
 						}
 
 						SJB_ListingManager::activateListingBySID($listing->getSID());
 						SJB_ProductsManager::incrementPostingsNumber($productSID);
-					
+
 						$listingSid = $listing->getSID();
 						SJB_Event::dispatch('listingSaved', $listingSid);
 						if ($editUser)
@@ -164,7 +186,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 					if ($form_submitted)
 						$add_listing_form->isDataValid($field_errors);
 					$add_listing_form->registerTags($tp);
-					
+
 					$form_fields = $add_listing_form->getFormFieldsInfo();
 					$pages = SJB_PostingPagesManager::getPagesByListingTypeSID($listingTypeSID);
 					$formFieldsSorted = array();
