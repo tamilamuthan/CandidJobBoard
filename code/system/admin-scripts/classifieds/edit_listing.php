@@ -7,7 +7,7 @@ class SJB_Admin_Classifieds_EditListing extends SJB_Function
 		$listingId = SJB_Request::getVar('listing_id', null);
 		$listingInfo = SJB_ListingManager::getListingInfoBySID($listingId);
 		$listingTypeId = SJB_ListingTypeManager::getListingTypeIDBySID($listingInfo['listing_type_sid']);
-		$listingType = !in_array($listingTypeId, array('Resume', 'Job')) ? "{$listingTypeId}_listings" : $listingTypeId . 's';
+		$listingType = !in_array($listingTypeId, array('Resume', 'Job','Idea','Opportunity')) ? "{$listingTypeId}_listings" : $listingTypeId . 's';
 		$this->setPermissionLabel(
 			array(
 				'manage_' . strtolower($listingType),
@@ -106,8 +106,9 @@ class SJB_Admin_Classifieds_EditListing extends SJB_Function
 
 				if ($form_is_submitted == 'save_info') {
 					$listingTypeId = SJB_ListingTypeManager::getListingTypeIDBySID($listing_info['listing_type_sid']);
-					$listingType = $listingTypeId !='Job' && $listingTypeId !='Resume' ? $listingTypeId . '-listings' : $listingTypeId . 's';
-					SJB_HelperFunctions::redirect(SJB_System::getSystemSettings("SITE_URL") . "/manage-" . strtolower($listingType) . "/?restore=1");
+					$listingType = !in_array($listingTypeId, array('Job','Resume','Idea','Opportunity')) ? $listingTypeId . '-listings' : $listingTypeId . 's';
+					$listingType = (strtolower($listingType)=='opportunitys') ? 'Opportunities' : $listingType;
+                                        SJB_HelperFunctions::redirect(SJB_System::getSystemSettings("SITE_URL") . "/manage-" . strtolower($listingType) . "/?restore=1");
 				}
 				$listing_info = SJB_ListingManager::getListingInfoBySID($listing_id);
 				$listing = new SJB_Listing($listing_info, $listing_info['listing_type_sid']);

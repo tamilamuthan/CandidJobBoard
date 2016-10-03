@@ -9,7 +9,6 @@ class SJB_ListingDBManager extends SJB_ObjectDBManager
 	 */
 	public static function saveListing($listing, $listingSidsForCopy = array())
 	{
-		\SJB\Location\Helper::fixLocation($listing);
 		$listing_type_sid = $listing->getListingTypeSID();
 		if (!is_null($listing_type_sid)) {
 			$expirationDate = $listing->getPropertyValue('expiration_date');

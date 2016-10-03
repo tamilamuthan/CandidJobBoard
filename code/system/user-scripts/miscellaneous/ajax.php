@@ -79,7 +79,7 @@ class SJB_AjaxRequests
 		$searchCriteria = $searchResultsTP->getCriteriaSaver()->getCriteria();
 		if (SJB_Request::getVar('showRefineFields', false)) {
 			$refineFields = SJB_RefineSearch::getRefineFieldsByCriteria($searchResultsTP, $searchCriteria);
-			$tp->assign('refineFields', $refineFields);
+                        $tp->assign('refineFields', $refineFields);
 		}
 		$currentSearch = SJB_RefineSearch::getCurrentSearchByCriteria($searchCriteria);
 		$tp->assign('currentSearch', $currentSearch);

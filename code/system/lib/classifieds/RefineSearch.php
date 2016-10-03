@@ -112,7 +112,7 @@ class SJB_RefineSearch
 		$aliases->addAlias($id_alias_info);
 		$aliases->addAlias($username_alias_info);
 		$aliases->addAlias($listing_type_id_info);
-        $aliases->changeAliasValuesInCriteria($criteria);
+                $aliases->changeAliasValuesInCriteria($criteria);
 		$sqlTranslator = new SJB_SearchSqlTranslator('listings');
 
 		$whereStatement = $sqlTranslator->_getWhereStatement($criteria);
@@ -395,8 +395,12 @@ class SJB_RefineSearch
 				$refineField['field_name'] = $parentID . '_' . $fieldName;
 			}
 			$criteria = self::getSearchCriteriaByField($searchCriteria, $refineField['field_name']);
-			$foundListingsByFieldName = self::getFieldValues($refineField, $criteria, $searchResultsTP, $fieldName);
-			$refineField['criteria'] = $criteria;
+
+                        $foundListingsByFieldName = self::getFieldValues($refineField, $criteria, $searchResultsTP, $fieldName);
+			
+                        //print '<pre>'; print_r($foundListingsByFieldName); print '</pre>'; exit;
+
+                        $refineField['criteria'] = $criteria;
 			$refineField['caption'] = $foundListingsByFieldName['caption'];
 
 			self::markToShowOrNot($foundListingsByFieldName['values'], $refineField, $criteria);
@@ -422,8 +426,8 @@ class SJB_RefineSearch
 		}
 
 		if (empty($foundListingsByFieldName)) {
-			$foundListingsByFieldName = SJB_RefineSearch::countListingsByFieldName($fieldName, $refineField['field_id'], $searchResultsTP, $refineField['user_field']);
-		}
+			$foundListingsByFieldName = SJB_RefineSearch::countListingsByFieldName($fieldName, $refineField['field_id'], $searchResultsTP, $refineField['user_field']);                    
+                }
 
 		if ($isMultiSelectFieldType && empty($criteria)) {
 			$searchResultsTP->criteria_saver->setSessionForRefine($refineField['field_name'], $foundListingsByFieldName);

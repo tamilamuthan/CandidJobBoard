@@ -1,6 +1,6 @@
 {breadcrumbs}
 	<a href="{$GLOBALS.site_url}/manage-{$listingType.link}/?restore=1">
-		{if $listingType.id == 'Job'}[[{$listingType.name} Postings]]{else}[[Resumes]]{/if}
+		{if $listingType.id == 'Resume'}[[Resumes]]{else}[[{$listingType.name} Postings]]{/if}
 	</a>
 	&#187; [[Edit {$listingType.name}]]
 {/breadcrumbs}
@@ -50,8 +50,8 @@
 					</tr>
 				{elseif $form_field.type == 'location'}
 					{input property=$form_field.id}
-                {elseif in_array($listingType.id, array('Opportunity','Idea')) && in_array($form_field.id, array('JobCategory','EmploymentType'))}
-                    <input type="hidden" id="{$form_field.id}" name="action" value="0"/>
+                                {elseif in_array($listingType.id, array('Opportunity','Idea')) && in_array($form_field.id, array('JobCategory','EmploymentType'))}
+                                        <input type="hidden" id="{$form_field.id}" name="{$form_field.id}" value="0"/>
 				{else}
 					<tr>
 						<td class="caption-td">[[{$form_field.caption}]]</td>
