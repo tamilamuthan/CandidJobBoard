@@ -379,21 +379,27 @@ class SJB_UserManager extends SJB_ObjectManager
 				$logoFields[] = " `{$logoInfo['id']}` != '' ";
 			}
 		}
-		
+                
 		$whereLogo = empty($logos) ? '' : 'AND (' . implode(' OR ', $logoFields) . ')';
 		$usersInfo = SJB_DB::query("SELECT `sid` FROM `users` WHERE `featured`=1 AND `active`=1 {$whereLogo} ORDER BY RAND() LIMIT 0, ?n", $numberOfProfiles);
 
 		$users = array();
 		$sids = array();
+                                
 		foreach ($usersInfo as $userInfo) {
 			$user    = SJB_UserManager::getObjectBySID($userInfo['sid']);
-			$users[] = !empty($user) ? SJB_UserManager::createTemplateStructureForUser($user) : null;
-			$sids[] = $userInfo['sid'];
+                        if (!empty($user)) {
+                            $group = SJB_UserGroupDBManager::getUserGroupIDBySID($user->user_group_sid);
+                            if ($group == "Employer") {
+                                $users[] = !empty($user) ? SJB_UserManager::createTemplateStructureForUser($user) : null;
+                                $sids[] = $userInfo['sid'];
+                            }
+                        }
 		}
 
 		if ($sids) {
-			$listingType = SJB_ListingTypeManager::getListingTypeInfoBySID(SJB_ListingTypeManager::getListingTypeSIDByID('Job'));
-			$countListings = SJB_ListingDBManager::getActiveJobsNumberForUsers($sids, $listingType);
+                        $listingType = SJB_ListingTypeManager::getListingTypeInfoBySID(SJB_ListingTypeManager::getListingTypeSIDByID('Job'));
+                        $countListings = SJB_ListingDBManager::getActiveJobsNumberForUsers($sids, $listingType);
 			foreach ($users as $key => $user) {
 				$users[$key]['countListings'] = empty($countListings[$user['sid']]) ? 0 : $countListings[$user['sid']];
 			}

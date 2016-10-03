@@ -17,6 +17,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
     const LISTING_FIELD_SID_IDEA_TYPE = 194;
     const LISTING_FIELD_SID_OPPORTUNITY_TYPE = 195;
     const LISTING_FIELD_SID_CATEGORIES = 196;
+    const LISTING_FIELD_SID_BADGES = 197;
     const LISTING_FIELD_SID_LOCATION = 359;
 
     public static function init()
@@ -340,6 +341,14 @@ EOD;
         $uri = SJB_System::getSystemSettings('SITE_URL') . '/system/miscellaneous/plugins/?plugin=GradLeadPlugin&action=';
 
         $oppMenu = [
+            'Badges' => [
+               [
+                    'title' => 'Manage Badges',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_BADGES,
+                    'highlight' => [],
+                ],
+            ],
+            
             'Opportunity Board' => [
                 [
                     'title' => "Investor Profiles",
@@ -362,12 +371,6 @@ EOD;
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-ideas/',
                     'highlight' => [],
                 ],
-                /*[
-                    'title' => 'Opportunity Alerts',
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/opportunity-alerts/',
-                    'highlight' => [],
-                ],
-                */
                 [
                     'title' => 'Manage Opportunity Fields',
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/posting-pages/opportunity/edit/' . GradLeadPlugin::POSTING_PAGE_SID_OPPORTUNITY,
