@@ -85,7 +85,8 @@ class SJB_UserInfoSearcher extends SJB_ObjectInfoSearcher
 			}
 		}
 		$sql_results = SJB_DB::query($sql_string);
-		if ($this->limit === false) {
+        
+        if ($this->limit === false) {
 			$affectedRows = SJB_DB::getAffectedRows();
 		}
 		$result = array();

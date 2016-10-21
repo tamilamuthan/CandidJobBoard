@@ -82,9 +82,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
         GradLeadPlugin::setupPostingPages();
         GradLeadPlugin::setupUserGroups($groups);
 
-        if (SJB_Settings::getSettingByName('gradlead_enable_opportunity')) {
-            SJB_Event::handle('onAfterAdminMenuCreated', array('GradLeadPlugin', 'setupOpportunityMenus'));
-        }
+        SJB_Event::handle('onAfterAdminMenuCreated', array('GradLeadPlugin', 'setupMenus'));
     }
 
     public static function handleRoutes()
@@ -334,21 +332,22 @@ EOD;
     }
 
 
-    public static function setupOpportunityMenus()
+    public static function setupMenus()
     {
         $menu = array();
 
         $uri = SJB_System::getSystemSettings('SITE_URL') . '/system/miscellaneous/plugins/?plugin=GradLeadPlugin&action=';
 
-        $oppMenu = [
+        $badgeMenu = [
             'Badges' => [
                [
                     'title' => 'Manage Badges',
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_BADGES,
                     'highlight' => [],
                 ],
-            ],
-            
+            ]];
+        
+        $oppMenu = [
             'Opportunity Board' => [
                 [
                     'title' => "Investor Profiles",
@@ -402,6 +401,10 @@ EOD;
         if (is_array($GLOBALS)) {
             if (SJB_Settings::getSettingByName('gradlead_enable_opportunity')) {
                 $GLOBALS['LEFT_ADMIN_MENU'] = array_merge(array_slice($GLOBALS['LEFT_ADMIN_MENU'], 0, 1, true), $oppMenu, array_slice($GLOBALS['LEFT_ADMIN_MENU'], 1, null, true));
+            }
+        
+            if (SJB_Settings::getSettingByName('gradlead_enable_badges')) {
+                $GLOBALS['LEFT_ADMIN_MENU'] = array_merge(array_slice($GLOBALS['LEFT_ADMIN_MENU'], 0, 1, true), $badgeMenu, array_slice($GLOBALS['LEFT_ADMIN_MENU'], 1, null, true));
             }
             return true;
         }

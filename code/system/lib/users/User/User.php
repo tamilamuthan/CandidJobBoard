@@ -39,10 +39,21 @@ class SJB_User extends SJB_Object
 		foreach ($user_groups_info as $user_group) {
 			$list_values[] = array('id' => $user_group['id'], 'caption' => $user_group['name']);
 		}
-
+        
 		$this->addProperty(
 			array(
 				'id'			=> 'user_group',
+				'type'			=> 'list',
+				'value'			=> $groupID,
+				'is_system' 	=> true,
+				'list_values' 	=> $list_values,
+			)
+		);
+        
+        // TODO: figure out why export doesn't use the common field name 
+        $this->addProperty(
+			array(
+				'id'			=> 'user_group_sid',
 				'type'			=> 'list',
 				'value'			=> $groupID,
 				'is_system' 	=> true,

@@ -138,7 +138,6 @@ class SJB_SearchFormBuilder extends SJB_Form
 							$object_details    = $object->getDetails();
 							$object_properties = $object_details->getProperties();
 						}
-
 						$property = isset($object_properties[$property_name]) ? $object_properties[$property_name] : null;
 						if (empty($property) && !empty($object)) {
 							foreach ($object_properties as $objectProperty) {

@@ -23,6 +23,7 @@ class SJB_Classifieds_Browsecompany extends SJB_Function
 			}
 		}
 		$user = new SJB_User(array(), SJB_UserGroup::EMPLOYER);
+        $user->addUserGroupProperty();
 		$_REQUEST['active']['equal'] = 1;
 		$search_form_builder = new SJB_SearchFormBuilder($user);
 		$criteria_saver = new SJB_UserCriteriaSaver($searchId);
@@ -43,8 +44,11 @@ class SJB_Classifieds_Browsecompany extends SJB_Function
 				$items_per_page = $criteria_saver->listings_per_page;
 		}
 
-		$items_per_page = $items_per_page ? $items_per_page : 10;
-		$criteria = $search_form_builder->extractCriteriaFromRequestData(array_merge($_REQUEST, array('username' => array('not_equal' => 'jobg8'))), $user);
+        $items_per_page = $items_per_page ? $items_per_page : 10;
+		$criteria = $search_form_builder->extractCriteriaFromRequestData(array_merge($_REQUEST, 
+                                                                                     array('username' => array('not_equal' => 'jobg8'),
+                                                                                       'user_group_sid'=>array('equal'=>SJB_UserGroup::EMPLOYER))), $user);
+                
 		if ($items_per_page) {
 			$criteria_saver->setSessionForListingsPerPage($items_per_page);
 		}
