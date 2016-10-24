@@ -1,13 +1,13 @@
-{include file="company_profile_header.tpl"}
+{include file="investor_profile_header.tpl"}
 <div class="container details-body details-body__company-profile">
     <div class="row">
-        {include file="company_profile.tpl"}
+        {include file="investor_profile.tpl"}
         <div class="col-xs-12 details-body__left companies-jobs-list">
             <div class="search-results__top clearfix">
                 <h3 class="search-results__title">
                     {assign var="opps_number" value=$listing_search.listings_number}
                     {assign var="company_name" value=$userInfo.CompanyName|escape}
-                    [[$opps_number opportunities(s) at $company_name]]
+                    [[$opps_number opportunities at $company_name]]
                 </h3>
             </div>
             {if $listings}

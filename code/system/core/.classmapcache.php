@@ -123,6 +123,7 @@ return array(
     'SJB_Classifieds_AddListingStep'                                                                    => SJB_BASE_DIR . 'system/user-scripts/classifieds/add_listing_step.php',
     'SJB_Classifieds_ApplyNow'                                                                          => SJB_BASE_DIR . 'system/user-scripts/classifieds/apply_now.php',
     'SJB_Classifieds_ApplyNowJobg8'                                                                     => SJB_BASE_DIR . 'system/user-scripts/classifieds/apply_now_jobg8.php',
+    'SJB_Classifieds_ApplyNowOpportunity'                                                               => SJB_BASE_DIR . 'system/user-scripts/classifieds/apply_now_opportunity.php',
     'SJB_Classifieds_Browse'                                                                            => SJB_BASE_DIR . 'system/user-scripts/classifieds/browse.php',
     'SJB_Classifieds_Browsecompany'                                                                     => SJB_BASE_DIR . 'system/user-scripts/classifieds/browseCompany.php',
     'SJB_Classifieds_CountListings'                                                                     => SJB_BASE_DIR . 'system/user-scripts/classifieds/count_listings.php',

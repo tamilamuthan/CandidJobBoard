@@ -137,13 +137,13 @@
 					</thead>
 					{foreach from=$found_users item=found_user name=users_block}
 						<tr class="{cycle values = 'evenrow,oddrow'}">
-							{if $userGroupInfo.id == 'Employer'}
+							{if in_array($userGroupInfo.id, array('Employer','Investor','Entrepreneur'))}
 								<td>{$found_user.CompanyName}</td>
 							{else}
 								<td>{$found_user.FullName}</td>
 							{/if}
 							<td><a href="{$GLOBALS.site_url}/choose-user/?user_sid={$found_user.sid}" onClick="return chooseUser('{$found_user.username}');" title="[[Edit]]"><b>{$found_user.username}</b></a></td>
-							{if $userGroupInfo.id == 'Employer'}
+							{if in_array($userGroupInfo.id, array('Employer','Investor','Entrepreneur'))}
 								<td>
 									{$found_user|location}
 								</td>

@@ -6,8 +6,18 @@
         {if $GLOBALS.current_user.group.id == "Employer"}
 			{title}[[Company Profile]]{/title}
             <li class="presentation"><a href="{$GLOBALS.site_url}/my-listings/job/">[[Job Postings]]</a></li>
-			<li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
+			<li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applications]]</a></li>
 			<li class="presentation active"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
+        {elseif $GLOBALS.current_user.group.id == "Investor"}
+            {title}[[Opportunities]]{/title}
+            <li class="presentation"><a href="{$GLOBALS.site_url}/my-listings/opportunity/">[[Opportunities]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applications]]</a></li>
+            <li class="presentation active"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Investor Profile]]</a></li>
+        {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
+            {title}[[My Ideas]]{/title}
+            <li class="presentation"><a href="{$GLOBALS.site_url}/my-listings/idea/">[[My Ideas]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[My Applications]]</a></li>
+            <li class="presentation active"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Account Settings]]</a></li>
         {else}
 			{title}[[Account Settings]]{/title}
             <li class="presentation"><a href="{$GLOBALS.site_url}/my-listings/resume/">[[My Resumes]]</a></li>
@@ -53,7 +63,7 @@
 	<form method="post" action="" enctype="multipart/form-data" class="form edit-profile">
 		<input type="hidden" name="action" value="save_info"/>
 			{set_token_field}
-			{if $GLOBALS.current_user.group.id == 'JobSeeker'}
+			{if in_array($GLOBALS.current_user.group.id, array('JobSeeker','Entrepreneur'))}
 				{foreach from=$form_fields item=form_field}
 					{if $form_field.type == 'password'}
 						{input property=$form_field.id}

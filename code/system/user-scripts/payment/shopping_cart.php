@@ -32,7 +32,16 @@ class SJB_Payment_ShoppingCart extends SJB_Function
 		}
 		$products = SJB_ShoppingCart::getAllProductsByUserSID($currentUser->getSID());
 		if (empty($products)) {
-			SJB_H::redirect(SJB_H::getSiteUrl() . ($currentUser->getUserGroupSID() == SJB_UserGroup::EMPLOYER ? '/employer-products/' : '/jobseeker-products/'));
+            $eSid = SJB_UserGroupManager::getUserGroupSIDByID('Entrepreneur');
+            $iSid = SJB_UserGroupManager::getUserGroupSIDByID('Investor');
+            $url = '';
+			switch($currentUser->getUserGroupSID()) {
+                case SJB_UserGroup::EMPLOYER: $url = '/empoloyer-products/'; break;    
+                case $eSid: $url = '/entrepreneur-products/'; break;    
+                case $iSid: $url = '/investor-products/'; break;    
+                default: $url = '/jobseeker-products';
+            }
+            SJB_H::redirect(SJB_H::getSiteUrl() . $url); 
 		}
 
 		$tp = SJB_System::getTemplateProcessor();

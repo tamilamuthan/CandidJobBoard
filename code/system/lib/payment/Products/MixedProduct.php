@@ -32,7 +32,7 @@ class SJB_MixedProduct extends SJB_ProductDetails
 			),
 			array(
 				'id'			=> 'number_of_listings',
-				'caption'		=> 'Number of Jobs',
+				'caption'		=> 'Number of '.$this->listingType['name'].'s',
 				'type'			=> 'integer',
 				'validators' => array(
 					'SJB_PlusValidator',
@@ -86,6 +86,7 @@ class SJB_MixedProduct extends SJB_ProductDetails
 				'is_system'		=> true,
 				'order'			=> 9,
 			),
+   
 			array(
 				'id'			=> 'expiration_period',
 				'caption'		=> 'Product Expiration',
@@ -108,6 +109,24 @@ class SJB_MixedProduct extends SJB_ProductDetails
 				'is_required'	=> false,
 				'is_system'		=> true,
 				'order'			=> 12,
+			),
+            array(
+				'id'			=> 'idea_access',
+				'caption'		=> 'Idea Access',
+				'type'			=> 'boolean',
+				'table_name'	=> 'products',
+				'is_required'	=> false,
+				'is_system'		=> true,
+				'order'			=> 9,
+			),
+            array(
+				'id'			=> 'opportunity_access',
+				'caption'		=> 'Opportunity Access',
+				'type'			=> 'boolean',
+				'table_name'	=> 'products',
+				'is_required'	=> false,
+				'is_system'		=> true,
+				'order'			=> 9,
 			),
 
 		);
@@ -132,12 +151,16 @@ class SJB_MixedProduct extends SJB_ProductDetails
 				'name' => 'General Settings',
 				'fields' => array('name', 'detailed_description', 'price', 'user_group_sid', 'availability_from',
 					'availability_to', 'trial', 'listing_type_sid', 'listing_duration', 'featured', 'default', 'featured_employer',
-					'pricing_type',  'number_of_listings', 'expiration_period', 'active', 'post_job', 'post_resume')
+					'pricing_type',  'number_of_listings', 'expiration_period', 'active', 'post_job', 'post_resume','post_opportunity','post_idea')
 			),
 		);
 		if ($this->listingType['id'] == 'Job') {
 			$pages['general']['fields'][] = 'resume_access';
-		}
+		} elseif ($this->listingType['id'] == 'Opportunity') {
+			$pages['general']['fields'][] = 'idea_access';
+        } elseif ($this->listingType['id'] == 'Idea') {
+			$pages['general']['fields'][] = 'opportunity_access';
+        }
 		return $pages;
 	}
 	

@@ -17,6 +17,9 @@ class SJB_Applications_View extends SJB_Function
 		$order = SJB_Request::getVar('order', 'desc');
 		$displayTemplate = "view.tpl";
 		$errors = array();
+       
+        $eSid = SJB_UserGroupManager::getUserGroupSIDByID('Entrepreneur');
+        $iSid = SJB_UserGroupManager::getUserGroupSIDByID('Investor');
 
 		// не бум пускать незарегенных
 		if (SJB_UserManager::isUserLoggedIn() === false) {
@@ -109,7 +112,59 @@ class SJB_Applications_View extends SJB_Function
 			$tp->assign("appJobs", $jobs);
 			$tp->assign("current_filter", $appJobId);
 			$tp->assign("listing_title", $listingTitle);
-		} else { // jobseeker
+        
+        } elseif ($currentUser->getUserGroupSID() == $iSid) { // investor
+            $jobs = SJB_DB::query('select `Title` as `title`, `sid` as `id` from `listings` where `user_sid` = ?n', $currentUser->sid);
+
+			$listingTitle = null;
+			foreach ($jobs as $job) {
+				if ($job['id'] == $appJobId)
+					$listingTitle = $job['title'];
+			}
+			$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+
+			if (empty($apps) && $this->currentPage > 1) {
+				$this->currentPage = 1;
+				$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+			}
+
+			foreach ($apps as $i => $app) {
+				$apps[$i]["job"] = SJB_ListingManager::getListingInfoBySID($apps[$i]["listing_id"]);
+				if (isset($apps[$i]["resume"]) && !empty($apps[$i]["resume"])) {
+					$resume = SJB_ListingManager::getObjectBySID($apps[$i]["resume"]);
+					if ($resume) {
+						$apps[$i]["resumeInfo"] = $apps[$i]["resumeInfo"] = SJB_ListingManager::createTemplateStructureForListing($resume);
+					}
+				}
+                
+				if ($apps[$i]['jobseeker_id'] == 0) {
+					$apps[$i]["user"]["FirstName"] = $apps[$i]['username'];
+				} else {
+					$apps[$i]["user"] = SJB_UserManager::getUserInfoBySID($apps[$i]["jobseeker_id"]);
+				}
+			}
+
+			$tp->assign("appsPerPage", $appsPerPage);
+			$tp->assign("currentPage", $this->currentPage);
+			$tp->assign("pages", $this->pages);
+			$tp->assign("totalPages", $this->totalPages);
+			$tp->assign("appJobs", $jobs);
+			$tp->assign("current_filter", $appJobId);
+			$tp->assign("listing_title", $listingTitle);
+        
+            $displayTemplate = "view_investor.tpl";
+            
+        } elseif ($currentUser->getUserGroupSID() == $eSid) { // entrepreneur
+            
+            $apps = SJB_Applications::getByJobseeker($currentUser->sid, $orderInfo);
+			for ($i = 0; $i < count($apps); ++$i) {
+				$apps[$i]["job"] = SJB_ListingManager::getListingInfoBySID($apps[$i]["listing_id"]);
+				$apps[$i]["company"] = SJB_UserManager::getUserInfoBySID($apps[$i]["job"]["user_sid"]);
+			}
+
+			$displayTemplate = "view_entrepreneur.tpl";
+		
+        } else { // jobseeker
 
 			$apps = SJB_Applications::getByJobseeker($currentUser->sid, $orderInfo);
 			for ($i = 0; $i < count($apps); ++$i) {

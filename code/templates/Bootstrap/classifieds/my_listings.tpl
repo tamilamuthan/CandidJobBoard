@@ -5,15 +5,16 @@
             {title}[[Job Postings]]{/title}
             <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[Job Postings]]</a>
             </li>
-            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Application]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Screening Questions]]</a></li>
             <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
         {elseif $GLOBALS.current_user.group.id == "Investor"}
             {title}[[Opportunities]]{/title}
             <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[Opportunities]]</a>
             </li>
-            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
-            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
-        {elseif $GLOBALS.current_user.group.id == "Entreprenuer"}
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applications]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Investor Profile]]</a></li>
+        {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
             {title}[[My Ideas]]{/title}
             <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[My Ideas]]</a></li>
             <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[My Applications]]</a></li>
@@ -39,7 +40,13 @@
                 <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Resume" class="btn btn__orange btn__bold">[[Create New Resume]]</a>
             {/if}
         </div>
-        <div class="alert alert-danger">[[You have no {$listingTypeID}s so far]]</div>
+        <div class="alert alert-danger">
+            {if $GLOBALS.current_user.group.id == "Investor"}
+                 [[You have no Opportunities so far]]
+            {else}
+                 [[You have no {$listingTypeID}s so far]]
+            {/if}  
+        </div>
     </div>
 {else}
     <div class="search-results my-account-listings col-xs-12 {if $my_products}col-sm-9{else}my-account-listings-full{/if}">
@@ -47,6 +54,10 @@
             {assign var="listings_number" value=$listing_search.listings_number}
             {if $GLOBALS.current_user.group.id == "Employer"}
                 {$listings_number} [[Job Postings]]
+            {elseif $GLOBALS.current_user.group.id == "Investor"}
+                {$listings_number} [[Opportunity Postings]]
+            {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
+                [[You have $listings_number Idea(s)]]           
             {else}
                 [[You have $listings_number Resume(s)]]
             {/if}
@@ -54,13 +65,17 @@
         <div class="form-group__btn">
             {if $GLOBALS.current_user.group.id == "Employer"}
                 <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Job" class="btn btn__orange btn__bold">[[Post a Job]]</a>
+            {elseif $GLOBALS.current_user.group.id == "Investor"}
+                <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Opportunity" class="btn btn__orange btn__bold">[[Post an Opportunity]]</a>         
+            {elseif $GLOBALS.current_user.group.id == "Entrepreneur"}
+                <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Idea" class="btn btn__orange btn__bold">[[Create a New Idea]]</a>          
             {else}
                 <a href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Resume" class="btn btn__orange btn__bold">[[Create New Resume]]</a>
             {/if}
         </div>
 
         {foreach from=$listings item=listing name=listings_block}
-            <article class="media well listing-item {if $listing.type.id eq 'Job'}listing-item__jobs{elseif $listing.type.id eq 'Resume'}listing-item__resumes{/if}">
+            <article class="media well listing-item {if in_array($listing.type.id,array('Job','Opportunity'))}listing-item__jobs{elseif $listing.type.id eq 'Resume'}listing-item__resumes{/if}">
                 <div class="media-body">
                     <div class="media-heading listing-item__title">
                         <a class="link" href="{$GLOBALS.site_url}/edit-{$listing.type.id|lower}/?listing_id={$listing.id}"><span class="strong">{$listing.Title}</span></a>
@@ -70,7 +85,7 @@
                     <div class="listing-item__views">
                         {$listing.views} [[views]]
                     </div>
-                    {if $GLOBALS.current_user.group.id == 'Employer'}
+                    {if in_array($GLOBALS.current_user.group.id,array('Employer','Investor'))}
                         <div class="listing-item__applies">
                             {if !$apps[$listing.id]}
                                 0 [[applicants]]
@@ -87,7 +102,7 @@
                         <div class="listing-item__views">
                             {$listing.views} [[views]]
                         </div>
-                        {if $GLOBALS.current_user.group.id == 'Employer'}
+                        {if in_array($GLOBALS.current_user.group.id,array('Employer','Investor'))}                        
                             <div class="listing-item__applies">
                                 {if !$apps[$listing.id]}
                                     0 [[applies]]

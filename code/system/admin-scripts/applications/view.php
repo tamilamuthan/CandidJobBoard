@@ -15,6 +15,9 @@ class SJB_Admin_Applications_View extends SJB_Function
 		$displayTemplate = 'view.tpl';
 		$errors = array();
 
+        $eSid = SJB_UserGroupManager::getUserGroupSIDByID('Entrepreneur');
+        $iSid = SJB_UserGroupManager::getUserGroupSIDByID('Investor');
+        
 		$filename = SJB_Request::getVar('filename', false);
 
 		if ($filename) {
@@ -87,9 +90,49 @@ class SJB_Admin_Applications_View extends SJB_Function
 
 			$tp->assign('appJobs', $appJobs);
 			$tp->assign('current_filter', $appJobId);
+            
+        } elseif ($cu['user_group_sid'] == $iSid) { 
 
-		}
-		else { // Соискатель
+			if ($appJobId) {
+				$apps = SJB_Applications::getByJob($appJobId, $orderInfo);
+				$jobInfo = SJB_ListingManager::getListingInfoBySID($appJobId);
+				$tp->assign('jobInfo', $jobInfo);
+				$tp->assign('listingType', SJB_ListingTypeManager::getListingTypeInfoBySID($jobInfo['listing_type_sid']));
+			} else {
+				$apps = SJB_Applications::getByEmployer($cu['sid'], $orderInfo);
+			}
+            
+			for ($i = 0; $i < count($apps); ++$i) {
+				$apps[$i]['job'] = SJB_ListingManager::getListingInfoBySID($apps[$i]['listing_id']);
+				if (isset($apps[$i]['resume']) && !empty($apps[$i]['resume']))
+					$apps[$i]['resumeInfo'] = SJB_ListingManager::getListingInfoBySID($apps[$i]['resume']);
+				if ($apps[$i]['jobseeker_id'] == 0)
+					$apps[$i]['user']['FirstName'] = $apps[$i]['username'];
+				else
+					$apps[$i]['user'] = SJB_UserManager::getUserInfoBySID($apps[$i]['jobseeker_id']);
+			}
+            
+			$jobs = SJB_ListingManager::getListingsByUserSID($cu['sid']);
+			$appJobs = array();
+			foreach ($jobs as $job)
+				$appJobs[] = array('title' => $job->details->properties['Title']->value, 'id' => $job->sid);
+
+			$tp->assign('appJobs', $appJobs);
+			$tp->assign('current_filter', $appJobId);
+
+			$displayTemplate = 'view_investor.tpl';   
+
+		} elseif ($cu['user_group_sid'] == $eSid) { 
+
+			$apps = SJB_Applications::getByJobseeker($cu['sid'], $orderInfo);
+			for ($i = 0; $i < count($apps); ++$i) {
+				$apps[$i]['job'] = SJB_ListingManager::getListingInfoBySID($apps[$i]['listing_id']);
+				$apps[$i]['company'] = SJB_UserManager::getUserInfoBySID($apps[$i]['job']['user_sid']);
+			}
+
+			$displayTemplate = 'view_entrepreneur.tpl';
+		
+        } else { // Соискатель
 
 			$apps = SJB_Applications::getByJobseeker($cu['sid'], $orderInfo);
 			for ($i = 0; $i < count($apps); ++$i) {

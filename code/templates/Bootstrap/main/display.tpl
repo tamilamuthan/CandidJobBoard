@@ -85,7 +85,7 @@
         window.SJB_UserSiteUrl   = '{$GLOBALS.user_site_url}';
 
         function windowMessage() {
-            $("#messageBox").dialog( 'destroy' ).html('[[You already applied to this job]]');
+            $("#messageBox").dialog( 'destroy' ).html('[[You already applied to this]]');
             $("#messageBox").dialog({
                 bgiframe: true,
                 modal: true,
@@ -129,8 +129,8 @@
                 .on('show.bs.modal', function(event){
                     var button = $(event.relatedTarget);
                     if (button.data('applied')) {
-                        $(this).find('.modal-title').text('[[You already applied to this job]]');
-                        $(this).find('.modal-body').html('[[You already applied to this job]]');
+                        $(this).find('.modal-title').text('[[You already applied to this]]');
+                        $(this).find('.modal-body').html('[[You already applied to this]]');
                     } else {
                         var titleData = button.data('title');
                         $(this).find('.modal-title').text(titleData);

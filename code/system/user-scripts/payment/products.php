@@ -51,7 +51,14 @@ class SJB_Payment_UserProducts extends SJB_Function
 				$availableProducts = array();
 				if (SJB_UserManager::isUserLoggedIn() && $postingProductsOnly) {
 					$availableProducts = SJB_ProductsManager::getProductsByUserGroupSID($current_user->getUserGroupSID(), $current_user->getSID());
-					$availableListingType = SJB_UserGroupManager::getUserGroupIDBySID($current_user->getUserGroupSID()) == 'Employer' ? 'job' : 'resume';
+					$t = '';
+                    switch($current_user->getUserGroupSID()) {
+                        case 'Employer':  $t= 'job'; break;
+                        case 'Entrepreneur':  $t= 'idea'; break;
+                        case 'Investor':  $t= 'opportunity'; break;
+                        default:  $t= 'resume'; 
+                    }
+                    $availableListingType = $t; 
 					$trialProducts = $current_user->getTrialProductSIDByUserSID();
 					foreach ($availableProducts as $key => $availableProduct) {
 						if (in_array($availableProduct['sid'], $trialProducts) || ($postingProductsOnly && empty($availableProduct['post_' . $availableListingType]))) {

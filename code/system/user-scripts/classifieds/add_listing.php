@@ -143,7 +143,7 @@ class SJB_Classifieds_AddListing extends SJB_Function
 				}
 			} else {
 				if ($productsInfo = SJB_ListingManager::canCurrentUserAddListing($error, $this->listingTypeID)) {
-					if ($contractID = SJB_Request::getVar('contract_id', false, 'POST')) {
+                    if ($contractID = SJB_Request::getVar('contract_id', false, 'POST')) {
 						$this->tp->assign("listing_id", $tmpListingSID);
 						$this->addListing($listingSID, $contractID, false);
 					} elseif (count($productsInfo) == 1) {
@@ -174,6 +174,16 @@ class SJB_Classifieds_AddListing extends SJB_Function
 				$returnUrl = SJB_System::getSystemSettings('SITE_URL') . '/add-listing/?listing_type_id=Job';
 				$returnUrl = base64_encode($returnUrl);
 				SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/registration/?user_group_id=Employer&return_url=' . $returnUrl);
+			}
+            if ($this->listingTypeID == 'Opportunity') {
+				$returnUrl = SJB_System::getSystemSettings('SITE_URL') . '/add-listing/?listing_type_id=Opportunity';
+				$returnUrl = base64_encode($returnUrl);
+				SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/registration/?user_group_id=Investor&return_url=' . $returnUrl);
+			}
+             if ($this->listingTypeID == 'Idea') {
+				$returnUrl = SJB_System::getSystemSettings('SITE_URL') . '/add-listing/?listing_type_id=Idea';
+				$returnUrl = base64_encode($returnUrl);
+				SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('SITE_URL') . '/registration/?user_group_id=Entrepreneur&return_url=' . $returnUrl);
 			}
 			$this->displayErrorTpl('NOT_LOGGED_IN');
 		}

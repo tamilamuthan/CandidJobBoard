@@ -67,11 +67,13 @@ class GradLeadPlugin extends SJB_PluginAbstract
                 'type' => 'Investor',
                 'product' => 'Free Opportunity Posting',
                 'desc' => 'Post your opportunities to attract entrepreneurs.',
+                'product_extra' => array('idea_access'=>1),
                 'list_type_sid' => GradLeadPlugin::LISTING_TYPE_SID_OPPORTUNITY
             ),
             array(
                 'type' => 'Entrepreneur',
                 'product' => 'Free Idea Posting',
+                'product_extra' => array('opportunity_access'=>1),
                 'desc' => 'Post your ideas to attract investors.',
                 'list_type_sid' => GradLeadPlugin::LISTING_TYPE_SID_IDEA
             )
@@ -85,7 +87,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
         SJB_Event::handle('onAfterAdminMenuCreated', array('GradLeadPlugin', 'setupMenus'));
     }
 
-    public static function handleRoutes()
+    public static function handleRoutes() 
     {
         $plugin = SJB_PluginManager::getPluginByName('GradLeadPlugin');
         $isPluginActive = $plugin && $plugin['active'] == '1';
@@ -120,7 +122,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
                 SJB_UserGroupManager::saveUserGroup($userGroup);
 
                 $sid = SJB_UserGroupManager::getUserGroupSIDByID($group['type']);
-                $pid = GradLeadPlugin::createProduct($sid, $group['list_type_sid'], $group['type'], $group['product'], $group['desc']);
+                $pid = GradLeadPlugin::createProduct($sid, $group['list_type_sid'], $group['type'], $group['product'], $group['desc'], $group['product_extra']);
                 SJB_UserGroupManager::setDefaultProduct($sid, $pid);
                 GradLeadPlugin::setupGroupProfile($sid);
             }
@@ -146,14 +148,20 @@ class GradLeadPlugin extends SJB_PluginAbstract
         SJB_DB::query($sql);
     }
 
-    private static function createProduct($userGroupSID, $listingTypeSID, $type, $productName, $productDesc)
+    private static function createProduct($userGroupSID, $listingTypeSID, $type, $productName, $productDesc, $extra)
     {
         $productInfo = array(
             'name' => $productName,
             'detailed_description' => $productDesc,
             'user_group_sid' => $userGroupSID,
             'listing_type_sid' => $listingTypeSID,
+            'active'=>1,
         );
+        if (sizeof($extra)) {
+            foreach($extra as $key => $val) {
+                $productInfo[$key] = $val;
+            }
+        }
         GradLeadPlugin::deleteProduct($userGroupSID, $type);
         $product = new SJB_Product($productInfo, 'mixed_product');
         $product->saveProduct($product);
@@ -223,7 +231,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
                 . "('Title', " . GradLeadPlugin::LISTING_TYPE_SID_IDEA . ", 1, 'Idea Title', 'string', '', 1, '', '256', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL), "
                 . "('JobDescription', " . GradLeadPlugin::LISTING_TYPE_SID_IDEA . ", 7, 'Idea Description', 'text', NULL, 0, '', '99999', NULL, NULL, NULL, NULL, 0, 'text.tpl', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL)";
             SJB_DB::query($sql);
-            SJB_DB::query("ALTER TABLE `listings` ADD `IdeaType` TEXT, ADD `OpportunityType` TEXT, ADD `OpportunityCategory` TEXT");
+            SJB_DB::query("ALTER TABLE `listings` ADD `IdeaType` TEXT NULL, ADD `OpportunityType` TEXT NULL, ADD `OpportunityCategory` TEXT NULL");
         }
 
         $listings = SJB_ListingFieldManager::getListingFieldsInfoByListingType(GradLeadPlugin::LISTING_TYPE_SID_OPPORTUNITY);
@@ -314,6 +322,40 @@ INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `te
 EOD;
             SJB_DB::query($sql);
         }
+        
+        
+        if (!GradLeadPlugin::inPages('/investor/')) {
+            $sql = <<<EOD
+            INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `content`) VALUES
+	        ('/investor/',1,'classifieds','search_results','display.tpl','','user','a:5:{s:21:"default_sorting_field";s:15:"activation_date";s:21:"default_sorting_order";s:4:"DESC";s:25:"default_listings_per_page";s:2:"20";s:16:"results_template";s:32:"search_results_opportunities.tpl";s:15:"listing_type_id";s:11:"Opportunity";}','','',NULL);
+EOD;
+            SJB_DB::query($sql);
+        }
+        
+        if (!GradLeadPlugin::inPages('/apply-now-opportunity/')) {
+            $sql = <<<EOD
+            INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `content`) VALUES
+	        ('/apply-now-opportunity/',0,'classifieds','apply_now_opportunity','','Apply Now','user','N;','','',NULL);
+EOD;
+            SJB_DB::query($sql);
+        }
+        
+        if (!GradLeadPlugin::inPages('/products/investor/')) {
+            $sql = <<<EOD
+            INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `content`) VALUES
+	        ('/products/investor/',NULL,'payment','products','index.tpl','Products','admin','a:1:{s:13:"user_group_id";s:8:"Investor";}','','',NULL);
+EOD;
+            SJB_DB::query($sql);
+        }
+        
+        if (!GradLeadPlugin::inPages('/products/entrepreneur/')) {
+            $sql = <<<EOD
+            INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `content`) VALUES
+	        ('/products/entrepreneur/',NULL,'payment','products','index.tpl','Products','admin','a:1:{s:13:"user_group_id";s:12:"Entrepreneur";}','','',NULL);
+EOD;
+            SJB_DB::query($sql);
+        }
+        
 
         if (!GradLeadPlugin::inPages('/edit-badge/')) {
             $sql = <<<EOD
@@ -323,7 +365,7 @@ EOD;
 	        ('/add-badge/',NULL,'payment','add_badge_product','index.tpl','Add Product','admin','','','',NULL);
 EOD;
             SJB_DB::query($sql);
-        }
+        }        
     }
 
     private static function inPages($uri) {
@@ -348,15 +390,10 @@ EOD;
             ]];
         
         $oppMenu = [
-            'Opportunity Board' => [
+            'Opportunities' => [
                 [
                     'title' => "Investor Profiles",
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-users/investor/',
-                    'highlight' => [],
-                ],
-                [
-                    'title' => "Entrepreneur Profiles",
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-users/entrepreneur/',
                     'highlight' => [],
                 ],
                 [
@@ -366,13 +403,41 @@ EOD;
                     'highlight' => [],
                 ],
                 [
-                    'title' => 'Idea Postings',
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-ideas/',
+                    'title' => 'Opportunity Products',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/products/investor/',
                     'highlight' => [],
                 ],
                 [
                     'title' => 'Manage Opportunity Fields',
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/posting-pages/opportunity/edit/' . GradLeadPlugin::POSTING_PAGE_SID_OPPORTUNITY,
+                    'highlight' => [],
+                ],
+
+                [
+                    'title' => 'Manage Opportunity Types',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_OPPORTUNITY_TYPE,
+                    'highlight' => [],
+                ],
+                [
+                    'title' => 'Manage Categories',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_CATEGORIES,
+                    'highlight' => [],
+                ],
+            ],
+            'Ideas' => [
+                [
+                    'title' => "Entrepreneur Profiles",
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-users/entrepreneur/',
+                    'highlight' => [],
+                ],
+                [
+                    'title' => 'Idea Postings',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/manage-ideas/',
+                    'highlight' => [],
+                ],
+                [
+                    'title' => 'Idea Products',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/products/entrepreneur/',
                     'highlight' => [],
                 ],
                 [
@@ -381,21 +446,12 @@ EOD;
                     'highlight' => [],
                 ],
                 [
-                    'title' => 'Manage Opportunity Types',
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_OPPORTUNITY_TYPE,
-                    'highlight' => [],
-                ],
-                [
                     'title' => 'Manage Idea Stages',
                     'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_IDEA_TYPE,
                     'highlight' => [],
                 ],
-                [
-                    'title' => 'Manage Categories',
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_CATEGORIES,
-                    'highlight' => [],
-                ],
-            ]];
+            ]
+        ];
 
 
         if (is_array($GLOBALS)) {

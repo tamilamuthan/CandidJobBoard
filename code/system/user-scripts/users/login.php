@@ -52,11 +52,14 @@ class SJB_Users_Login extends SJB_Function
 						}
 					} else {
 						if ($page_config->module == 'users' && $page_config->function == 'login') {
-							if (SJB_UserGroupManager::getUserGroupIDByUserSID(SJB_UserManager::getCurrentUserSID()) == 'Employer') {
-								$redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/job/";
-							} else {
-								$redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/resume/";
-							}
+                            switch(SJB_UserGroupManager::getUserGroupIDByUserSID(SJB_UserManager::getCurrentUserSID())) {
+                                case 'Employer': $redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/job/"; break;
+                                case 'JobSeeker': $redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/resume/"; break;
+                                case 'Investor': $redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/opportunity/"; break;
+                                case 'Entrepreneur': $redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/idea/"; break;
+                                default: $redirect_url = SJB_System::getSystemSettings("SITE_URL") . "/my-listings/resume/";
+                                    
+                            }
 						} else {
 							$redirect_url = SJB_System::getSystemSettings("SITE_URL") . SJB_System::getURI();
 						}

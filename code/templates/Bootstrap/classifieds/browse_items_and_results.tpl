@@ -5,6 +5,10 @@
 	</div>
 {elseif $listing_type == 'Resume'}
 	{include file="search_results_resumes.tpl"}
+{elseif $listing_type == 'Opportunity'}
+	{include file="search_results_opportunities.tpl"}
+{elseif $listing_type == 'Idea'}
+	{include file="search_results_ideas.tpl"}
 {else}
 	{include file="search_results_jobs.tpl"}
 {/if}

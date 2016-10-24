@@ -168,7 +168,7 @@ class SJB_Acl
 
         $role = $type . '_' . $roleId;
 
-		if (!isset($this->permissions[$role])) {
+        if (!isset($this->permissions[$role])) {
 			switch ($type) {
 				case 'user':
 				case 'guest':
@@ -180,7 +180,6 @@ class SJB_Acl
 						$permissions = $this->getPermissions('user', $roleId);
 						$groupPermissions = $this->getPermissions('group', $userInfo['user_group_sid']);
 						$this->permissions['group_' . $userInfo['user_group_sid']] = $groupPermissions;
-
 						$contracts = SJB_ContractManager::getAllContractsSIDsByUserSID($roleId);
 						if (!empty($contracts)) {
 							foreach ($contracts as $contract) {

@@ -5,7 +5,7 @@
 	{module name='classifieds' function='search_form' form_template='quick_search_opportunities.tpl' listing_type_id='Opportunity' browse_request_data=$browse_request_data searchId=$searchId}
 {/capture}
 
-{if $GLOBALS.user_page_uri == '/company/'}
+{if $GLOBALS.user_page_uri == '/investor/'} 
 	{assign var='refineSearch' value=false}
 {/if}
 {if $ERRORS}

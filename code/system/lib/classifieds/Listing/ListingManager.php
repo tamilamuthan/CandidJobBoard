@@ -705,11 +705,11 @@ class SJB_ListingManager extends SJB_ObjectManager
 		if (SJB_UserManager::isUserLoggedIn()) {
 			$current_user = SJB_UserManager::getCurrentUser();
 			if ($current_user->hasContract()) {
-				$contracts_id = $current_user->getContractID();
+                $contracts_id = $current_user->getContractID();
 				$contractsSIDs = $contracts_id ? implode(',', $contracts_id) : 0;
 				$resultContractInfo = SJB_DB::query("SELECT `id`, `product_sid`, `expired_date`, `number_of_postings` FROM `contracts` WHERE `id` in ({$contractsSIDs}) ORDER BY `expired_date` DESC");
 				$PlanAcces = count($resultContractInfo) > 0 ? true : false;
-				if ($PlanAcces && $acl->isAllowed('post_' . $listingTypeId)) {
+				if ($PlanAcces && $acl->isAllowed('post_' .$listingTypeId)) {
 					$productsInfo = array();
 					$is_contract = false;
 					foreach ($resultContractInfo as $contractInfo) {

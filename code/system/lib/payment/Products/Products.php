@@ -43,6 +43,14 @@ class SJB_Product extends SJB_Object
 			$permissions[] = 'apply_for_a_job';
 			$permissions[] = 'resume_access';
 		}
+        if ($listingType['id'] == 'Opportunity') {
+			$permissions[] = 'apply_for_a_opportunity';
+			$permissions[] = 'idea_access';
+		}
+        if ($listingType['id'] == 'Idea') {
+			$permissions[] = 'apply_for_a_idea';
+			$permissions[] = 'opportunity_access';
+		}
 		return $permissions;
 	}
 

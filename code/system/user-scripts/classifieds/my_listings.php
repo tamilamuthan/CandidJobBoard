@@ -45,9 +45,7 @@ class SJB_Classifieds_MyListings extends SJB_Function
                             case SJB_UserGroup::JOBSEEKER: $page = 'resume'; break;
                         }
 			SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . '/my-listings/' . $page . '/');
-		
-                        
-                }
+        }
                 
 		$this->listingTypeSID = SJB_ListingTypeManager::getListingTypeSIDByID($this->listingTypeID);
 

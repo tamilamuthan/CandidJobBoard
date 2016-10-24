@@ -117,6 +117,9 @@ class SJB_Payment_Callback extends SJB_Function
         }
         $tp->assign('errors', $errors);
         $tp->assign('listingTypes', $listingTypes);
+        //print '<pre>'; print_r($products); print '</pre>'; 
+        //print '<pre>'; print_r($erros); print '</pre>'; 
+        //print '<pre>'; print_r($listingTypes); print '</pre>'; exit;
         $tp->display('callback_payment_page.tpl');
     }
 

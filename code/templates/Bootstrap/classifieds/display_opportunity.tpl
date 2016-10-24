@@ -81,7 +81,7 @@
 				<div class="sidebar__content">
 					{if $listing.user.Logo.file_url}
 						<div class="text-center profile__image">
-							<a href="{if $listing.user.isJobg8}{$GLOBALS.site_url}/company/{$listing.user.id}/{$listing.CompanyName|pretty_url}/{else}{$GLOBALS.site_url}/company/{$listing.user.id}/{$listing.user.CompanyName|pretty_url}/{/if}">
+							<a href="{if $listing.user.isJobg8}{$GLOBALS.site_url}/investor/{$listing.user.id}/{$listing.CompanyName|pretty_url}/{else}{$GLOBALS.site_url}/investor/{$listing.user.id}/{$listing.user.CompanyName|pretty_url}/{/if}">
 								<img class="profile__img profile__img-company" src="{$listing.user.Logo.file_url}" alt="" />
 							</a>
 						</div>
@@ -91,7 +91,7 @@
 						<div class="text-center profile__info__name">[[About $company_name]]</div>
 						<div class="profile__info__description content-text">{$listing.user.CompanyDescription}</div>
                         <div>
-                            <a class="btn__profile" href="{$GLOBALS.site_url}/company/{$listing.user.id}/{$listing.user.CompanyName|pretty_url}/">[[Company Profile]]</a>
+                            <a class="btn__profile" href="{$GLOBALS.site_url}/investor/{$listing.user.id}/{$listing.user.CompanyName|pretty_url}/">[[Company Profile]]</a>
                         </div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 					{/capture}
 				{else}
 					{capture assign='url'}
-						{$GLOBALS.site_url}/apply-now/?listing_id={$listing.id}&ajaxRelocate=1
+						{$GLOBALS.site_url}/apply-now-opportunity/?listing_id={$listing.id}&ajaxRelocate=1
 					{/capture}
 					{capture assign='modalTitle'}
 						{assign var="job_title" value=$listing.Title|escape}

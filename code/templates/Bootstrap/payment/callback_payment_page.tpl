@@ -22,6 +22,11 @@
 					<p class="paragraph"><a href="{$GLOBALS.site_url}/resumes/" class="link">[[Proceed to searching candidates.]]</a></p>
 				{/capture}
 			{/if}
+        	{if !$product.error && $product.idea_access}
+				{capture assign=ideaAccess}
+					<p class="paragraph"><a href="{$GLOBALS.site_url}/ideas/" class="link">[[Proceed to searching ideas.]]</a></p>
+				{/capture}
+			{/if}
 		{/foreach}
 		{if isset($listingTypes)}
 			{foreach from=$listingTypes item=listingType name='types'}
@@ -65,6 +70,33 @@
 						</div>
 					{/if}
 					{$resumeAccess}
+        
+        		{elseif $listingType.ID|lower == 'opportunity'}
+					<p class="paragraph">
+						<a class="link" href="{$GLOBALS.site_url}{$listingInfo|listing_url}">[[Preview and share your {$listingType.ID|lower}.]]</a>
+					</p>
+					<p class="paragraph">
+						<a class="link" href="{$GLOBALS.site_url}/my-listings/{$listingType.ID|lower}/">
+							[[View your opportunity stats in "My Account" section]]
+						</a>
+					</p>
+					{if $product.number_of_listings > 1}
+						<p class="paragraph">
+							<a class="link" href="{$GLOBALS.site_url}/add-listing/?listing_type_id=Opportunity">[[Proceed to posting your new opportunity.]]</a>
+						</p>
+					{/if}
+					{$ideaAccess}
+                 
+                {elseif $listingType.ID|lower == 'idea'}
+					<p class="paragraph">
+						<a class="link" href="{$GLOBALS.site_url}{$listingInfo|listing_url}">[[Preview your idea.]]</a>
+					</p>
+					<p class="paragraph">
+						<a class="link" href="{$GLOBALS.site_url}/my-listings/{$listingType.ID|lower}/">
+							[[Edit your idea in "My Account" section]]
+						</a>
+					</p>
+        
 				{else}
 					<p class="paragraph">
 						<a class="link" href="{$GLOBALS.site_url}{$listingInfo|listing_url}">[[Preview your resume.]]</a>
@@ -95,6 +127,29 @@
 						</div>
 					{/if}
 					{$resumeAccess}
+        
+        		{elseif $listingType.ID|lower == 'opportunity'}
+					<p class="paragraph">
+						<a class="link" href="{$GLOBALS.site_url}/my-listings/{$listingType.ID|lower}/">
+							[[View your opportunity stats in "My Account" section]]
+						</a>
+					</p>
+					{if ($product.post_opportunity && $product.number_of_listings > 1) || ($product.post_opportunity && $product.number_of_listings == '')}
+						<p class="paragraph">
+							<a class="link" href="{$GLOBALS.site_url}/add-listing/?listing_type_id={$userSectionListingTypes}">
+								[[Proceed to posting your new opportunity.]]
+							</a>
+						</p>
+					{/if}
+		
+					{$ideaAccess}
+        
+                {elseif $listingType.ID|lower == 'idea'}
+        			{if $product.post_idea}
+						<p class="paragraph">
+							<a class="link" href="{$GLOBALS.site_url}/add-listing/?listing_type_id={$userSectionListingTypes}">[[Proceed to posting your idea.]]</a>
+						</p>
+					{/if}
 				{else}
 					{if $product.post_resume}
 						<p class="paragraph">

@@ -75,7 +75,7 @@ class SJB_Classifieds_DisplayListing extends SJB_Function
 			$errors['404'] = true;
 		}
 		elseif ((SJB_ListingTypeManager::getListingTypeIDBySID($listing->listing_type_sid) == 'Resume' && ($template == 'display_job.tpl')) ||
-				(SJB_ListingTypeManager::getListingTypeIDBySID($listing->listing_type_sid) == 'Job' && ($template == 'display_resume.tpl'))
+				(SJB_ListingTypeManager::getListingTypeIDBySID($listing->listing_type_sid) == 'Job' && ($template == 'display_resume.tpl')) 
 		) {
 			SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . SJB_TemplateProcessor::listing_url($listing));
 		} else {
@@ -89,6 +89,14 @@ class SJB_Classifieds_DisplayListing extends SJB_Function
 					SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . $listingUrl, SJB_HelperFunctions::REDIRECT_302);
 				}
 			}
+            
+            if ($listing_type_id == 'Opportunity') {
+				$listingUrl = SJB_TemplateProcessor::listing_url($listing);
+				if (strpos(rawurldecode(SJB_Navigator::getURIThis()), $listingUrl) === false) {
+					SJB_HelperFunctions::redirect(SJB_HelperFunctions::getSiteUrl() . $listingUrl, SJB_HelperFunctions::REDIRECT_302);
+				}
+			}
+
 
 			$display_form = new SJB_Form($listing);
 
@@ -187,6 +195,15 @@ class SJB_Classifieds_DisplayListing extends SJB_Function
 						if ($params) {
 							SJB_HelperFunctions::redirect(
 								SJB_HelperFunctions::getSiteUrl() . '/jobs/?keywords[all_words]=' . str_replace('-', ' ', array_pop($params)) . '&not_found=1',
+								SJB_HelperFunctions::REDIRECT_302
+							);
+						}
+					}
+                    if (SJB_Array::get($this->params, 'listing_type_id') == 'Opportunity') {
+						$params = SJB_UrlParamProvider::getParams();
+						if ($params) {
+							SJB_HelperFunctions::redirect(
+								SJB_HelperFunctions::getSiteUrl() . '/opportunities/?keywords[all_words]=' . str_replace('-', ' ', array_pop($params)) . '&not_found=1',
 								SJB_HelperFunctions::REDIRECT_302
 							);
 						}

@@ -16,7 +16,9 @@ class SJB_Classifieds_SearchResults extends SJB_Function
 		// SEO friendly URL for company profile
 		$m = array();
 		$isCompanyProfilePage = false;
-		if (preg_match('#/company/([0-9]+)/.*#', SJB_Navigator::getURI(), $m)) {
+		if (preg_match('#/company/([0-9]+)/.*#', SJB_Navigator::getURI(), $m) ||
+		    preg_match('#/investor/([0-9]+)/.*#', SJB_Navigator::getURI(), $m)
+            ) {
 			$isCompanyProfilePage = true;
 			$params = SJB_FixedUrlParamProvider::getParams($_REQUEST);
 			if (!empty($params)) {

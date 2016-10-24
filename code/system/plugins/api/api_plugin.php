@@ -213,7 +213,8 @@ class ApiPlugin extends SJB_PluginAbstract
 	private static function get_filtered_user_info($username)
 	{
 		$userInfo = SJB_UserManager::getUserInfoByUserName($username);
-		$userInfo['group'] = $userInfo['user_group_sid'] == 41 ? 'Employer' : 'JobSeeker';
+        $groups = array(63=>'Entrepreneur',64=>'Investor',41=>'Employer',36=>'JobSeeker');
+		$userInfo['group'] = $groups[$userInfo['user_group_sid']];
 
 		unset($userInfo['password']);
 		unset($userInfo['verification_key']);
@@ -262,6 +263,14 @@ class ApiPlugin extends SJB_PluginAbstract
 			array(
 				'id' => 'Job',
 				'caption' => 'Job'
+			),
+			array(
+				'id' => 'Opportunity',
+				'caption' => 'Opportunity'
+			),
+			array(
+				'id' => 'Ide',
+				'caption' => 'Idea'
 			),
 			array(
 				'id' => 'Resume',
@@ -473,6 +482,7 @@ class ApiPlugin extends SJB_PluginAbstract
 		$request['listing_id'] = SJB_Array::get($params, 'listing_sid', null);
 		$request['comments'] = SJB_Array::get($params, 'comment', null);
 		$request['id_resume'] = SJB_Array::get($params, 'attached_listing_sid', null);
+		$request['id_idea'] = SJB_Array::get($params, 'attached_listing_sid', null);
 		// unregistered user
 		$request['name'] = SJB_Array::get($params, 'name', null);
 		$request['email'] = SJB_Array::get($params, 'email', null);
@@ -493,15 +503,25 @@ class ApiPlugin extends SJB_PluginAbstract
 				return 'cannot apply without resume';
 			}
 		}
-
-		if (SJB_Applications::isApplied($post['submitted_data']['listing_id'], $current_user_sid) && !is_null($current_user_sid)) {
-			return 'You already applied to this job';
+        
+		if (!isset($post['submitted_data']['id_idea'])) {
+			$canApplyWithoutIdea = true;
+			if (!$canApplyWithoutIdea) {
+				return 'cannot apply without idea';
+			}
 		}
 
+		if (SJB_Applications::isApplied($post['submitted_data']['listing_id'], $current_user_sid) && !is_null($current_user_sid)) {
+			return 'You already applied to this.';
+		}
+
+	    $item = (isset($post['submitted_data']['id_resume'])) ? $post['submitted_data']['id_resume'] : "";
+	    $item = (isset($post['submitted_data']['id_idea'])) ? $post['submitted_data']['id_idea'] : $item;
+        
 		$res = SJB_Applications::create(
 			$post['submitted_data']['listing_id'],
 			$current_user_sid,
-			(isset($post['submitted_data']['id_resume'])) ? $post['submitted_data']['id_resume'] : "",
+            $item,
 			$post['submitted_data']['comments'],
 			'',
 			'',
@@ -519,6 +539,15 @@ class ApiPlugin extends SJB_PluginAbstract
 			$accessible = SJB_ListingManager::isListingAccessableByUser($post['submitted_data']['id_resume'], $emp_sid);
 			if (!$accessible) {
 				SJB_ListingManager::setListingAccessibleToUser($post['submitted_data']['id_resume'], $emp_sid);
+			}
+		}
+        
+        if (isset($post['submitted_data']['id_idea']) && $post['submitted_data']['id_idea'] != 0) {
+			$listing_info = SJB_ListingManager::getListingInfoBySID($post['submitted_data']['id_idea']);
+			$emp_sid = SJB_ListingManager::getUserSIDByListingSID($post['submitted_data']['listing_id']);
+			$accessible = SJB_ListingManager::isListingAccessableByUser($post['submitted_data']['id_idea'], $emp_sid);
+			if (!$accessible) {
+				SJB_ListingManager::setListingAccessibleToUser($post['submitted_data']['id_idea'], $emp_sid);
 			}
 		}
 

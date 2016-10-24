@@ -8,6 +8,10 @@
 {/if}
 {if $listingTypeID == 'Job'}
 	<h1 class="title__primary title__primary-small title__centered title__bordered">[[Post a Job]]</h1>
+{elseif $listingTypeID == 'Opportunity'}
+	<h1 class="title__primary title__primary-small title__centered title__bordered">[[Post an Opportunity]]</h1>
+{elseif $listingTypeID == 'Idea'}
+	<h1 class="title__primary title__primary-small title__centered title__bordered">[[Create New Idea]]</h1>
 {else}
 	<h1 class="title__primary title__primary-small title__centered title__bordered">[[Create New Resume]]</h1>
 {/if}

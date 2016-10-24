@@ -182,6 +182,13 @@ return [
             'access_type' => ['user'],
         ],
 
+        'apply_now_opportunity' => [
+            'display_name' => 'Apply Now',
+            'script' => 'apply_now_opportunity.php',
+            'type' => 'user',
+            'access_type' => ['user'],
+        ],
+
         'delete_uploaded_file' => [
             'display_name' => 'Delete Uploaded File',
             'script' => 'delete_uploaded_file.php',
