@@ -150,7 +150,6 @@ class SJB_UserPageConfig extends SJB_PageConfig
 		if ($page_info = SJB_PageManager::extract_page_info ($this->uri, SJB_System::getSystemSettings('SYSTEM_ACCESS_TYPE')) ) {
 			$this->page_id = $page_info['ID'];
 			$this->page_exists = true;
-
 			$this->module = $page_info['module'];
 			$this->function = $page_info['function'];
 			$this->template = $page_info['template'];

@@ -67,6 +67,9 @@
 								<div class="listing-item__desc listing-item__desc-job-seeker hidden-sm hidden-xs">
 									{$listing.Skills|strip_tags:false}
 								</div>
+								<div style="margin-top: 10px;" class="listing-item__info clearfix">
+									{$listing|badges}
+                                </div>
 							</div>
 							<div class="listing-item__desc visible-sm visible-xs listing-item__desc-job-seeker">
 								{$listing.Skills|strip_tags:false}

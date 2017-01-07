@@ -6,6 +6,28 @@ class SJB_Notifications
 	const SEND_APPLY_NOW_SID 						= 33;
 //	const SEND_USER_SOCIAL_REG_LETTER_SID 			= 6;
 	const SEND_SUBSCRIPTION_ACTIVATION_LTR_SID 		= 24;
+    const USER_AUTO_REPLY_SID                       = 41;
+
+
+    public static function userAutoReply($listing_info, $user_sid, $questionnaire, $notRegisteredUserData = array())
+    {
+        $user = SJB_UserManager::getObjectBySID($user_sid);
+        $user = SJB_UserManager::createTemplateStructureForUser($user);
+
+        if (empty($user)) {
+            $user = $notRegisteredUserData;
+        }
+
+        $listing = SJB_ListingManager::getObjectBySID($listing_info['sid']);
+        $listing = SJB_ListingManager::createTemplateStructureForListing($listing);
+        $data = array(
+            'user' => $user,
+            'listing' => $listing,
+            'text' => $questionnaire
+        );
+        $email = SJB_EmailTemplateEditor::getEmail( $user['email'], self::USER_AUTO_REPLY_SID, $data);
+        return $email->send('Auto Reply');
+    }
 
 	public static function sendUserPasswordChangeLetter($user_sid)
 	{

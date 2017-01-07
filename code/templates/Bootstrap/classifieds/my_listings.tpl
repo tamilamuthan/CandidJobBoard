@@ -5,8 +5,8 @@
             {title}[[Job Postings]]{/title}
             <li class="presentation active"><a href="{$GLOBALS.site_url}/my-listings/{$listingTypeID|lower}/">[[Job Postings]]</a>
             </li>
-            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Application]]</a></li>
-            <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Screening Questions]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applications]]</a></li>
+            <li class="presentation"> <a href="{$GLOBALS.site_url}/screening-questionnaires/">[[Screening Questionnaires]]</a></li>
             <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
         {elseif $GLOBALS.current_user.group.id == "Investor"}
             {title}[[Opportunities]]{/title}

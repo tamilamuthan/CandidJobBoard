@@ -128,6 +128,23 @@ class SJB_Classifieds_EditListing extends SJB_Function
 			$listing->deleteProperty('status');
 
 			$listing->setSID($listingId);
+            
+            $screening_questionnaires = SJB_ScreeningQuestionnaires::getList($current_user->getSID());
+            if (SJB_Settings::getSettingByName('gradlead_enable_screening') && $screening_questionnaires) {
+                $value = SJB_Request::getVar('screening_questionnaire');
+                $value = $value ? $value : isset($listingInfo['screening_questionnaire']) ?         $listingInfo['screening_questionnaire'] : '';
+                $listing->addProperty(
+                    array('id' => 'screening_questionnaire',
+                        'type' => 'list',
+                        'caption' => 'Screening Questionnaire',
+                        'value' => $value,
+                        'list_values' => SJB_ScreeningQuestionnaires::getListSIDsAndCaptions($current_user->getSID()),
+                        'is_system' => true));
+            }
+            else {
+                $listing->deleteProperty('screening_questionnaire');
+            }
+            
 
 			//--->CLT-2637
 			$properties = $listing->getProperties();

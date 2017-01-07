@@ -188,9 +188,9 @@ function smarty_function_html_radios_output($name, $value, $output, $selected, $
     if ($labels) {
         if ($label_ids) {
             $_id = smarty_function_escape_special_chars(preg_replace('![^\w\-\.]!' . Smarty::$_UTF8_MODIFIER, '_', $name . '_' . $value));
-            $_output .= '<label for="' . $_id . '">';
+            $_output .= '<label class="form-label" for="' . $_id . '">';
         } else {
-            $_output .= '<label>';
+            $_output .= '<label class="form-label">';
         }
     }
 
@@ -200,7 +200,7 @@ function smarty_function_html_radios_output($name, $value, $output, $selected, $
         $output = smarty_function_escape_special_chars($output);
     }
 
-    $_output .= '<input type="radio" name="' . $name . '" value="' . $value . '"';
+    $_output .= '<input type="radio" class="form-control" name="' . $name . '" value="' . $value . '"';
 
     if ($labels && $label_ids) {
         $_output .= ' id="' . $_id . '"';

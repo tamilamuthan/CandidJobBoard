@@ -72,6 +72,7 @@ class SJB_TemplateProcessor extends Smarty
 		$this->registerPlugin('block', 'tr', array(&$this, 'translate'));
 		$this->registerPlugin('modifier', 'clrNonPrintedChars', 'SJB_HelperFunctions::clearNonPrintedCharacters');
 		$this->registerPlugin('modifier', 'location', array(&$this, 'location'));
+		$this->registerPlugin('modifier', 'badges', array(&$this, 'badges'));
 		$this->registerPlugin('modifier', 'pretty_url', array(&$this, 'pretty_url'));
 		$this->registerPlugin('modifier', 'listing_url', array(&$this, 'listing_url'));
 		$this->registerPlugin('modifier', 'whmcs_encode', 'SJB_HelperFunctions::whmcsEncode');
@@ -149,6 +150,32 @@ class SJB_TemplateProcessor extends Smarty
 		}
 		return '';
 	}
+
+    function badges($listingOrUser) 
+    {
+        $html = '';
+        $achievements = array();
+
+        if (isset($listingOrUser['user'])) {
+            //print '<pre>'; print_r($listingOrUser); print '</pre>'; exit;
+            $achievements = SJB_AchievementManager::getAllAchievementsInfoByUserSID($listingOrUser['user']['sid']);
+            foreach ($achievements as $key => $achievementInfo) {
+                 $achievements[$key] = $achievementInfo;
+                 $achievements[$key]['badge'] =  SJB_BadgesManager::getBadgeInfoBySID($achievementInfo['badge_sid']);
+            }
+        }
+
+        foreach($achievements as $ach) {
+            if ($ach['badge']['file']) {
+                $html .=   '<span style="padding:10px"> '
+                          .'<img src="http://localhost/gradlead/code/files/files/'.$ach['badge']['file'].'" '
+                          .'title="'.$ach['badge']['detailed_description'].'" border="0"/>'
+                          .'</span>';
+            }
+        }
+
+        return $html;
+    }
 
 	/**
 	 * @param string $urlPart

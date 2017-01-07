@@ -83,11 +83,13 @@ class GradLeadPlugin extends SJB_PluginAbstract
         GradLeadPlugin::setupListingTypeFields();
         GradLeadPlugin::setupPostingPages();
         GradLeadPlugin::setupUserGroups($groups);
+        
+        GradLeadPlugin::loadModules();
 
         SJB_Event::handle('onAfterAdminMenuCreated', array('GradLeadPlugin', 'setupMenus'));
     }
 
-    public static function handleRoutes() 
+    public static function loadModules() 
     {
         $plugin = SJB_PluginManager::getPluginByName('GradLeadPlugin');
         $isPluginActive = $plugin && $plugin['active'] == '1';
@@ -95,21 +97,12 @@ class GradLeadPlugin extends SJB_PluginAbstract
         if (!$isPluginActive) {
             return;
         }
-
-        $pages = array('manage-opportunities', 'manage-ideas');
-        $page = SJB_Request::getVar('action');
-
-        $isOpportunityPage = in_array($page, $pages) && SJB_Request::getVar('plugin') == 'GradLeadPlugin';
-
-        if ($isOpportunityPage) {
-            SJB_HelperFunctions::redirect(SJB_System::getSystemSettings('ADMIN_SITE_URL') . "/system/miscellaneous/opportunities/?action=$page");
-        }
-
-        if (SJB_Navigator::getURI() == "/system/miscellaneous/opportunities/") {
-            SJB_System::getModuleManager()->includeModule(SJB_BASE_DIR . 'system/plugins/gradlead_plugin/module', 'miscellaneous');
-            $modules = SJB_System::getModuleManager()->getModulesList();
-            require_once __DIR__ . '/module/miscellaneous/opportunity_manage_listings.php';
-        }
+        
+        //if (SJB_Settings::getSettingByName('gradlead_enable_badges')) {
+        //    SJB_System::getModuleManager()->includeModule(SJB_BASE_DIR . 'system/plugins/gradlead_plugin/modules', 'badges');
+        //    $modules = SJB_System::getModuleManager()->getModulesList();
+        //    require_once __DIR__ . '/modules/badges/Badges.php';
+        //}
     }
 
     private static function setupUserGroups($groups)
@@ -274,8 +267,7 @@ class GradLeadPlugin extends SJB_PluginAbstract
 
     private static function addPages()
     {
-        $res = SJB_DB::query("SELECT COALESCE(SUM(IF(uri='/manage-opportunities/',1,0)),0) AS opp, COALESCE(SUM(IF(uri='/manage-ideas/',1,0)),0) AS idea FROM pages");
-        if (!$res[0]['opp']) {
+        if (!GradLeadPlugin::inPages('/manage-opportunities/')) {
             $params = array('listing_type_sid' => GradLeadPlugin::LISTING_TYPE_SID_OPPORTUNITY);
             $sql = "INSERT INTO `pages` SET `uri` = ?s, `module` = ?s, `function` = ?s, `template`= ?s, `title` = ?s, `access_type`= ?s, `parameters`= ?s ON DUPLICATE KEY UPDATE `uri` = ?s";
             SJB_DB::query($sql, '/manage-opportunities/', 'classifieds', 'manage_listings', 'index.tpl', 'Manage Opportunities', 'admin', serialize($params), '/manage-opportunities/');
@@ -299,7 +291,7 @@ EOD;
             SJB_DB::query($sql);
         }
 
-        if (!$res[0]['idea']) {
+        if (!GradLeadPlugin::inPages('/manage-ideas/')) {
             $params = array('listing_type_sid' => GradLeadPlugin::LISTING_TYPE_SID_IDEA);
             $sql = "INSERT INTO `pages` SET `uri` = ?s, `module` = ?s, `function` = ?s, `template`= ?s, `title` = ?s, `access_type`= ?s, `parameters`= ?s ON DUPLICATE KEY UPDATE `uri` = ?s";
             SJB_DB::query($sql, '/manage-ideas/', 'classifieds', 'manage_listings', 'index.tpl', 'Manage Ideas', 'admin', serialize($params), '/manage-ideas/');
@@ -356,13 +348,35 @@ EOD;
             SJB_DB::query($sql);
         }
         
-
+        if (!GradLeadPlugin::inPages('/screening-questionnaires/')) {
+            $sql = <<<EOD
+            ALTER TABLE `applications` ADD `status` ENUM('Pending','Rejected','Approved') DEFAULT 'Pending' AFTER `email`, ADD `questionnaire` TEXT NOT NULL AFTER `status`, ADD `score` FLOAT NOT NULL AFTER `questionnaire`;
+EOD;
+            SJB_DB::query($sql);
+            
+            $sql = <<<EOD
+                INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `ID`, `content`) VALUES
+('/screening-questionnaires/', 0, 'applications', 'screening_questionnaires', '', 'Screening Questionnaires', 'user', 'N;', '', '', 342, 0),
+('/screening-questionnaires/new/', 0, 'applications', 'add_questionnaire', '', '', 'user', 'a:2:{s:6:"action";s:3:"add";s:13:"template_name";s:21:"add_questionnaire.tpl";}', '', '', 343, 0),
+('/screening-questionnaires/edit/', 1, 'applications', 'add_questionnaire', '', '', 'user', 'a:2:{s:6:"action";s:4:"edit";s:13:"template_name";s:22:"edit_questionnaire.tpl";}', '', '', 344, 0),
+('/screening-questionnaires/add-questions/', 1, 'applications', 'add_questions', '', '', 'user', 'a:1:{s:13:"template_name";s:17:"add_questions.tpl";}', '', '', 345, 0),
+('/edit-questions/', 1, 'applications', 'edit_questions', '', '', 'user', 'N;', '', '', 346, 0),
+('/edit-question/', 1, 'applications', 'edit_question', '', '', 'user', 'N;', '', '', 347, 0);
+('/screening-questionnaires/delete-question/', 1, 'applications', 'edit_questions', '', '', 'user', 'N;', '', '', 348, 0),
+('/applications/view-questionnaire/', 1, 'applications', 'view_questionnaire', '', '', 'user', 'N;', '', '', 349, 0);
+EOD;            
+            SJB_DB::query($sql);
+        }
+        
+        
         if (!GradLeadPlugin::inPages('/edit-badge/')) {
             $sql = <<<EOD
             INSERT INTO `pages` (`uri`, `pass_parameters_via_uri`, `module`, `function`, `template`, `title`, `access_type`, `parameters`, `keywords`, `description`, `content`) VALUES
-            ('/edit-badge/',NULL,'payment','edit_product','index.tpl','Edit Product','admin','','','',NULL),
-	        ('/products/badges/',NULL,'payment','products_badges','index.tpl','Products','admin','a:1:{s:13:"user_group_id";s:9:"JobSeeker";}','','',NULL),
-	        ('/add-badge/',NULL,'payment','add_badge_product','index.tpl','Add Product','admin','','','',NULL);
+            ('/add-badge/', NULL, 'badge', 'add_badge', 'index.tpl', 'Add Badge', 'admin', '', '', '', NULL, NULL),
+          ('/edit-badge/', NULL, 'badge', 'edit_badge', 'index.tpl', 'Edit Badge', 'admin', '', '', '', NULL, NULL),
+          ('/user-badges/', NULL, 'badge', 'user_badge', 'index.tpl', 'User Badges', 'admin', 'a:1:{s:4:"page";s:11:"user_badges";}', '', '', NULL, NULL),
+          ('/user-badge/', NULL, 'badge', 'user_badge', 'empty.tpl', 'User Badge', 'admin', 'a:1:{s:4:"page";s:10:"user_badge";}', '', '', NULL, NULL),
+          ('/badges/jobseeker/',NULL,'badge','badges','index.tpl','Badges','admin','a:1{s:13:"user_group_id";s:9:"JobSeeker";}','','',NULL);
 EOD;
             SJB_DB::query($sql);
         }        
@@ -383,8 +397,8 @@ EOD;
         $badgeMenu = [
             'Badges' => [
                [
-                    'title' => 'Manage Badges',
-                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/edit-listing-field/edit-list/?field_sid=' . GradLeadPlugin::LISTING_FIELD_SID_BADGES,
+                    'title' => 'Job Seeker Badges',
+                    'reference' => SJB_System::getSystemSettings('SITE_URL') . '/badges/jobseeker/',
                     'highlight' => [],
                 ],
             ]];

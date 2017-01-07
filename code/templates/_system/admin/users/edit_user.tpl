@@ -38,6 +38,9 @@
 		<a href="{$GLOBALS.site_url}/manage-jobs/?company_name[like]={$user_info.username|escape:'url'}" class="grayButton">[[View {$user_group_info.name} Jobs]]</a>
 	{/if}
 	<a href="{$GLOBALS.site_url}/user-products/?user_sid={$user_info.sid}" class="grayButton">[[{$user_group_info.name} Products]]</a>
+      
+   	<a href="{$GLOBALS.site_url}/user-badges/?user_sid={$user_info.sid}" class="grayButton">[[{$user_group_info.name} Badges]]</a>
+
     {*<a href="{$GLOBALS.site_url}/system/users/acl/?type=user&amp;role={$user_info.sid}" class="grayButton">[[View Permissions]]</a>*}
 </p>
 {include file='field_errors.tpl'}

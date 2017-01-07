@@ -71,6 +71,57 @@ class SJB_Classifieds_ApplyNow extends SJB_Function
 
 				$res = false;
 				$listing_info = '';
+                
+                $score = 0;
+                if (!empty($jobInfo['screening_questionnaire'])) {
+                        $questions = new SJB_Questions($_REQUEST, $jobInfo['screening_questionnaire']);
+                        $add_form = new SJB_Form($questions);
+                        $add_form->registerTags($tp);
+                        $add_form->isDataValid($field_errors);
+                        $tp->assign('field_errors', $field_errors);
+                        if (!$field_errors) {
+                            $result = array();
+                            $properties = $questions->getProperties();
+                            $countAnswers = 0;
+                            foreach ($properties as $key => $val) {
+                                if ($val->type->property_info['type'] == 'boolean') {
+                                    switch ($val->value) {
+                                        case 0:
+                                            $val->value = 'No';
+                                            break;
+                                        case 1:
+                                            $val->value = 'Yes';
+                                            break;
+                                    }
+                                }
+                                $result[$val->caption] = $val->value;
+                                if (isset($val->type->property_info['list_values'])) {
+                                    foreach ($val->type->property_info['list_values'] as $list_values) {
+                                        if (is_array($val->value)) {
+                                            foreach ($val->value as $value) {
+                                                if ($value == $list_values['id'] && $list_values['score'] != 'no') {
+                                                    $score += $list_values['score'];
+                                                    $countAnswers++;
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            if ($val->value == $list_values['id'] && $list_values['score'] != 'no') {
+                                                $score += $list_values['score'];
+                                                $countAnswers++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if ($countAnswers === 0)
+                                $score = 0.00;
+                            else
+                                $score = round($score / $countAnswers, 2);
+                            $post['submitted_data']['questionnaire'] = serialize($result);
+                        }
+                }
+
 
 				if (count($errors) == 0 && count($field_errors) == 0) {
 					$res = SJB_Applications::create(
@@ -81,7 +132,9 @@ class SJB_Classifieds_ApplyNow extends SJB_Function
 						$file_name,
 						$mimeType,
 						$id_file,
-						$_POST
+						$_POST,
+                        $post['submitted_data']['questionnaire'],
+                        $score
 					);
 					if (isset($post['submitted_data']['id_resume']) && $post['submitted_data']['id_resume'] != 0) {
 						$listing_info = SJB_ListingManager::getListingInfoBySID($post['submitted_data']['id_resume']);
@@ -92,6 +145,38 @@ class SJB_Classifieds_ApplyNow extends SJB_Function
 					}
 					if (!empty($file_name))
 						$file_name = 'files/files/'. $file_name;
+                    
+                    if (!empty($jobInfo['screening_questionnaire'])) {
+                            $questionnaire = SJB_ScreeningQuestionnaires::getInfoBySID($jobInfo['screening_questionnaire']);
+                            if ($questionnaire) {
+                                $passing_score = 0;
+                                switch ($questionnaire['passing_score']) {
+                                    case 'acceptable':
+                                        $passing_score = 1;
+                                        break;
+                                    case 'good':
+                                        $passing_score = 2;
+                                        break;
+                                    case 'very_good':
+                                        $passing_score = 3;
+                                        break;
+                                    case 'excellent':
+                                        $passing_score = 4;
+                                        break;
+                                }
+                            }
+                            if ($score >= $passing_score && $questionnaire['send_auto_reply_more'] ==   1) {
+                                if (!empty($questionnaire['email_text_more'])) {
+                                    SJB_Notifications::userAutoReply($jobInfo, $current_user_sid,       $questionnaire['email_text_more'], $notRegisterUserData);
+                                }
+                            }
+                            elseif ($score < $passing_score && $questionnaire['send_auto_reply_less']   == 1) {
+                                if (!empty($questionnaire['email_text_less'])) {
+                                    SJB_Notifications::userAutoReply($jobInfo, $current_user_sid,       $questionnaire['email_text_less'], $notRegisterUserData);
+                                }
+                            }
+                    }
+                    
 					SJB_Notifications::sendApplyNow($post, $file_name, $listing_info, $_POST);
 				}
 
@@ -102,6 +187,16 @@ class SJB_Classifieds_ApplyNow extends SJB_Function
 				$isDataSubmitted = true;
 			}
 
+            if (!empty($jobInfo['screening_questionnaire'])) {
+                $questions = new SJB_Questions($_REQUEST, $jobInfo['screening_questionnaire']);
+                $add_form = new SJB_Form($questions);
+                $add_form->registerTags($tp);
+                $form_fields = $add_form->getFormFieldsInfo();
+                $tp->assign('form_fields', $form_fields);
+                $tp->assign('questionsObject', $questions);
+            }
+
+            
 			if ($loggedIn) {
 				$resumes = array();
 				foreach (SJB_ListingDBManager::getActiveListingsSIDByUserSID($current_user_sid) as $key => $resume) {

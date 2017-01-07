@@ -113,8 +113,20 @@ class SJB_Classifieds_SearchResults extends SJB_Function
 		if ($userForm) {
 			$tp->assign('form_fields', $userForm->getFormFieldsInfo());
 		}
+
 		$tp->display($template);
 	}
+
+    public function getAchievements($userSID)
+    {
+        $achievements = array();
+            $achievements = SJB_AchievementManager::getAllAchievementsInfoByUserSID($userSID);
+            foreach ($achievements as $key => $achievementInfo) {
+                 $achievements[$key] = $achievementInfo;
+                 $achievements[$key]['badge'] =  SJB_BadgesManager::getBadgeInfoBySID($achievementInfo['badge_sid']);
+        }
+        return $achievements;
+    }
 
 	private function redirectToListingByKeywords()
 	{

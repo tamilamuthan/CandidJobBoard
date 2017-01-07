@@ -250,6 +250,25 @@ class SJB_Classifieds_AddListing extends SJB_Function
 						'is_system' => true));
 			}
 			$currentUser = SJB_UserManager::getCurrentUser();
+            
+            $screeningQuestionnaires = SJB_ScreeningQuestionnaires::getList($currentUser->getSID());
+            if (SJB_Settings::getSettingByName('gradlead_enable_screening') &&  $screeningQuestionnaires) {
+                $issetQuestionnairyField = $listing->getProperty('screening_questionnaire');
+                if ($issetQuestionnairyField) {
+                    $value = SJB_Request::getVar("screening_questionnaire");
+                    $listingInfo = $_REQUEST;
+                    $value = $value ? $value : isset($listingInfo['screening_questionnaire']) ?         $listingInfo['screening_questionnaire'] : '';
+                    $listing->addProperty(
+                        array('id' => 'screening_questionnaire',
+                            'type' => 'list',
+                            'caption' => 'Screening Questionnaire',
+                            'value' => $value,
+                            'list_values' => SJB_ScreeningQuestionnaires::                              getListSIDsAndCaptions($currentUser->getSID()),
+                            'is_system' => true));
+                }
+            } else {
+                $listing->deleteProperty('screening_questionnaire');
+            }
 
 			$listingFormAdd = new SJB_Form($listing);
 			$listingFormAdd->registerTags($this->tp);

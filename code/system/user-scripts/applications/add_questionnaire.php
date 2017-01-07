@@ -4,8 +4,7 @@ class SJB_Applications_AddQuestionnaire extends SJB_Function
 {
 	public function isAccessible()
 	{
-		$this->setPermissionLabel('use_screening_questionnaires');
-		return parent::isAccessible();
+		return (SJB_Settings::getSettingByName('gradlead_enable_screening'));
 	}
 
 	public function execute()
@@ -25,7 +24,7 @@ class SJB_Applications_AddQuestionnaire extends SJB_Function
 		if (!empty($questionnaireInfo['sid']) && !SJB_ScreeningQuestionnaires::isUserOwnerQuestionnaire(SJB_UserManager::getCurrentUserSID(), $questionnaireInfo['sid'])) {
 			SJB_FlashMessages::getInstance()->addError('NOT_OWNER');
 		}
-		else if (SJB_Acl::getInstance()->isAllowed('use_screening_questionnaires')) {
+		else if (SJB_Settings::getSettingByName('gradlead_enable_screening')) {
 			$questionnaireInfo = $questionnaireInfo ? $questionnaireInfo : array();
 			$questionnaireInfo = array_merge($questionnaireInfo, $_REQUEST);
 			$questionnaire = new SJB_ScreeningQuestionnaires($questionnaireInfo);
@@ -80,6 +79,7 @@ class SJB_Applications_AddQuestionnaire extends SJB_Function
 					'form_fields' => $metaDataProvider->getFormFieldsMetadata($form_fields),
 				)
 			);
+            //print "<pre>"; print_r($form_fields); print '</pre>'; exit;
 			$tp->assign('edit', $edit);
 			$tp->assign('request', $questionnaireInfo);
 			$tp->assign('sid', $sid);

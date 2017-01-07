@@ -1,9 +1,72 @@
+{literal}
+<style>
+.editbutton,
+.deletebutton {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 10px;
+    text-decoration: none;
+    display: inline-block;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.editbutton {
+    background: #f9fdff;
+    background: -moz-linear-gradient(top,  #f9fdff 0%, #bbd4e5 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9fdff), color-stop(100%,#bbd4e5));
+    background: -webkit-linear-gradient(top,  #f9fdff 0%,#bbd4e5 100%);
+    background: -o-linear-gradient(top,  #f9fdff 0%,#bbd4e5 100%);
+    background: -ms-linear-gradient(top,  #f9fdff 0%,#bbd4e5 100%);
+    background: linear-gradient(to bottom,  #f9fdff 0%,#bbd4e5 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fdff', endColorstr='#bbd4e5',GradientType=0 );
+    -moz-box-shadow: inset 0 1px 0 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 0 #fff;
+    box-shadow: inset 0 1px 0 0 #fff;
+    border: 1px solid #b5b3b5;
+    color: #777;
+    text-shadow: 1px 1px 0 #fff;
+}
+.editbutton:hover {
+    background: #bbd4e5;
+    background: -moz-linear-gradient(top,  #bbd4e5 0%, #f9fdff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bbd4e5), color-stop(100%,#f9fdff));
+    background: -webkit-linear-gradient(top,  #bbd4e5 0%,#f9fdff 100%);
+    background: -o-linear-gradient(top,  #bbd4e5 0%,#f9fdff 100%);
+    background: -ms-linear-gradient(top,  #bbd4e5 0%,#f9fdff 100%);
+    background: linear-gradient(to bottom,  #bbd4e5 0%,#f9fdff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bbd4e5', endColorstr='#f9fdff',GradientType=0 );
+}
+.deletebutton {
+    -moz-box-shadow: inset 0 1px 0 0 #f7c5c0;
+    -webkit-box-shadow: inset 0 1px 0 0 #f7c5c0;
+    box-shadow: inset 0 1px 0 0 #f7c5c0;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f0a5a1), color-stop(1, #e67e7e) );
+    background: -moz-linear-gradient( center top, #f0a5a1 5%, #e67e7e 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0a5a1', endColorstr='#e67e7e');
+    background-color: #f0a5a1;
+    border: 1px solid #b8372e;
+    color: #fff;
+    text-shadow: 1px 1px 0 #9c3830;
+}
+.deletebutton:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e67e7e), color-stop(1, #f0a5a1) );
+    background: -moz-linear-gradient( center top, #e67e7e 5%, #f0a5a1 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e67e7e', endColorstr='#f0a5a1');
+    background-color: #e67e7e;
+}
+</style>
+{/literal}
+
 {title}[[Applicants]]{/title}
 <h1 class="my-account-title">[[My Account]]</h1>
 <div class="my-account-list">
     <ul class="nav nav-pills">
         <li class="presentation"><a href="{$GLOBALS.site_url}/my-listings/job/">[[Job Postings]]</a></li>
-        <li class="presentation active"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applicants]]</a></li>
+        <li class="presentation active"> <a href="{$GLOBALS.site_url}/system/applications/view/">[[Applications]]</a></li>
+        <li class="presentation"> <a href="{$GLOBALS.site_url}/screening-questionnaires/">[[Screening Questions]]</a></li>
         <li class="presentation"> <a href="{$GLOBALS.site_url}/edit-profile/">[[Company Profile]]</a></li>
     </ul>
 </div>
@@ -26,11 +89,18 @@
         <input type="hidden" name="orderBy" value="{$orderBy|escape:'html'}" />
         <input type="hidden" name="order" value="{$order}" />
         <input type="hidden" name="appsPerPage" value="{$appsPerPage}" />
-        <div class="col-xs-12 col-sm-6">
-            <h3 class="title__primary title__primary-small">[[Applicants]]</h3>
+        <div class="col-xs-12 col-sm-3">
+            <h3 class="title__primary title__primary-sall">[[ {$cnt_pending+$cnt_approved+$cnt_rejected} ]] [[Applications]]</h3>
         </div>
-        <div class="col-xs-12 col-sm-6 app-job-filter">
-            <select name="appJobId" class="form-control">
+        <div class="col-xs-12 col-sm-9 app-job-filter" style="border:0px solid red;">
+           {if $can_use_questionnaire}
+            <select name="score" class="form-control" style="display:inline; width: 20%; float: right">
+                <option value="">[[Any Score]]</option>
+                <option value="passed" {if $score == 'passed'} selected="selected"{/if}>[[Passed]]</option>
+                <option value="not_passed" {if $score == 'not_passed'} selected="selected"{/if}>[[Not passed]]</option>
+            </select>
+            {/if}
+            <select name="appJobId" class="form-control" style="display:inline; width: 50%; float:right">
                 <option value="">[[All Jobs]]</option>
                 {foreach from=$appJobs item=appJob}
                     <option value="{$appJob.id}"{if $appJob.id == $current_filter} selected="selected"{/if}>{$appJob.title}</option>
@@ -39,63 +109,32 @@
         </div>
         <input type="submit" value="[[Filter]]" class="btn btn-default hidden filter-button" />
     </form>
-    <div id="applicants-list">
-        {foreach item=application from=$applications name=applications}
-            <article class="media well listing-item {if $listing.type.id eq 'Job'}listing-item__jobs{elseif $listing.type.id eq 'Resume'}listing-item__resumes{/if}">
-                {if $application.resumeInfo.Photo.file_url}
-                    <div class="media-left listing-item__logo listing-item__resumes">
-                        <div class="job-seeker__image">
-                            <a class="link profile__image" href="{$GLOBALS.site_url}{$application.resumeInfo|listing_url}">
-                                <img class="media-object profile__img" src="{$application.resumeInfo.Photo.file_url}" />
-                            </a>
-                        </div>
-                    </div>
-                {/if}
-                <div class="media-body">
-                    <div class="media-heading listing-item__title">
-                        <span class="app-track-link">
-                            {if $application.resume}
-                                {if $application.resumeInfo}
-                                    <a href="{$GLOBALS.site_url}{$application.resumeInfo|listing_url}">
-                                        {$application.username|escape}
-                                    </a>
-                                {else}
-                                    [[Not Available Anymore]]
-                                {/if}
-                            {else}
-                                <a href="?appsID={$application.id}&amp;filename={$application.file|escape:"url"}">{$application.username|escape}</a>
-                            {/if}
-                        </span> <br />
-                    </div>
-                    <div class="listing-item__info clearfix">
-                        <span class="listing-item__info--item listing-item__info--item-company">
-                            {$application.job.Title}
-                        </span>
-                    </div>
-                    <div class="listings-application-info clearfix">
-                        <div class="listing-item__date visible-xs-480">{$application.date|date}</div>
-                        <a class="listings-application-info--item link" href="mailto:{$application.email}">{$application.email}</a>
-                        {if $application.file}
-                            <a class="listings-application-info--item link" href="?appsID={$application.id}&amp;filename={$application.file|escape:"url"}">[[Resume file]]</a>
-                        {/if}
-                        {if $application.resumeInfo.Resume.file_name}
-                            <a class="listings-application-info--item link" href="{$GLOBALS.site_url}{$application.resumeInfo|listing_url}?filename={$application.resumeInfo.Resume.saved_file_name|escape:'url'}">[[Resume file]]</a>
-                        {/if}
-                        {if $application.comments}
-                            <span class="listings-application-info--item">
-                                <a class="link" onclick="showCoverLetter('{$application.id}')" href="#">[[Cover letter]]</a>
-                                <div id="coverLetter_{$application.id}" style="display: none">
-                                    {$application.comments|escape}
-                                </div>
-                            </span>
-                        {/if}
-                    </div>
-                </div>
-                <div class="media-right text-right hidden-xs-480">
-                    <div class="listing-item__date">{$application.date|date}</div>
-                </div>
-            </article>
-        {/foreach}
+
+    <div id="applicants-list" style="margin-top: 20px;">
+        {if $can_use_app_management}
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#pending">Pending ([[$cnt_pending]])</a></li>
+            <li><a data-toggle="tab" href="#rejected">Rejected ([[$cnt_rejected]])</a></li>
+            <li><a data-toggle="tab"  href="#approved">Approved ([[$cnt_approved]])</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="pending" class="tab-pane fade in active">
+                <h3>&nbsp;</h3>
+		        {include file='view_tab.tpl' tab="Pending"}
+            </div>
+            <div id="rejected" class="tab-pane fade">
+                <h3>&nbsp;</h3>
+		        {include file='view_tab.tpl' tab="Rejected"}
+            </div>
+            <div id="approved" class="tab-pane fade">
+                <h3>&nbsp;</h3>
+		        {include file='view_tab.tpl' tab="Approved"}
+            </div>
+        </div>
+        {else}
+		     {include file='view_default.tpl'}
+        {/if}
         <button type="button" class="load-more btn btn__white {if $applications|@count < $appsPerPage}hidden{/if}" data-page="2">
             [[Load more]]
         </button>
@@ -131,6 +170,7 @@
 
         $(document).ready(function() {
             $('.nav-pills').scrollLeft($('.nav-pills').width() / 2);
+        
         });
 	</script>
 {/javascript}

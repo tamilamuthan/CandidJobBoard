@@ -13,7 +13,7 @@ class SJB_Applications
         return false;
     }
 
-	public static function getByJob($listingID, $orderInfo = false, $limit = false)
+	public static function getByJob($listingID, $orderInfo = false, $limit = false, $score=false)
 	{
 		$order = SJB_Applications::generateOrderAndJoin($orderInfo);
 
@@ -22,18 +22,31 @@ class SJB_Applications
 			$limitFilter = "LIMIT {$limit['startRow']}, {$limit['countRows']}";
 		}
 
+        $scoreFilter['case'] = '';
+        $scoreFilter['inner_join'] = '';
+        if (!empty($score)) {
+            $scoreFilter = self::getScoredApplications($score);
+        }
+        
 		$apps = SJB_DB::query("
 		SELECT `a`.*
 		FROM `applications` `a`
 			INNER JOIN `listings` l ON
 				`l`.`sid` = `a`.`listing_id`
+                {$scoreFilter['inner_join']}
 				{$order['join']}
-				WHERE `a`.`listing_id` = ?s {$order['order']} {$limitFilter}", $listingID);
+				WHERE `a`.`listing_id` = ?s {$scoreFilter['case']} {$order['order']} {$limitFilter}", $listingID);
 		return $apps;
 	}
 
-	public static function getCountAppsByJob($listingID)
+	public static function getCountAppsByJob($listingID, $score=false)
 	{
+        $scoreFilter['case'] = '';
+        $scoreFilter['inner_join'] = '';
+        if (!empty($score)) {
+            $scoreFilter = self::getScoredApplications($score);
+        }
+
 		$appsCount = SJB_DB::queryValue("
 		SELECT
 			COUNT(`a`.`listing_id`)
@@ -41,7 +54,8 @@ class SJB_Applications
 			`applications` `a`
 		INNER JOIN `listings` l ON
 			`l`.`sid` = `a`.`listing_id`
-		WHERE `a`.`listing_id` = ?s ", $listingID);
+            {$scoreFilter['inner_join']}
+		WHERE `a`.`listing_id` = ?s {$scoreFilter['case']}", $listingID);
 
 		return $appsCount;
 	}
@@ -76,7 +90,7 @@ class SJB_Applications
         return $result;
     }
 
-	public static function getByEmployer($userSID, $orderInfo, $limit = false)
+	public static function getByEmployer($userSID, $orderInfo, $limit = false, $score=false)
 	{
 		$order = SJB_Applications::generateOrderAndJoin($orderInfo);
 
@@ -84,6 +98,12 @@ class SJB_Applications
 		if (!empty($limit)) {
 			$limitFilter = "LIMIT {$limit['startRow']}, {$limit['countRows']}";
 		}
+        
+        $scoreFilter['case'] = '';
+        $scoreFilter['inner_join'] = '';
+        if (!empty($score)) {
+            $scoreFilter = self::getScoredApplications($score);
+        }
 
 		$apps = SJB_DB::query("
 			SELECT `a`.*
@@ -91,20 +111,28 @@ class SJB_Applications
 				`applications` `a`
 			INNER JOIN `listings` l ON
 				`l`.`sid` = `a`.`listing_id`
+                {$scoreFilter['inner_join']}
 				{$order['join']}
-			WHERE `l`.`user_sid` = ?s {$order['order']} {$limitFilter}", $userSID);
+			WHERE `l`.`user_sid` = ?s {$scoreFilter['case']} {$order['order']} {$limitFilter}", $userSID);
 		return $apps;
 	}
 
-	public static function getCountApplicationsByEmployer($userSID)
+	public static function getCountApplicationsByEmployer($userSID, $score=false)
 	{
+        $scoreFilter['case'] = '';
+        $scoreFilter['inner_join'] = '';
+        if (!empty($score)) {
+            $scoreFilter = self::getScoredApplications($score);
+        }
+
 		$appsCount = SJB_DB::queryValue("
 			SELECT COUNT(`a`.`listing_id`)
 			FROM
 				`applications` `a`
 			INNER JOIN `listings` l ON
 				`l`.`sid` = `a`.`listing_id`
-			WHERE `l`.`user_sid` = ?s", $userSID);
+                {$scoreFilter['inner_join']}
+			WHERE `l`.`user_sid` = ?s {$scoreFilter['case']}", $userSID);
 		return $appsCount;
 	}
 
@@ -202,7 +230,7 @@ class SJB_Applications
      * @param bool $post
      * @return array|bool
      */
-	public static function create($listing_id, $jobseeker_id, $resume, $comments, $file, $mimeType, $file_sid, $post = false)
+	public static function create($listing_id, $jobseeker_id, $resume, $comments, $file, $mimeType, $file_sid, $post = false, $questionnaire='', $score=0)
     {
         if (SJB_Applications::isApplied($listing_id, $jobseeker_id) && !is_null($jobseeker_id))
             return false;
@@ -215,8 +243,8 @@ class SJB_Applications
         $jobSeekerName  = $post['name'];
         $jobSeekerEmail = $post['email'];
         $res = SJB_DB::query("
-            insert into applications(`listing_id`, `jobseeker_id`, `comments`, `date`, `resume`, `file`, `mime_type`, `username`, `email`, `file_id`)
-            values(?s, ?s, ?s, NOW(), ?s, ?s, ?s, ?s, ?s, ?s)", $listing_id, $jobseeker_id ? $jobseeker_id : 0, $comments, $resume, $file, $mimeType, $jobSeekerName, $jobSeekerEmail, $file_id);
+            insert into applications(`listing_id`, `jobseeker_id`, `comments`, `date`, `resume`, `file`, `mime_type`, `username`, `email`, `file_id`,`questionnaire`,`score`)
+            values(?s, ?s, ?s, NOW(), ?s, ?s, ?s, ?s, ?s, ?s, ?s, ?s)", $listing_id, $jobseeker_id ? $jobseeker_id : 0, $comments, $resume, $file, $mimeType, $jobSeekerName, $jobSeekerEmail, $file_id, $questionnaire, $score);
         return !empty($res);
     }
 
@@ -285,5 +313,47 @@ class SJB_Applications
             }
         }
         SJB_DB::query('delete from `applications` where `listing_id` = ?n', $listing);
+    }
+    
+       /**
+     * @param $score
+     */
+    public static function getScoredApplications($score)
+    {
+        $scoreFilter['inner_join'] = "
+        inner join `screening_questionnaires` `s` on
+            `l`.`screening_questionnaire` = `s`.`sid`
+        ";
+
+        if ($score == 'passed') {
+            $scoreFilter['case'] = "
+                AND `a`.`score` >= (CASE `s`.`passing_score`
+                WHEN 'acceptable' THEN 1
+                WHEN 'good' THEN 2
+                WHEN 'very_good' THEN 3
+                WHEN 'excellent' THEN 4
+                END)
+                ";
+        } elseif ($score == 'not_passed') {
+                $scoreFilter['case'] = "
+                AND `a`.`score` < (CASE `s`.`passing_score`
+                WHEN 'acceptable' THEN 1
+                WHEN 'good' THEN 2
+                WHEN 'very_good' THEN 3
+                WHEN 'excellent' THEN 4
+                END)
+                ";
+        }
+        return $scoreFilter;
+    }
+    
+    public static function accept($applicationId)
+    {
+        SJB_DB::query("update applications set `status` = 'Approved' where id = ?s", $applicationId);
+    }
+
+    public static function reject($applicationId)
+    {
+        SJB_DB::query("update applications set `status` = 'Rejected' where id = ?s", $applicationId);
     }
 }

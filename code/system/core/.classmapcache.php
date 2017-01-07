@@ -1831,4 +1831,19 @@ return array(
     'SJB_TemplateProcessor'                                                                             => SJB_BASE_DIR . 'system/core/TemplateProcessor.php',
     'SJB_TemplateSupplier'                                                                              => SJB_BASE_DIR . 'system/core/TemplateSupplier.php',
     'ThemeManager'                                                                                      => SJB_BASE_DIR . 'system/core/TemplateSupplier.php',
+
+    // Badges Classes
+    'SJB_Admin_Badge_Badges'                                                                        => SJB_BASE_DIR . 'system/admin-scripts/badge/badges.php',
+    'SJB_Admin_Badge_AddBadge'                                                                      => SJB_BASE_DIR . 'system/admin-scripts/badge/add_badge.php',
+    'SJB_Admin_Badge_EditBadge'                                                                     => SJB_BASE_DIR . 'system/admin-scripts/badge/edit_badge.php',
+    'SJB_Admin_Badge_UserBadge'                                                                     => SJB_BASE_DIR . 'system/admin-scripts/badge/user_badge.php',
+    //'SJB_Badge_UserBadges'                                                                          => SJB_BASE_DIR . 'system/user-scripts/badge/badges.php',
+
+    'SJB_BadgeDetails'                                                                              => SJB_BASE_DIR . 'system/lib/badge/BadgeDetails.php',
+    'SJB_Badge'                                                                                     => SJB_BASE_DIR . 'system/lib/badge/Badges.php',
+    'SJB_BadgesManager'                                                                             => SJB_BASE_DIR . 'system/lib/badge/BadgesManager.php',
+
+    'SJB_Achievement'                                                                               => SJB_BASE_DIR . 'system/lib/badge/Achievement.php',
+    'SJB_AchievementManager'                                                                        => SJB_BASE_DIR . 'system/lib/badge/AchievementManager.php',
+    'SJB_AchievementSQL'                                                                            => SJB_BASE_DIR . 'system/lib/badge/AchievementSQL.php',
 );

@@ -54,6 +54,12 @@
 				<label class="form-label">[[Cover letter]]</label>
 				<textarea class="form-control" name="comments" rows="5">{$request.comments|escape}</textarea>
 			</div>
+			
+			{if $form_fields}
+               {include file="questionnaire.tpl" form_fields=$form_fields}
+            {/if}
+
+			
 			<div class="form-group text-center">
 				<input class="btn__submit-modal btn btn__orange btn__bold" type="submit" value="[[Send application]]" onclick="return applySubmit();"/>
 			</div>

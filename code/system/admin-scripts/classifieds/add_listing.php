@@ -80,7 +80,6 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 
                 // Add screening questions
                 $screening_questionnaires = SJB_ScreeningQuestionnaires::getList($userSID);
-                //if (SJB_Acl::getInstance()->isAllowed('use_screening_questionnaires') && $screening_questionnaires) {
                 if ($screening_questionnaires) {
 					$issetQuestionnairyField = $listing->getProperty('screening_questionnaire');
 					if ($issetQuestionnairyField) {
@@ -96,9 +95,7 @@ class SJB_Admin_Classifieds_AddListing extends SJB_Function
 								'is_system' => true));
 					}
 				}
-				//else {
-				//	$listing->deleteProperty('screening_questionnaire');
-                //}
+		
 
 				$add_listing_form = new SJB_Form($listing);
 				$add_listing_form->registerTags($tp);

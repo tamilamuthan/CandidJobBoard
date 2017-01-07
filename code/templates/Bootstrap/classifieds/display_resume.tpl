@@ -93,6 +93,9 @@
 								<a href="?filename={$listing.Resume.saved_file_name|escape:'url'}">[[My Resume]]</a>
 							</li>
 						{/if}
+					    <li class="profile__info-list__item profile__info-list__item-resume">
+							{$listing|badges}
+                       </li>
 					</ul>
 				</div>
 				{if 'banner_right_side'|banner}

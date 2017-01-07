@@ -13,6 +13,7 @@ class SJB_Applications_View extends SJB_Function
 		$this->currentPage = SJB_Request::getVar('page', 1);
 		$currentUser = SJB_UserManager::getCurrentUser();
 		$appJobId = SJB_Request::getVar('appJobId', false, null, 'int');
+        $score = SJB_Request::getVar('score', false);
 		$orderBy = SJB_Request::getVar('orderBy', 'date');
 		$order = SJB_Request::getVar('order', 'desc');
 		$displayTemplate = "view.tpl";
@@ -48,6 +49,10 @@ class SJB_Applications_View extends SJB_Function
 		if (!is_numeric($appsPerPage) || $appsPerPage < 1) {
 			$appsPerPage = 10;
 		}
+        
+        if (!empty($score) && $score != 'passed' && $score != 'not_passed') {
+            $score = false;
+        }
 
 		if ($order != 'asc' && $order != 'desc') {
 			$order = 'desc';
@@ -67,6 +72,9 @@ class SJB_Applications_View extends SJB_Function
 					$orderInfo = false;
 					$sortByUsername = true;
 					break;
+                case "score":
+                    $orderInfo = array('sorting_field' => 'score', 'sorting_order' => $order);
+                    break;
 				case "company":
 					$orderInfo = array('sorting_field' => 'CompanyName', 'sorting_order' => $order, 'inner_join' => array('table' => 'listings', 'field1' => 'sid', 'field2' => 'listing_id'), 'inner_join2' => array('table1' => 'users', 'table2' => 'listings', 'field1' => 'sid', 'field2' => 'user_sid'), );
 					break;
@@ -75,22 +83,49 @@ class SJB_Applications_View extends SJB_Function
 			}
 		}
 		if ($currentUser->getUserGroupSID() == SJB_UserGroup::EMPLOYER) {
-			$jobs = SJB_DB::query('select `Title` as `title`, `sid` as `id` from `listings` where `user_sid` = ?n', $currentUser->sid);
+
+            $this->processAction();
+            
+            $jobs = SJB_DB::query('select `Title` as `title`, `sid` as `id` from `listings` where `user_sid` = ?n', $currentUser->sid);
 
 			$listingTitle = null;
 			foreach ($jobs as $job) {
 				if ($job['id'] == $appJobId)
 					$listingTitle = $job['title'];
 			}
-			$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+			$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle, $score);
 
 			if (empty($apps) && $this->currentPage > 1) {
 				$this->currentPage = 1;
-				$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+				$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle, $score);
 			}
 
 			foreach ($apps as $i => $app) {
 				$apps[$i]["job"] = SJB_ListingManager::getListingInfoBySID($apps[$i]["listing_id"]);
+                
+                if (!empty($apps[$i]["job"]['screening_questionnaire'])) {
+                    $screening_questionnaire = SJB_ScreeningQuestionnaires::getInfoBySID($apps[$i]["job"]['screening_questionnaire']);
+                    $passing_score = 0;
+                    switch ($screening_questionnaire['passing_score']) {
+                        case 'acceptable':
+                            $passing_score = 1;
+                            break; 
+                        case 'good':
+                            $passing_score = 2;
+                            break;
+                        case 'very_good':
+                            $passing_score = 3;
+                            break;
+                        case 'excellent':
+                            $passing_score = 4;
+                            break;
+                    }
+                    if ($apps[$i]['score'] >= $passing_score)
+                        $apps[$i]['passing_score'] = 'Passed';
+                    else 
+                        $apps[$i]['passing_score'] = 'Not passed';
+                }
+                
 				if (isset($apps[$i]["resume"]) && !empty($apps[$i]["resume"])) {
 					$resume = SJB_ListingManager::getObjectBySID($apps[$i]["resume"]);
 					if ($resume) {
@@ -111,9 +146,12 @@ class SJB_Applications_View extends SJB_Function
 			$tp->assign("totalPages", $this->totalPages);
 			$tp->assign("appJobs", $jobs);
 			$tp->assign("current_filter", $appJobId);
+            $tp->assign("score", $score);
 			$tp->assign("listing_title", $listingTitle);
         
         } elseif ($currentUser->getUserGroupSID() == $iSid) { // investor
+            $this->processAction();
+            
             $jobs = SJB_DB::query('select `Title` as `title`, `sid` as `id` from `listings` where `user_sid` = ?n', $currentUser->sid);
 
 			$listingTitle = null;
@@ -121,16 +159,40 @@ class SJB_Applications_View extends SJB_Function
 				if ($job['id'] == $appJobId)
 					$listingTitle = $job['title'];
 			}
-			$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+			$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle, $score);
 
 			if (empty($apps) && $this->currentPage > 1) {
 				$this->currentPage = 1;
-				$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle);
+				$apps = $this->executeApplicationsForEmployer($appsPerPage, $appJobId, $currentUser, $orderInfo, $listingTitle, $score);
 			}
 
 			foreach ($apps as $i => $app) {
 				$apps[$i]["job"] = SJB_ListingManager::getListingInfoBySID($apps[$i]["listing_id"]);
-				if (isset($apps[$i]["resume"]) && !empty($apps[$i]["resume"])) {
+				
+                if (!empty($apps[$i]["job"]['screening_questionnaire'])) {
+                    $screening_questionnaire = SJB_ScreeningQuestionnaires::getInfoBySID($apps[$i]["job"]['screening_questionnaire']);
+                    $passing_score = 0;
+                    switch ($screening_questionnaire['passing_score']) {
+                        case 'acceptable':
+                            $passing_score = 1;
+                            break; 
+                        case 'good':
+                            $passing_score = 2;
+                            break;
+                        case 'very_good':
+                            $passing_score = 3;
+                            break;
+                        case 'excellent':
+                            $passing_score = 4;
+                            break;
+                    }
+                    if ($apps[$i]['score'] >= $passing_score)
+                        $apps[$i]['passing_score'] = 'Passed';
+                    else 
+                        $apps[$i]['passing_score'] = 'Not passed';
+                }
+                
+                if (isset($apps[$i]["resume"]) && !empty($apps[$i]["resume"])) {
 					$resume = SJB_ListingManager::getObjectBySID($apps[$i]["resume"]);
 					if ($resume) {
 						$apps[$i]["resumeInfo"] = $apps[$i]["resumeInfo"] = SJB_ListingManager::createTemplateStructureForListing($resume);
@@ -150,6 +212,7 @@ class SJB_Applications_View extends SJB_Function
 			$tp->assign("totalPages", $this->totalPages);
 			$tp->assign("appJobs", $jobs);
 			$tp->assign("current_filter", $appJobId);
+            $tp->assign("score", $score);
 			$tp->assign("listing_title", $listingTitle);
         
             $displayTemplate = "view_investor.tpl";
@@ -189,28 +252,104 @@ class SJB_Applications_View extends SJB_Function
 		if (empty($apps)) {
 			$errors['APPLICATIONS_NOT_FOUND'] = true;
 		}
+        
+        $pending = 0;
+        $approved = 0;
+        $rejected = 0;
+        foreach($apps as $ap) {
+            if ($ap['status']=='Pending') { $pending++; }
+            if ($ap['status']=='Approved') { $approved++; }
+            if ($ap['status']=='Rejected') { $rejected++; }
+        }
 
+        $tp->assign("cnt_approved", $approved);
+        $tp->assign("cnt_pending", $pending);
+        $tp->assign("cnt_rejected", $rejected);
 		$tp->assign("METADATA", SJB_Applications::getApplicationMeta());
 		$tp->assign("applications", $apps);
 		$tp->assign("errors", $errors);
+        $tp->assign("can_use_questionnaire", SJB_Settings::getSettingByName('gradlead_enable_screening'));
+        $tp->assign("can_use_app_management", SJB_Settings::getSettingByName('gradlead_enable_application'));
 		$tp->display($displayTemplate);
 	}
+    
+    
+    private function processAction() 
+    {
+            switch (SJB_Request::getVar('action', '')) {
+                case "approve":
+                    $applications = SJB_Request::getVar('applications', '');
+                    if (!empty($applications)) {
+                        if (is_array($applications)) {
+                            foreach ($applications as $key => $value) {
+                                $this->approveApplication($key);
+                            }
+                        } else {
+                            $this->approveApplication($applications);
+                        }
+                    }
+                    break;
 
-	private function executeApplicationsForEmployer($appsPerPage, $appJobId, SJB_User $currentUser, $orderInfo, $listingTitle)
+                case "reject":
+                    $applications = SJB_Request::getVar('applications', '');
+                    if (!empty($applications)) {
+                        if (is_array($applications)) {
+                            foreach ($applications as $key => $value) {
+                                $this->rejectApplication($key);
+                            }
+                        } else {
+                            $this->rejectApplication($applications);
+                        }
+                    }
+                    break;
+
+                case "delete":
+                    if (isset($_POST["applications"]))
+                        foreach ($_POST["applications"] as $key => $value)
+                            SJB_Applications::hideEmp($key);
+                    break;
+            }
+    }
+    
+    /**
+     * @param $applicationID
+     */
+    private function rejectApplication($applicationID)
+    {
+        $applicationInfo = SJB_Applications::getBySID($applicationID);
+        if ($applicationInfo['status'] != 'Rejected') {
+            $jobseekerSID = $applicationInfo['jobseeker_id'];
+            SJB_Applications::reject($applicationID);
+        }
+    }
+
+    /**
+     * @param $applicationID
+     */
+    private function approveApplication($applicationID)
+    {
+        $applicationInfo = SJB_Applications::getBySID($applicationID);
+        if ($applicationInfo['status'] != 'Approved') {
+            $jobseekerSID = $applicationInfo['jobseeker_id'];
+            SJB_Applications::accept($applicationID);
+        }
+    }
+
+	private function executeApplicationsForEmployer($appsPerPage, $appJobId, SJB_User $currentUser, $orderInfo, $listingTitle, $score)
 	{
 		$limit['countRows'] = $appsPerPage;
 		$limit['startRow'] = $this->currentPage * $appsPerPage - ($appsPerPage);
 		$apps = array();
 		if ($appJobId) {
 			if (SJB_Applications::isUserOwnsAppsByAppJobId($currentUser->getID(), $appJobId)) {
-				$allAppsCountByJobID = SJB_Applications::getCountAppsByJob($appJobId);
+				$allAppsCountByJobID = SJB_Applications::getCountAppsByJob($appJobId, $score);
 				$this->setPaginationInfo($appsPerPage, $allAppsCountByJobID);
-				$apps = SJB_Applications::getByJob($appJobId, $orderInfo, $limit);
+				$apps = SJB_Applications::getByJob($appJobId, $orderInfo, $limit, $score);
 			}
 		} else {
-			$allAppsCount = SJB_Applications::getCountApplicationsByEmployer($currentUser->getSID());
+			$allAppsCount = SJB_Applications::getCountApplicationsByEmployer($currentUser->getSID(), $score);
 			$this->setPaginationInfo($appsPerPage, $allAppsCount);
-			$apps = SJB_Applications::getByEmployer($currentUser->getSID(), $orderInfo, $limit);
+			$apps = SJB_Applications::getByEmployer($currentUser->getSID(), $orderInfo, $limit, $score);
 		}
 		return $apps;
 	}
